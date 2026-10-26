@@ -37,6 +37,7 @@ El sitio oficial de ARWEN (DJ y productor de Afro House y Melodic Techno, CDMX /
 
 ## Marca e íconos
 - `marca/arwen-logo.png`: logo completo (emblema dorado + ARWEN + géneros) sobre negro, 1254×1254.
+- `favicon.ico` (16, 32 y 48 px) para Safari y navegadores que lo buscan en la raíz.
 - `favicon.svg`: versión simplificada del emblema para la pestaña, con `favicon-32.png` de respaldo. `apple-touch-icon.png` es el emblema recortado del logo, para el ícono en iPhone.
 - El home, el Lab y las guías enlazan los tres íconos.
 - El PDF del press kit todavía dice soundcloud.com/arwenmusic; hay que corregirlo en la próxima versión.
