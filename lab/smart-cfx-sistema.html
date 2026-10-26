@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART CFX &amp; El Sistema · Guía Afro House · ARWEN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0B;
+  --panel:#131315;
+  --panel2:#18181B;
+  --line:rgba(201,151,91,.22);
+  --line-soft:rgba(201,151,91,.10);
+  --gold:#C9975B;
+  --gold-hi:#E3BE8B;
+  --gold-dim:#8C6A42;
+  --bone:#EDE7DC;
+  --muted:#9A948A;
+  --bad:#B05C4A;
+  --good:#7E9C6E;
+  --disp:'Cormorant Garamond',Didot,'Bodoni MT',Georgia,serif;
+  --sans:'Jost',Futura,'Century Gothic',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--ink)}
+
+.wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+.eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:400}
+h2{font-family:var(--disp);font-weight:600;font-size:clamp(28px,4.4vw,42px);line-height:1.12;margin:10px 0 14px}
+h2 em{font-style:italic;font-weight:400;color:var(--gold-hi)}
+.lead{color:var(--muted);max-width:660px;font-size:15.5px}
+section{padding:76px 0;border-top:1px solid var(--line-soft)}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:1.5px solid var(--gold);outline-offset:3px}
+
+/* ---------- HERO ---------- */
+.hero{min-height:88vh;display:flex;align-items:center;border:none;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 70% 50% at 70% 20%, rgba(201,151,91,.08), transparent 60%),
+  radial-gradient(ellipse 50% 40% at 15% 90%, rgba(201,151,91,.05), transparent 60%);pointer-events:none}
+.hero-inner{position:relative}
+.hero h1{font-family:var(--disp);font-weight:400;font-size:clamp(46px,9vw,104px);line-height:.98;letter-spacing:.01em;margin:18px 0 8px}
+.hero h1 .fx{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:15px;color:var(--muted);max-width:600px;margin-top:18px}
+.hero-rule{display:flex;align-items:center;gap:14px;margin-top:36px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dim)}
+.hero-rule::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.hero-nav{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:22px}
+.hero-nav a{color:var(--bone);text-decoration:none;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;border-bottom:1px solid transparent;padding-bottom:3px;transition:border-color .25s,color .25s}
+.hero-nav a:hover,.hero-nav a:focus-visible{color:var(--gold);border-color:var(--gold)}
+
+/* ---------- CONTEXTO ---------- */
+.ctx-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:start;margin-top:34px}
+.ctx-grid p{margin-bottom:16px;font-size:15px;color:#CFC9BE}
+.ctx-grid strong{font-weight:500;color:var(--bone)}
+.callout{border-left:2px solid var(--gold);background:var(--panel);padding:16px 20px;margin-top:8px;font-size:14px;color:#CFC9BE}
+.callout b{color:var(--gold);font-weight:500}
+.callout.warn{border-left-color:var(--bad)}
+.callout.warn b{color:var(--bad)}
+.caveats{background:var(--panel);border:1px solid var(--line);padding:28px 26px}
+.caveats h5{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dim);text-align:center;margin-bottom:18px;font-weight:400}
+.cav{display:flex;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line-soft);font-size:13px;color:var(--muted)}
+.cav:last-child{border-bottom:none}
+.cav .ci{font-family:var(--disp);font-style:italic;font-size:19px;color:var(--gold);flex:0 0 24px}
+.cav b{color:var(--bone);font-weight:400}
+
+/* ---------- PRESET CARDS ---------- */
+.tier-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.tier{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;padding:6px 13px;border:1px solid var(--line-soft)}
+.tier.t-util{color:var(--gold);border-color:var(--gold)}
+.tier.t-tex{color:var(--gold-hi);border-color:var(--line)}
+.tier.t-ign{color:#6A655D;text-decoration:line-through;text-decoration-color:rgba(154,148,138,.5)}
+.fx-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:30px}
+.fx-card{background:var(--panel);border:1px solid var(--line-soft);padding:26px;position:relative;transition:border-color .3s}
+.fx-card:hover{border-color:var(--line)}
+.fx-head{display:flex;align-items:center;gap:14px;margin-bottom:12px}
+.fx-glyph{width:44px;height:44px;flex:0 0 44px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.fx-glyph svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round}
+.fx-name{font-family:var(--disp);font-size:24px;font-weight:600;letter-spacing:.02em}
+.fx-tag{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-dim);display:block;margin-top:1px}
+.fx-desc{font-size:13.5px;color:#CFC9BE;margin-bottom:14px}
+.fx-desc b{color:var(--bone);font-weight:500}
+.fx-verdict{border-top:1px solid var(--line-soft);padding-top:12px;font-size:13px;color:var(--muted)}
+.fx-verdict b{color:var(--gold);font-weight:500;letter-spacing:.08em;text-transform:uppercase;font-size:11px;display:block;margin-bottom:4px}
+.fx-meter{position:absolute;top:0;right:0;font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:8px 12px;color:var(--gold-dim);border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+
+/* ---------- EL SISTEMA ---------- */
+.tools3{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);margin-top:38px}
+.tool{padding:28px 26px;border-right:1px solid var(--line-soft)}
+.tool:last-child{border-right:none}
+.tool h4{font-family:var(--disp);font-size:23px;font-weight:600;margin-bottom:2px}
+.tool .tsub{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:12px}
+.tool p{font-size:13px;color:var(--muted)}
+.tool p b{color:var(--bone);font-weight:400}
+.axis{display:flex;align-items:center;gap:14px;margin-top:22px;font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dim)}
+.axis .bar{flex:1;height:1px;background:linear-gradient(90deg,var(--gold),var(--gold-dim))}
+
+.moments{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px}
+.mom-btn{background:transparent;border:1px solid var(--line-soft);color:var(--bone);font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;padding:11px 16px;cursor:pointer;transition:all .25s}
+.mom-btn:hover{border-color:var(--gold)}
+.mom-btn[aria-pressed="true"]{border-color:var(--gold);color:var(--gold);background:rgba(201,151,91,.08)}
+.combo{border:1px solid var(--line);background:var(--panel2);margin-top:14px;padding:0}
+.combo-head{padding:26px 30px 18px;border-bottom:1px solid var(--line-soft)}
+.combo-head h3{font-family:var(--disp);font-size:26px;font-weight:600}
+.combo-head p{font-size:13.5px;color:var(--muted);max-width:680px;margin-top:6px}
+.combo-cols{display:grid;grid-template-columns:1.2fr 1fr .8fr}
+.combo-col{padding:24px 30px;border-right:1px solid var(--line-soft)}
+.combo-col:last-child{border-right:none}
+.combo-col h6{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:400;margin-bottom:12px}
+.combo-col.main h6{color:var(--gold)}
+.combo-col.smart h6{color:var(--gold-hi)}
+.combo-col.never h6{color:var(--bad)}
+.combo-col .cfx-chip{display:inline-block;border:1px solid var(--line);padding:5px 12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 6px 8px 0}
+.combo-col.never .cfx-chip{color:var(--muted);border-color:var(--line-soft);text-decoration:line-through}
+.combo-col p{font-size:12.5px;color:var(--muted);margin-top:6px}
+.combo-col p b{color:#CFC9BE;font-weight:400}
+
+/* ---------- CABINA ---------- */
+.booth{background:var(--panel);border:1px solid var(--line);margin-top:40px;padding:36px 32px}
+.booth-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:8px}
+.booth-title{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim)}
+.play-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:var(--sans);font-size:12px;letter-spacing:.24em;text-transform:uppercase;padding:13px 34px;cursor:pointer;transition:background .3s,color .3s}
+.play-btn:hover{background:var(--gold);color:var(--ink)}
+.play-btn.playing{background:var(--gold);color:var(--ink)}
+.booth-hint{font-size:12.5px;color:var(--muted);margin-bottom:26px}
+.smartpanel{display:grid;grid-template-columns:1fr 280px;gap:26px}
+.smartpanel-left{border:1px solid var(--line-soft);background:var(--ink);padding:24px}
+.smartpanel-right{border:1px solid var(--line-soft);background:var(--ink);padding:26px;display:flex;flex-direction:column;align-items:center;gap:14px;justify-content:center}
+.panel-lab{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px}
+.sel-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.sel-btn{background:transparent;border:1px solid var(--line-soft);color:var(--bone);font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:9px 14px;cursor:pointer;transition:all .25s}
+.sel-btn:hover{border-color:var(--gold)}
+.sel-btn[aria-pressed="true"]{border-color:var(--gold);color:var(--gold);background:rgba(201,151,91,.08)}
+.fx-hintline{font-size:12px;color:var(--muted);min-height:56px}
+.fx-hintline b{color:var(--gold);font-weight:500}
+.knob{width:110px;height:110px;border-radius:50%;position:relative;cursor:ns-resize;touch-action:none;
+  background:radial-gradient(circle at 38% 32%, #232326, #0E0E10 70%);
+  border:1px solid #2A2A2E;box-shadow:0 6px 18px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05)}
+.knob::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid var(--line-soft);pointer-events:none}
+.knob .pointer{position:absolute;left:50%;top:8px;width:3px;height:32px;background:var(--gold);transform-origin:50% 47px;transform:translateX(-50%) rotate(0deg);border-radius:2px}
+.knob-label{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--bone);margin-top:4px;text-align:center}
+.knob-val{font-size:10.5px;color:var(--gold-dim);letter-spacing:.1em;min-height:16px;text-align:center}
+.knob-reset{font-size:10px;color:var(--muted);letter-spacing:.08em;text-align:center}
+.smartled{width:100%;background:transparent;border:1px solid var(--line);color:var(--muted);font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding:13px 0;cursor:pointer;transition:all .25s}
+.smartled.on{border-color:var(--gold);color:var(--ink);background:var(--gold)}
+.booth-note{font-size:12px;color:var(--muted);margin-top:16px}
+.booth-note b{color:var(--gold);font-weight:500}
+
+/* ---------- QUIZ ---------- */
+.quiz-box{background:var(--panel);border:1px solid var(--line);margin-top:38px;padding:38px 34px;min-height:340px;display:flex;flex-direction:column}
+.quiz-progress{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:18px}
+.quiz-q{font-family:var(--disp);font-size:clamp(21px,3vw,27px);font-weight:600;line-height:1.25;margin-bottom:26px;max-width:720px}
+.quiz-opts{display:grid;gap:10px;max-width:720px}
+.quiz-opt{background:transparent;border:1px solid var(--line-soft);color:var(--bone);text-align:left;font-family:var(--sans);font-weight:300;font-size:14px;padding:15px 18px;cursor:pointer;transition:border-color .25s,background .25s;line-height:1.5}
+.quiz-opt:hover:not(:disabled){border-color:var(--gold)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{border-color:var(--good);background:rgba(126,156,110,.08)}
+.quiz-opt.wrong{border-color:var(--bad);background:rgba(176,92,74,.07);opacity:.85}
+.quiz-fb{margin-top:20px;font-size:14px;color:#CFC9BE;border-left:2px solid var(--gold);padding:12px 18px;background:var(--ink);max-width:720px;display:none}
+.quiz-fb.show{display:block}
+.quiz-fb b{color:var(--gold);font-weight:500}
+.quiz-next{margin-top:22px;align-self:flex-start;display:none}
+.quiz-next.show{display:inline-block}
+.quiz-score{font-family:var(--disp);font-size:clamp(34px,6vw,58px);font-weight:600;line-height:1.1}
+.quiz-verdict{color:var(--muted);margin-top:12px;max-width:600px;font-size:15px}
+
+/* ---------- REGLAS ---------- */
+.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid var(--line);margin-top:38px}
+.rule{padding:30px 28px;border-bottom:1px solid var(--line-soft)}
+.rule:nth-child(odd){border-right:1px solid var(--line-soft)}
+.rule:nth-last-child(-n+2){border-bottom:none}
+.rule h4{font-family:var(--disp);font-size:21px;font-weight:600;margin-bottom:8px}
+.rule h4 span{color:var(--gold);font-style:italic;font-weight:400}
+.rule p{font-size:13.5px;color:var(--muted)}
+.rule p b{color:var(--bone);font-weight:400}
+
+footer{padding:60px 0 70px;text-align:center;color:var(--gold-dim);font-size:11px;letter-spacing:.34em;text-transform:uppercase}
+footer .mark{font-family:var(--disp);font-size:20px;letter-spacing:.42em;color:var(--gold);margin-bottom:10px;font-weight:400}
+
+@media(max-width:840px){
+  .ctx-grid{grid-template-columns:1fr}
+  .fx-grid{grid-template-columns:1fr}
+  .rules{grid-template-columns:1fr}
+  .rule:nth-child(odd){border-right:none}
+  .rule:nth-last-child(-n+2){border-bottom:1px solid var(--line-soft)}
+  .rule:last-child{border-bottom:none}
+  .tools3{grid-template-columns:1fr}
+  .tool{border-right:none;border-bottom:1px solid var(--line-soft)}
+  .tool:last-child{border-bottom:none}
+  .combo-cols{grid-template-columns:1fr}
+  .combo-col{border-right:none;border-bottom:1px solid var(--line-soft)}
+  .combo-col:last-child{border-bottom:none}
+  .smartpanel{grid-template-columns:1fr}
+  section{padding:58px 0}
+}
+</style>
+</head>
+<body>
+<!-- ARWEN Lab · botón de regreso -->
+<style>
+#arwen-back{position:fixed;top:14px;left:14px;z-index:1000;display:inline-flex;align-items:center;gap:8px;
+  padding:9px 14px;background:rgba(10,10,11,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border:1px solid rgba(201,151,91,.35);color:#EDE7DC;text-decoration:none;
+  font:400 11px/1 'Jost',Futura,'Century Gothic',system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;
+  transition:border-color .25s,color .25s}
+#arwen-back:hover{border-color:#C9975B;color:#C9975B}
+#arwen-back:focus-visible{outline:1.5px solid #C9975B;outline-offset:3px}
+@media print{#arwen-back{display:none}}
+</style>
+<a id="arwen-back" href="index.html" aria-label="Volver al ARWEN Lab">← ARWEN Lab</a>
+
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Guía técnica · Vol. III · DDJ-FLX4 / Rekordbox</span>
+    <h1>Smart <span class="fx">CFX</span><br>&amp; el sistema completo</h1>
+    <p class="hero-sub">La última pieza: los 8 presets Smart CFX de tu FLX4 — y lo más importante, el criterio que une las tres capas. CFX, Smart CFX y Beat FX no son tres menús separados: son un solo sistema con una sola pregunta — ¿cuánto control necesita este momento?</p>
+    <div class="hero-rule">Tres herramientas · Un criterio · Un protagonista</div>
+    <nav class="hero-nav" aria-label="Secciones">
+      <a href="#contexto">Qué es Smart CFX</a>
+      <a href="#presets">Los 8 presets</a>
+      <a href="#sistema">El sistema</a>
+      <a href="#cabina">La cabina</a>
+      <a href="#quiz">Ponte a prueba</a>
+      <a href="#reglas">Reglas del sistema</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ CONTEXTO ============ -->
+<section id="contexto">
+  <div class="wrap">
+    <span class="eyebrow">01 · La tercera capa</span>
+    <h2>Smart CFX: <em>un combo entero</em> en un solo giro</h2>
+    <div class="ctx-grid">
+      <div>
+        <p>Cuando presionas el botón <strong>SMART CFX</strong> de un deck, tu knob CFX deja de ser el filtro de siempre y pasa a controlar un <strong>preset</strong>: una combinación prediseñada de varios efectos a la vez, sincronizada al tempo. Un giro del knob mueve filtro + echo + más cosas en proporciones que Pioneer ya calculó por ti.</p>
+        <p>Esa es exactamente la promesa y la trampa. La promesa: <strong>un gesto de dos manos con una sola mano</strong> — el build de HPF + Noise que en la guía Vol. I hacías con dos movimientos, aquí es un solo giro. La trampa: <strong>no eliges las proporciones</strong>. El preset suena como el preset, en tu set y en el de cualquier otro DJ con una FLX4.</p>
+        <p>El preset se elige con <strong>SHIFT + SMART CFX</strong> (o en la pantalla de Rekordbox). El knob sigue siendo bipolar: centro apagado, y cada lado aplica una variante o dirección del preset con intensidad creciente. Como siempre: el centro es tu casa.</p>
+        <div class="callout warn"><b>Atención:</b> mientras SMART CFX está encendido, ese knob ya no es tu Filter. Si tu siguiente transición depende del LPF/HPF manual — y en Afro House casi siempre depende — apaga SMART CFX antes de empezar a mezclar. Este descuido es la causa #1 de transiciones arruinadas con esta función.</div>
+      </div>
+      <div class="caveats">
+        <h5>Letra pequeña que te va a ahorrar sustos</h5>
+        <div class="cav"><span class="ci">i.</span><span><b>Solo en Rekordbox.</b> En Serato DJ Lite el Smart CFX no funciona igual — los presets no están implementados. Otro motivo para quedarte en Rekordbox.</span></div>
+        <div class="cav"><span class="ci">ii.</span><span><b>El bug conocido:</b> si cambias el Beat FX en la pantalla con Smart CFX encendido, el preset puede dejar de aplicar parte de su efecto. La solución oficial: apaga y vuelve a encender SMART CFX.</span></div>
+        <div class="cav"><span class="ci">iii.</span><span><b>Es por deck.</b> Cada canal tiene su botón: puedes tener Smart CFX en el deck 2 y tu Filter normal en el deck 1.</span></div>
+        <div class="cav"><span class="ci">iv.</span><span><b>Herramienta de puente, no de identidad.</b> Muchos controladores no la tienen. Aprende los gestos manuales primero (Vols. I y II); usa Smart como atajo, no como muleta.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRESETS ============ -->
+<section id="presets">
+  <div class="wrap">
+    <span class="eyebrow">02 · El arsenal preprogramado</span>
+    <h2>Los 8 presets, <em>traducidos a Afro House</em></h2>
+    <p class="lead">Cada preset es una receta cerrada. Aquí va qué mezcla cada uno, y su veredicto honesto para tu género. Notarás un patrón: los mejores para ti son los que replican gestos que ya conoces — con una mano menos.</p>
+    <div class="tier-legend">
+      <span class="tier t-util">Útil — gánatelo</span>
+      <span class="tier t-tex">Textura — dosis puntuales</span>
+      <span class="tier t-ign">Ignóralo en este género</span>
+    </div>
+
+    <div class="fx-grid">
+
+      <article class="fx-card">
+        <span class="fx-meter">Útil</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><path d="M4 6 v12 M10 8 v8 M15 10 v4 M19 11 v2" opacity=".9"/><path d="M2 12 h20" opacity=".3"/></svg></div>
+          <div><span class="fx-name">Phantom Echo</span><span class="fx-tag">Echo + filtrado</span></div>
+        </div>
+        <p class="fx-desc">Combina el <b>echo con filtro</b> en un giro: el sonido se repite mientras se filtra, desapareciendo como un fantasma. Es tu <b>echo-out de una sola mano</b> — el gesto de la guía Vol. II condensado.</p>
+        <div class="fx-verdict"><b>En Afro House</b>Salidas de track cuando tu otra mano está ocupada con el fader o el EQ del track entrante. El más rentable de los ocho.</div>
+      </article>
+
+      <article class="fx-card">
+        <span class="fx-meter">Textura</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><path d="M12 4 v16 M9 7 l3 -3 l3 3 M15 17 l-3 3 l-3 -3" opacity=".9"/></svg></div>
+          <div><span class="fx-name">Reflect Echo</span><span class="fx-tag">Echo + reversa</span></div>
+        </div>
+        <p class="fx-desc">Un echo cuyas repeticiones incluyen <b>sonido reproducido al revés</b> — el audio parece reflejarse en un espejo. Dramático e inconfundible.</p>
+        <div class="fx-verdict"><b>En Afro House</b>Una salida dramática ocasional o un instante de textura antes de un corte. Una o dos veces por set; su rareza es su valor.</div>
+      </article>
+
+      <article class="fx-card">
+        <span class="fx-meter">Útil</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><path d="M4 18 C8 18 8 6 12 6 C16 6 16 18 20 18" opacity=".4"/><path d="M4 14 L20 6 M20 6 h-5 M20 6 v5"/></svg></div>
+          <div><span class="fx-name">Mobius Echo</span><span class="fx-tag">Echo + oscilador ascendente</span></div>
+        </div>
+        <p class="fx-desc">Echo más un <b>oscilador que sube sin llegar nunca</b> (la ilusión Shepard que ya conoces del Mobius del Beat FX). Tensión infinita servida en un knob.</p>
+        <div class="fx-verdict"><b>En Afro House</b>Tu build de una mano — especialmente en el lado Melodic Techno, donde los builds largos piden esta subida. Giro gradual de 8 compases, centro exacto en el drop.</div>
+      </article>
+
+      <article class="fx-card">
+        <span class="fx-meter">Útil</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><circle cx="12" cy="14" r="3" opacity=".9"/><path d="M8 8 C8 6 10 5 12 5 C14 5 16 6 16 8" opacity=".5"/><path d="M6 5 C6 3 9 2 12 2 C15 2 18 3 18 5" opacity=".25"/></svg></div>
+          <div><span class="fx-name">Vaporize</span><span class="fx-tag">Reverb + desvanecimiento</span></div>
+        </div>
+        <p class="fx-desc">El track se <b>evapora en reverberación</b>: cuanto más giras, más se disuelve en una nube de espacio. El nombre lo dice todo.</p>
+        <div class="fx-verdict"><b>En Afro House</b>Dos usos elegantes: atmósfera instantánea en breakdowns, y desvanecer un track para salir sin echo — la alternativa etérea al echo-out.</div>
+      </article>
+
+      <article class="fx-card">
+        <span class="fx-meter">Textura</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><path d="M3 16 L6 11 L9 14 L12 6 L15 10 L18 4 L21 8" opacity=".9"/><path d="M4 20 h3 M10 20 h3 M16 20 h3" opacity=".6"/></svg></div>
+          <div><span class="fx-name">Noise Chopper</span><span class="fx-tag">Ruido + corte rítmico</span></div>
+        </div>
+        <p class="fx-desc">Ruido creciente mientras el audio se <b>corta rítmicamente</b> (gate sincronizado). Es tu combo de build HPF + Noise, con picadora incluida.</p>
+        <div class="fx-verdict"><b>En Afro House</b>Builds rítmicos agresivos en tu zona Afro Tech. Más intenso que tu build manual — resérvalo para los momentos altos de la noche, y siempre a cero en el beat 1.</div>
+      </article>
+
+      <article class="fx-card">
+        <span class="fx-meter">Ignóralo</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><path d="M3 12 C6 6 9 6 12 12 C15 18 18 18 21 12" opacity=".9"/><path d="M17 5 l4 2 l-4 2" opacity=".5"/></svg></div>
+          <div><span class="fx-name">Cyber Jet</span><span class="fx-tag">Jet + delay</span></div>
+        </div>
+        <p class="fx-desc">Barrido tipo avión (el pariente del flanger) combinado con <b>delay</b>. Suena futurista, digital, muy EDM.</p>
+        <div class="fx-verdict"><b>En Afro House</b>Cuerpo extraño: su estética metálica choca con el carácter cálido y orgánico del género. Sin culpa: ignóralo.</div>
+      </article>
+
+      <article class="fx-card">
+        <span class="fx-meter">Textura</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><path d="M4 19 L20 5 M20 5 h-6 M20 5 v6" opacity=".9"/><path d="M4 12 h6" opacity=".4"/></svg></div>
+          <div><span class="fx-name">Cyber Pitch</span><span class="fx-tag">Pitch + movimiento</span></div>
+        </div>
+        <p class="fx-desc">El tono del track <b>sube o baja</b> con carácter, según el lado del knob. Imposible de disimular — es un efecto de anuncio, no de mezcla.</p>
+        <div class="fx-verdict"><b>En Afro House</b>Un cierre de impacto: la caída de tono al final de la última frase de un track, y de ahí el siguiente entra limpio. Una o dos veces por set, como el Pitch del CFX.</div>
+      </article>
+
+      <article class="fx-card">
+        <span class="fx-meter">Textura</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><path d="M12 20 C12 14 8 14 8 10 C8 6 11 4 14 5 C17 6 17 10 14 11 C11 12 10 9 12 8" opacity=".9"/></svg></div>
+          <div><span class="fx-name">Twister</span><span class="fx-tag">Espiral + reverberación</span></div>
+        </div>
+        <p class="fx-desc">Un <b>tornado sonoro</b>: espiral ascendente envuelta en reverb. El más teatral de los ocho — todo el mundo en la pista lo nota.</p>
+        <div class="fx-verdict"><b>En Afro House</b>Una subida dramática puntual, tipo cierre de la primera hora o antesala de tu track más grande. Su tamaño exige racionarlo.</div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ EL SISTEMA ============ -->
+<section id="sistema">
+  <div class="wrap">
+    <span class="eyebrow">03 · El todo en uno</span>
+    <h2>El sistema: CFX, Smart CFX y Beat FX <em>como una sola decisión</em></h2>
+    <p class="lead">Las tres capas hacen cosas que se traslapan. La diferencia real entre ellas no es el sonido — es cuánto control te dan y cuántas manos te cuestan. Ese es el eje de toda decisión en cabina.</p>
+
+    <div class="tools3">
+      <div class="tool">
+        <h4>CFX manual</h4>
+        <span class="tsub">Vol. I · La mano continua</span>
+        <p><b>Un parámetro, control total, gesto analógico.</b> Filter, Dub Echo, Noise, Space. Es tu herramienta por defecto para transiciones y micro-tensión — precisa, silenciosa, tuya.</p>
+      </div>
+      <div class="tool">
+        <h4>Beat FX</h4>
+        <span class="tsub">Vol. II · El cirujano rítmico</span>
+        <p><b>Medido en beats, quirúrgico, requiere ritual.</b> Echo-outs exactos, rolls, reverbs con depth fino. Cuando el gesto necesita estar matemáticamente en tiempo, es su territorio.</p>
+      </div>
+      <div class="tool">
+        <h4>Smart CFX</h4>
+        <span class="tsub">Vol. III · El combo de una mano</span>
+        <p><b>Máximo efecto, mínimo control.</b> Recetas cerradas y espectaculares. Su lugar: cuando la otra mano está ocupada, o cuando el preset ES exactamente el gesto que ibas a construir.</p>
+      </div>
+    </div>
+    <div class="axis"><span>+ Control</span><span class="bar"></span><span>+ Conveniencia</span></div>
+
+    <p class="lead" style="margin-top:48px">Y aquí está el combinador — el corazón de esta guía. Elige el momento del set y te da la jugada completa: la herramienta principal, cuándo conviene la versión Smart, y lo que queda prohibido.</p>
+
+    <div class="moments" id="moments" role="tablist" aria-label="Momentos del set"></div>
+    <div class="combo" id="comboPanel" role="tabpanel"></div>
+  </div>
+</section>
+
+<!-- ============ CABINA ============ -->
+<section id="cabina">
+  <div class="wrap">
+    <span class="eyebrow">04 · Escucha el combo</span>
+    <h2>La cabina: <em>presets Smart</em> sobre el groove</h2>
+    <p class="lead">El mismo loop a 122 BPM de las guías anteriores. Enciende SMART CFX, elige un preset y gira el único knob: escucharás varios efectos moverse a la vez — esa es la esencia de la función. Es una aproximación pedagógica para entrenar el oído, no una réplica exacta de los presets de Pioneer.</p>
+
+    <div class="booth">
+      <div class="booth-top">
+        <span class="booth-title">ARWEN · Smart Booth · 122 BPM</span>
+        <button class="play-btn" id="playBtn">▶ &nbsp;Reproducir loop</button>
+      </div>
+      <p class="booth-hint">Nota cómo con SMART CFX apagado el knob es tu Filter normal (Vol. I) — y al encenderlo, el mismo knob se convierte en el combo. Esa transformación es exactamente lo que pasa en tu FLX4.</p>
+
+      <div class="smartpanel">
+        <div class="smartpanel-left">
+          <div class="panel-lab">Preset</div>
+          <div class="sel-row" id="presetRow">
+            <button class="sel-btn" data-p="phantom" aria-pressed="true">Phantom Echo</button>
+            <button class="sel-btn" data-p="vaporize" aria-pressed="false">Vaporize</button>
+            <button class="sel-btn" data-p="chopper" aria-pressed="false">Noise Chopper</button>
+            <button class="sel-btn" data-p="mobius" aria-pressed="false">Mobius Echo</button>
+          </div>
+          <div class="fx-hintline" id="pHint"></div>
+        </div>
+        <div class="smartpanel-right">
+          <button class="smartled" id="smartBtn" aria-pressed="false">SMART CFX OFF</button>
+          <div class="knob" id="kMain" tabindex="0" role="slider" aria-label="Knob CFX" aria-valuemin="-100" aria-valuemax="100" aria-valuenow="0"><div class="pointer"></div></div>
+          <div>
+            <div class="knob-label" id="knobMode">CFX · Filter</div>
+            <div class="knob-val" id="vMain">OFF</div>
+            <div class="knob-reset">doble toque = centro</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="booth-note"><b>Ejercicio con tu FLX4:</b> practica el cambio de contexto, que es lo difícil: transición con Filter normal → SMART CFX ON + Mobius para el build de una mano → centro en el drop → <b>SMART CFX OFF inmediatamente</b> para recuperar tu Filter antes de la siguiente mezcla. Ese apagado a tiempo es el hábito que separa la herramienta del accidente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="quiz">
+  <div class="wrap">
+    <span class="eyebrow">05 · Ponte a prueba</span>
+    <h2>Ocho decisiones <em>de sistema</em></h2>
+    <p class="lead">Este quiz ya no pregunta por efectos sueltos: pregunta por el criterio. En cada escena hay varias opciones que "funcionarían" — elige la que elegiría un selector.</p>
+    <div class="quiz-box" id="quizBox"></div>
+  </div>
+</section>
+
+<!-- ============ REGLAS ============ -->
+<section id="reglas">
+  <div class="wrap">
+    <span class="eyebrow">06 · La constitución de cabina</span>
+    <h2>Reglas del <em>sistema completo</em></h2>
+    <div class="rules">
+      <div class="rule"><h4><span>I.</span> Un protagonista, tres capas</h4><p>CFX, Smart CFX o Beat FX: en cada momento del set, <b>solo una capa dirige</b>. La regla de "un efecto a la vez" de los Vols. I y II ahora es de sistema: tampoco se apilan capas.</p></div>
+      <div class="rule"><h4><span>II.</span> Manual primero, Smart después</h4><p>Gánate cada preset: usa Smart CFX solo para gestos que <b>ya sabes hacer a mano</b>. Así el preset es un atajo consciente, no una lotería — y tu técnica sobrevive a cualquier controlador sin el botón.</p></div>
+      <div class="rule"><h4><span>III.</span> Smart OFF antes de mezclar</h4><p>Con SMART CFX encendido no tienes Filter. Hazlo reflejo: <b>termina el gesto → centro → SMART CFX OFF</b>. Tu knob vuelve a ser tuyo antes de que la siguiente transición lo necesite.</p></div>
+      <div class="rule"><h4><span>IV.</span> El drop es ley en las tres capas</h4><p>Filter, Roll, Mobius, Phantom, Twister — da igual de qué capa venga: <b>todo muere en el beat 1</b>. Tres guías, una sola ley, cero excepciones.</p></div>
+      <div class="rule"><h4><span>V.</span> Control cuando importa, conveniencia cuando conviene</h4><p>Momentos delicados (transiciones, vocales queridas) piden <b>control</b>: manual. Momentos de manos ocupadas o combos idénticos a tu gesto piden <b>conveniencia</b>: Smart. Esa es toda la teoría.</p></div>
+      <div class="rule"><h4><span>VI.</span> El silencio es parte del sistema</h4><p>La cuarta herramienta, y la más usada por los grandes: <b>ninguna</b>. En Afro House el groove hipnótico se sostiene solo. Si la pista está bailando con los ojos cerrados, tu mejor combo es no tocar nada.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="mark">ARWEN</div>
+  Focus · Elegance · Movement · Connection · Emotion · Timelessness
+</footer>
+
+<script>
+/* ================= EL COMBINADOR ================= */
+const MOMENTS = [
+ {id:'entrada', name:'Entrada / transición',
+  title:'Entrada y transición', sub:'El momento más delicado del set: aquí manda el control.',
+  main:{chips:['EQ swap','CFX Filter · LPF suave'], txt:'Tu técnica base: EQ swap en las frases, y si el track saliente compite, <b>LPF gradual del CFX</b> para hundirlo. Gesto continuo, dosis fina — exactamente lo que Smart no ofrece.'},
+  smart:{chips:[], txt:'<b>Ninguna.</b> Y más importante: SMART CFX debe estar APAGADO antes de empezar, o no tendrás Filter cuando lo necesites.'},
+  never:{chips:['Smart CFX encendido','Twister','Noise Chopper'], txt:'Los presets espectaculares no pertenecen al momento más quirúrgico del set.'}},
+ {id:'groove', name:'Groove',
+  title:'Groove principal', sub:'La zona de disciplina: el sistema entero descansa.',
+  main:{chips:['Nada','CFX Filter · HPF leve 2–4 compases'], txt:'La respuesta por defecto es silencio. La excepción: <b>micro-tensión con HPF leve</b> que sueltas al inicio de frase (Vol. I), o un Trans sutil del Beat FX (Vol. II).'},
+  smart:{chips:[], txt:'<b>Ninguna.</b> Los presets Smart son demasiado grandes para un momento que pide invisibilidad.'},
+  never:{chips:['Cualquier preset Smart','Flanger largo','Echo en el kick'], txt:'Todo lo que llame la atención sobre el DJ en vez de sobre el groove.'}},
+ {id:'vocal', name:'Vocal',
+  title:'Cola de vocal', sub:'El gesto firma del Afro House: precisión sobre la última palabra.',
+  main:{chips:['Beat FX · Delay/Echo 3/4','CFX Dub Echo'], txt:'<b>Beat FX Delay o Echo a 3/4</b> con depth moderado sobre la última frase (control exacto de beats), o el <b>Dub Echo del CFX</b> si prefieres el gesto de muñeca. Ambas manos tuyas, ambas válidas.'},
+  smart:{chips:['Phantom Echo'], txt:'Si tu otra mano está ocupada preparando el siguiente track: <b>Phantom Echo</b> hace eco + filtrado en un giro. Suéltalo al centro en cuanto la palabra flote.'},
+  never:{chips:['Cyber Pitch en la vocal','Reflect Echo largo','Crush'], txt:'Desafinar o romper una vocal que la gente canta mata el momento.'}},
+ {id:'breakdown', name:'Breakdown',
+  title:'Breakdown', sub:'Sin kick, el espacio es bienvenido.',
+  main:{chips:['Beat FX · Reverb (depth 30–40%)','CFX Space sutil'], txt:'La <b>Reverb del Beat FX</b> con depth fino, o el <b>Space del CFX</b> para el gesto continuo. La atmósfera crece, el momento se vuelve cine, y todo se apaga antes del build.'},
+  smart:{chips:['Vaporize'], txt:'<b>Vaporize suave</b> es atmósfera instantánea de una mano — reverb y desvanecimiento en un giro. Dosis pequeña: el breakdown no necesita disolverse entero.'},
+  never:{chips:['Noise Chopper','Echo con feedback alto','Cyber Jet'], txt:'El breakdown es emoción, no agresión.'}},
+ {id:'buildcorto', name:'Build corto',
+  title:'Build corto · Afro House', sub:'4–8 compases de rampa: tu gesto de dos manos.',
+  main:{chips:['CFX · HPF + Noise (combo Vol. I)'], txt:'El clásico: <b>HPF girando gradual mientras el Noise sube</b>, todo al centro en el beat 1. Dos manos, control total del arco. Es TU build — practícalo hasta que sea reflejo.'},
+  smart:{chips:['Noise Chopper'], txt:'La versión de una mano, más agresiva (agrega el corte rítmico). Para los picos de la noche o cuando la otra mano prepara el drop del siguiente track.'},
+  never:{chips:['CFX + Beat FX apilados','Vaporize'], txt:'Dos builds simultáneos se tapan; y disolver el track en reverb es lo contrario de tensar.'}},
+ {id:'buildlargo', name:'Build largo',
+  title:'Build largo · Melodic Techno', sub:'8–16 compases de ascenso dramático.',
+  main:{chips:['Beat FX · Mobius (depth gradual)','Beat FX · Roll 1/2 → 1/4'], txt:'El territorio del Vol. II: <b>Mobius</b> con depth subiendo lento (la escalera infinita), o el <b>roll acelerante</b>. Precisión rítmica para builds que son medio track.'},
+  smart:{chips:['Mobius Echo','Twister'], txt:'<b>Mobius Echo</b> es el mismo ascenso en un giro — ideal si tu otra mano maneja EQs. <b>Twister</b> para el momento más teatral de la noche, racionado.'},
+  never:{chips:['Ambas capas a la vez','Phantom Echo'], txt:'El echo de salida no es herramienta de subida.'}},
+ {id:'drop', name:'Drop',
+  title:'Drop', sub:'La ley que une las tres guías.',
+  main:{chips:['NADA — todo al centro, todo OFF'], txt:'Filter al centro, Noise a cero, Beat FX OFF, Smart CFX al centro <b>y apagado</b>. El drop cae seco desde cualquier capa del sistema. Sin excepciones, sin negociación.'},
+  smart:{chips:[], txt:'<b>Ninguna.</b> Y si usaste un preset en el build, apagar SMART CFX aquí mismo te devuelve el Filter para lo que sigue.'},
+  never:{chips:['Cualquier efecto de cualquier capa'], txt:'Un solo efecto residual en el beat 1 y el build entero fue en vano.'}},
+ {id:'salida', name:'Salida',
+  title:'Salida / echo-out', sub:'Despedir el track con intención.',
+  main:{chips:['Beat FX · Low Cut Echo 1/2–3/4 + fader'], txt:'El echo-out del Vol. II: <b>Low Cut Echo</b> (cola limpia aunque suene el kick nuevo), ON al final de la frase, fader abajo en el beat 1, OFF cuando muere. Control quirúrgico de la despedida.'},
+  smart:{chips:['Phantom Echo','Vaporize'], txt:'<b>Phantom Echo</b> si necesitas la mano libre: echo + filtro en un giro y el track se esfuma. <b>Vaporize</b> para la salida etérea sin repeticiones.'},
+  never:{chips:['Cortar el fader en seco sin nada','Dejar el FX encendido después'], txt:'La salida seca sin intención suena a error; el FX olvidado contamina el siguiente gesto.'}},
+ {id:'cierre', name:'Cierre dramático',
+  title:'Cierre dramático', sub:'Una o dos veces por noche, no más.',
+  main:{chips:['CFX Pitch · caída de tono'], txt:'La <b>caída de Pitch del CFX</b> al final de la última frase simula el apagado de un tornamesa — y el siguiente track entra limpio sobre el silencio. Gesto manual, control del arco.'},
+  smart:{chips:['Cyber Pitch','Reflect Echo'], txt:'<b>Cyber Pitch</b> es la versión combo de la misma caída. <b>Reflect Echo</b> para un cierre más extraño y memorable. Su valor está en la escasez: racionalos.'},
+  never:{chips:['Usarlo cada dos tracks','Cyber Jet'], txt:'El cierre dramático repetido deja de ser dramático a la tercera vez.'}}
+];
+
+const momRow = document.getElementById('moments');
+const comboPanel = document.getElementById('comboPanel');
+MOMENTS.forEach((m,i)=>{
+  const b=document.createElement('button');
+  b.className='mom-btn'; b.textContent=m.name;
+  b.setAttribute('role','tab'); b.setAttribute('aria-pressed', i===0?'true':'false');
+  b.addEventListener('click',()=>selectMoment(i));
+  momRow.appendChild(b);
+});
+function chips(arr,never){
+  if(!arr.length) return '';
+  return arr.map(c=>`<span class="cfx-chip">${c}</span>`).join('');
+}
+function selectMoment(i){
+  [...momRow.children].forEach((c,j)=>c.setAttribute('aria-pressed', j===i?'true':'false'));
+  const m=MOMENTS[i];
+  comboPanel.innerHTML=`
+    <div class="combo-head"><h3>${m.title}</h3><p>${m.sub}</p></div>
+    <div class="combo-cols">
+      <div class="combo-col main"><h6>Herramienta principal</h6>${chips(m.main.chips)}<p>${m.main.txt}</p></div>
+      <div class="combo-col smart"><h6>Cuándo ir por la Smart</h6>${chips(m.smart.chips)}<p>${m.smart.txt}</p></div>
+      <div class="combo-col never"><h6>Prohibido</h6>${chips(m.never.chips,true)}<p>${m.never.txt}</p></div>
+    </div>`;
+}
+selectMoment(0);
+
+/* ================= AUDIO ENGINE ================= */
+let ctx=null, playing=false, schedTimer=null, nextNoteTime=0, step=0;
+const BPM=122, SPB=60/BPM, STEP=SPB/4;
+let nodes={};
+const st = {smart:false, preset:'phantom', v:0}; // v: -1..1
+
+function buildGraph(){
+  const c=ctx;
+  const bus=c.createGain(); bus.gain.value=.9;
+
+  // gate (para chopper)
+  const gate=c.createGain(); gate.gain.value=1;
+  bus.connect(gate);
+  const lfo=c.createOscillator(); lfo.type='square'; lfo.frequency.value=1/(0.5*SPB);
+  const lfoScale=c.createGain(); lfoScale.gain.value=0;
+  lfo.connect(lfoScale); lfoScale.connect(gate.gain); lfo.start();
+
+  // filtros bipolares (modo Filter normal + phantom/vaporize)
+  const lpf=c.createBiquadFilter(); lpf.type='lowpass'; lpf.frequency.value=20000; lpf.Q.value=.9;
+  const hpf=c.createBiquadFilter(); hpf.type='highpass'; hpf.frequency.value=20; hpf.Q.value=.9;
+  gate.connect(lpf); lpf.connect(hpf);
+  const post=c.createGain(); hpf.connect(post);
+  const master=c.createGain(); master.gain.value=.85;
+  post.connect(master);
+
+  // echo
+  const echoSend=c.createGain(); echoSend.gain.value=0;
+  const delay=c.createDelay(2); delay.delayTime.value=STEP*3;
+  const fb=c.createGain(); fb.gain.value=0;
+  const tone=c.createBiquadFilter(); tone.type='lowpass'; tone.frequency.value=4000;
+  post.connect(echoSend); echoSend.connect(delay);
+  delay.connect(tone); tone.connect(fb); fb.connect(delay);
+  tone.connect(master);
+
+  // reverb
+  const revSend=c.createGain(); revSend.gain.value=0;
+  const conv=c.createConvolver(); conv.buffer=makeImpulse(c,2.8,2.4);
+  post.connect(revSend); revSend.connect(conv); conv.connect(master);
+
+  // noise (chopper)
+  const nSrc=c.createBufferSource(); nSrc.buffer=makeNoiseBuffer(c,2); nSrc.loop=true;
+  const nFil=c.createBiquadFilter(); nFil.type='bandpass'; nFil.frequency.value=1200; nFil.Q.value=.6;
+  const nGain=c.createGain(); nGain.gain.value=0;
+  nSrc.connect(nFil); nFil.connect(nGain); nGain.connect(master); nSrc.start();
+
+  // riser (mobius aprox.)
+  const rOsc1=c.createOscillator(); rOsc1.type='sawtooth'; rOsc1.frequency.value=110;
+  const rOsc2=c.createOscillator(); rOsc2.type='sawtooth'; rOsc2.frequency.value=220;
+  const rG1=c.createGain(); rG1.gain.value=0;
+  const rG2=c.createGain(); rG2.gain.value=0;
+  const rMix=c.createGain(); rMix.gain.value=0;
+  const rFil=c.createBiquadFilter(); rFil.type='lowpass'; rFil.frequency.value=2200;
+  rOsc1.connect(rG1); rOsc2.connect(rG2); rG1.connect(rMix); rG2.connect(rMix);
+  rMix.connect(rFil); rFil.connect(master); rFil.connect(echoSend);
+  rOsc1.start(); rOsc2.start();
+
+  master.connect(c.destination);
+  nodes={bus,gate,lfo,lfoScale,lpf,hpf,post,echoSend,delay,fb,tone,revSend,nGain,nFil,master,rOsc1,rOsc2,rG1,rG2,rMix};
+}
+function makeNoiseBuffer(c,sec){
+  const b=c.createBuffer(1,c.sampleRate*sec,c.sampleRate);
+  const d=b.getChannelData(0);
+  for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+  return b;
+}
+function makeImpulse(c,sec,decay){
+  const len=c.sampleRate*sec;
+  const b=c.createBuffer(2,len,c.sampleRate);
+  for(let ch=0;ch<2;ch++){const d=b.getChannelData(ch);
+    for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,decay);}
+  return b;
+}
+
+/* instrumentos (mismo groove de los Vols. I y II) */
+function kick(t){
+  const o=ctx.createOscillator(), g=ctx.createGain();
+  o.type='sine';
+  o.frequency.setValueAtTime(140,t);
+  o.frequency.exponentialRampToValueAtTime(46,t+.11);
+  g.gain.setValueAtTime(1,t);
+  g.gain.exponentialRampToValueAtTime(.001,t+.34);
+  o.connect(g); g.connect(nodes.bus); o.start(t); o.stop(t+.4);
+}
+function shaker(t,acc){
+  const s=ctx.createBufferSource(); s.buffer=nodes.noiseB||(nodes.noiseB=makeNoiseBuffer(ctx,.5));
+  const f=ctx.createBiquadFilter(); f.type='highpass'; f.frequency.value=6500;
+  const g=ctx.createGain();
+  g.gain.setValueAtTime(acc?.34:.16,t);
+  g.gain.exponentialRampToValueAtTime(.001,t+(acc?.09:.05));
+  s.connect(f); f.connect(g); g.connect(nodes.bus); s.start(t); s.stop(t+.12);
+}
+function conga(t,fq){
+  const o=ctx.createOscillator(), g=ctx.createGain();
+  o.type='triangle';
+  o.frequency.setValueAtTime(fq,t);
+  o.frequency.exponentialRampToValueAtTime(fq*.72,t+.09);
+  g.gain.setValueAtTime(.5,t);
+  g.gain.exponentialRampToValueAtTime(.001,t+.16);
+  o.connect(g); g.connect(nodes.bus); o.start(t); o.stop(t+.2);
+}
+function rim(t){
+  const o=ctx.createOscillator(), g=ctx.createGain();
+  const f=ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1700; f.Q.value=8;
+  o.type='square'; o.frequency.value=900;
+  g.gain.setValueAtTime(.35,t); g.gain.exponentialRampToValueAtTime(.001,t+.05);
+  o.connect(f); f.connect(g); g.connect(nodes.bus); o.start(t); o.stop(t+.06);
+}
+function bass(t,fq,len){
+  const o=ctx.createOscillator(), g=ctx.createGain();
+  const f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=340; f.Q.value=1.2;
+  o.type='sawtooth'; o.frequency.value=fq;
+  g.gain.setValueAtTime(0,t);
+  g.gain.linearRampToValueAtTime(.34,t+.012);
+  g.gain.setValueAtTime(.34,t+len-.05);
+  g.gain.exponentialRampToValueAtTime(.001,t+len);
+  o.connect(f); f.connect(g); g.connect(nodes.bus); o.start(t); o.stop(t+len+.05);
+}
+function scheduleStep(s,t){
+  const p=s%32;
+  if(p%4===0) kick(t);
+  shaker(t,p%4===2);
+  if(p===3||p===11||p===19||p===27) conga(t,300);
+  if(p===6||p===22) conga(t,220);
+  if(p===14||p===30) rim(t);
+  if(p===2||p===10||p===18||p===26) bass(t,55,STEP*1.6);
+  if(p===7) bass(t,65.4,STEP*1.2);
+  if(p===23) bass(t,73.4,STEP*1.2);
+}
+function scheduler(){
+  while(nextNoteTime<ctx.currentTime+.12){
+    scheduleStep(step,nextNoteTime);
+    nextNoteTime+=STEP; step++;
+  }
+}
+const playBtn=document.getElementById('playBtn');
+playBtn.addEventListener('click', async ()=>{
+  if(!ctx){ ctx=new (window.AudioContext||window.webkitAudioContext)(); buildGraph(); applySmart(); startRiserLoop(); }
+  if(ctx.state==='suspended') await ctx.resume();
+  playing=!playing;
+  if(playing){
+    step=0; nextNoteTime=ctx.currentTime+.06;
+    schedTimer=setInterval(scheduler,30);
+    playBtn.textContent='■  Detener'; playBtn.classList.add('playing');
+  }else{
+    clearInterval(schedTimer);
+    playBtn.innerHTML='▶ &nbsp;Reproducir loop'; playBtn.classList.remove('playing');
+  }
+});
+
+/* riser mobius: dos sierras subiendo en bucle con crossfade */
+let riserPhase=0, lastT=null;
+function startRiserLoop(){
+  function tick(now){
+    if(lastT===null) lastT=now;
+    const dt=(now-lastT)/1000; lastT=now;
+    if(ctx && st.smart && st.preset==='mobius' && Math.abs(st.v)>.02){
+      riserPhase=(riserPhase+dt/5)%1; // ciclo de 5 s
+      const f1=90*Math.pow(2,riserPhase*2);        // sube 2 octavas
+      const f2=90*Math.pow(2,((riserPhase+.5)%1)*2);
+      const w1=Math.sin(Math.PI*riserPhase);        // ventana
+      const w2=Math.sin(Math.PI*((riserPhase+.5)%1));
+      const t=ctx.currentTime;
+      nodes.rOsc1.frequency.setTargetAtTime(f1,t,.05);
+      nodes.rOsc2.frequency.setTargetAtTime(f2,t,.05);
+      nodes.rG1.gain.setTargetAtTime(w1,t,.05);
+      nodes.rG2.gain.setTargetAtTime(w2,t,.05);
+    }
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ================= LÓGICA SMART ================= */
+const PHINTS={
+  phantom:'<b>Phantom Echo</b> — echo + filtrado en un giro. Derecha: eco con HPF (el track se vuelve fantasma hacia arriba). Izquierda: eco con LPF (se hunde). Escucha cómo dos parámetros se mueven con un solo gesto — eso es Smart CFX.',
+  vaporize:'<b>Vaporize</b> — reverb + desvanecimiento. Al girar, el track se disuelve en espacio mientras pierde brillo. Prueba: giro lento hasta 60% y regreso — un breakdown instantáneo.',
+  chopper:'<b>Noise Chopper</b> — ruido + corte rítmico sincronizado. Tu build HPF+Noise del Vol. I, con picadora incluida. Cuanto más giras, más corta y más ruido. A cero exacto en el drop.',
+  mobius:'<b>Mobius Echo</b> — oscilador ascendente infinito + eco. El build de una mano: giro gradual de 8 compases y la tensión sube sin llegar nunca. Centro en el beat 1.'
+};
+function applySmart(){
+  if(!ctx) return;
+  const t=ctx.currentTime, r=.05;
+  const {lpf,hpf,echoSend,fb,tone,revSend,nGain,nFil,lfoScale,gate,rMix}=nodes;
+  const v=st.v, a=Math.abs(v);
+  // valores neutros
+  let LPF=20000,HPF=20,eS=0,eFB=0,rev=0,noi=0,gD=0,ris=0,toneF=4000;
+  if(!st.smart){
+    // modo Filter normal (Vol. I)
+    if(v<-.02) LPF=Math.max(180,Math.pow(10,Math.log10(20000)+v*(Math.log10(20000)-Math.log10(180))));
+    else if(v>.02) HPF=Math.min(1600,Math.pow(10,Math.log10(20)+v*(Math.log10(1600)-Math.log10(20))));
+  }else{
+    switch(st.preset){
+      case 'phantom':
+        eS=a*.85; eFB=Math.min(.82,a*.9);
+        if(v>0){HPF=Math.min(1400,Math.pow(10,Math.log10(20)+a*(Math.log10(1400)-Math.log10(20))));}
+        else if(v<0){LPF=Math.max(260,Math.pow(10,Math.log10(20000)-a*(Math.log10(20000)-Math.log10(260))));}
+        break;
+      case 'vaporize':
+        rev=a*1.35;
+        LPF=Math.max(500,Math.pow(10,Math.log10(20000)-a*(Math.log10(20000)-Math.log10(500))));
+        break;
+      case 'chopper':
+        gD=a; noi=a*.4;
+        nFil.frequency.setTargetAtTime(400+a*5600,t,r);
+        break;
+      case 'mobius':
+        ris=a*.22; eS=a*.5; eFB=.55; toneF=3000;
+        break;
+    }
+  }
+  lpf.frequency.setTargetAtTime(LPF,t,r);
+  hpf.frequency.setTargetAtTime(HPF,t,r);
+  echoSend.gain.setTargetAtTime(eS,t,r);
+  fb.gain.setTargetAtTime(eFB,t,eFB? r:.8);
+  tone.frequency.setTargetAtTime(toneF,t,r);
+  revSend.gain.setTargetAtTime(rev,t,r);
+  nGain.gain.setTargetAtTime(noi,t,r);
+  lfoScale.gain.setTargetAtTime(gD*.5,t,r);
+  gate.gain.setTargetAtTime(1-gD*.5,t,r);
+  rMix.gain.setTargetAtTime(ris,t,r);
+}
+
+/* UI */
+const pHint=document.getElementById('pHint');
+document.querySelectorAll('#presetRow .sel-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#presetRow .sel-btn').forEach(x=>x.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+    st.preset=b.dataset.p;
+    pHint.innerHTML=PHINTS[st.preset];
+    applySmart();
+  });
+});
+pHint.innerHTML=PHINTS.phantom;
+
+const smartBtn=document.getElementById('smartBtn');
+const knobMode=document.getElementById('knobMode');
+smartBtn.addEventListener('click',()=>{
+  st.smart=!st.smart;
+  smartBtn.classList.toggle('on',st.smart);
+  smartBtn.textContent=st.smart? 'SMART CFX ON':'SMART CFX OFF';
+  smartBtn.setAttribute('aria-pressed',st.smart);
+  knobMode.textContent=st.smart? 'CFX · Smart (preset)':'CFX · Filter';
+  applySmart(); renderKnob();
+});
+
+const kMain=document.getElementById('kMain');
+const kPtr=kMain.querySelector('.pointer');
+const vMain=document.getElementById('vMain');
+function fmtMain(){
+  const v=st.v;
+  if(Math.abs(v)<.02) return 'OFF';
+  if(!st.smart) return v<0?`LPF ${Math.round(-v*100)}%`:`HPF ${Math.round(v*100)}%`;
+  return (v<0?'← ':'→ ')+Math.round(Math.abs(v)*100)+'%';
+}
+function renderKnob(){
+  kPtr.style.transform=`translateX(-50%) rotate(${st.v*135}deg)`;
+  vMain.textContent=fmtMain();
+  kMain.setAttribute('aria-valuenow',Math.round(st.v*100));
+  applySmart();
+}
+renderKnob();
+let dragging=false,startY=0,startV=0;
+kMain.addEventListener('pointerdown',e=>{dragging=true;startY=e.clientY;startV=st.v;kMain.setPointerCapture(e.pointerId);e.preventDefault();});
+kMain.addEventListener('pointermove',e=>{
+  if(!dragging) return;
+  let v=startV+(startY-e.clientY)/80;
+  v=Math.max(-1,Math.min(1,v));
+  if(Math.abs(v)<.06) v=0;
+  st.v=v; renderKnob();
+});
+kMain.addEventListener('pointerup',()=>dragging=false);
+kMain.addEventListener('pointercancel',()=>dragging=false);
+kMain.addEventListener('dblclick',()=>{st.v=0;renderKnob();});
+kMain.addEventListener('keydown',e=>{
+  const s=e.shiftKey?.2:.05;
+  if(e.key==='ArrowUp'||e.key==='ArrowRight'){st.v=Math.min(1,st.v+s);renderKnob();e.preventDefault();}
+  if(e.key==='ArrowDown'||e.key==='ArrowLeft'){st.v=Math.max(-1,st.v-s);renderKnob();e.preventDefault();}
+  if(e.key==='0'||e.key==='Escape'){st.v=0;renderKnob();}
+});
+
+/* ================= QUIZ ================= */
+const QUIZ=[
+ {q:'Enciendes SMART CFX en el deck 1. ¿Qué le pasa a tu knob CFX de ese canal?',
+  opts:['Nada, se agrega el preset encima del Filter','Deja de ser tu Filter: ahora controla el preset Smart','Se convierte en control de volumen','Controla el Beat FX'],
+  a:1, fb:'El knob es uno solo: con SMART CFX encendido, <b>controla el preset y pierdes el Filter manual</b> en ese deck. Por eso la regla: Smart OFF antes de cualquier transición que dependa del filtro.'},
+ {q:'Tu siguiente transición usa LPF sobre el track saliente, pero acabas de usar Mobius Echo en el build. ¿Cuál es el orden correcto?',
+  opts:['Mezclar y apagar Smart al final','Knob al centro → SMART CFX OFF → luego empezar la mezcla','Girar el knob al lado contrario para compensar','Usar el Beat FX Filter en su lugar'],
+  a:1, fb:'El hábito de oro del Vol. III: <b>terminar el gesto → centro → SMART OFF</b>, y solo entonces mezclar. El apagado a tiempo devuelve tu Filter antes de que lo necesites.'},
+ {q:'Build largo de melodic techno y tu mano derecha está ocupada ajustando EQs del track entrante. ¿Herramienta?',
+  opts:['CFX HPF + Noise (dos manos)','Beat FX Roll con cambios de beat (dos gestos)','Smart CFX · Mobius Echo (un giro)','Nada, mejor sin build'],
+  a:2, fb:'Exactamente el caso de uso del Smart CFX: el gesto que querías (ascenso + eco) existe como preset, y solo tienes <b>una mano libre</b>. Mobius Echo con giro gradual — y centro en el beat 1.'},
+ {q:'Echo-out con ambas manos libres y calma total. ¿Qué eliges y por qué?',
+  opts:['Phantom Echo, porque es más nuevo','Beat FX Low Cut Echo: más control (beats exactos, depth fino)','Twister, para que se note','Vaporize al máximo'],
+  a:1, fb:'Con las dos manos disponibles, gana el <b>control</b>: el Beat FX te deja elegir beats exactos y depth fino. Phantom Echo es la alternativa legítima cuando una mano está ocupada — conveniencia cuando conviene.'},
+ {q:'Usas Vaporize, cambias el Beat FX en la pantalla de Rekordbox, y de pronto el preset perdió su reverb. ¿Qué haces?',
+  opts:['Reiniciar Rekordbox','Subir el depth del Beat FX','Apagar y volver a encender SMART CFX','Reconectar el USB'],
+  a:2, fb:'Es el comportamiento conocido de la función: cambiar el Beat FX en pantalla con Smart activo puede desactivar parte del preset. La solución documentada: <b>SMART CFX off y on de nuevo</b>. Treinta segundos de pánico ahorrados.'},
+ {q:'¿Cuántas capas del sistema (CFX / Smart CFX / Beat FX) pueden ser protagonistas al mismo tiempo?',
+  opts:['Las tres, si el momento es grande','Dos, si están en decks distintos','Una','Depende del BPM'],
+  a:2, fb:'<b>Una.</b> La regla de "un efecto a la vez" ahora es de sistema: una sola capa dirige cada momento. Dos protagonistas se tapan mutuamente; tres son ruido con pretensiones.'},
+ {q:'Breakdown emotivo, tu mano libre es una sola, quieres atmósfera ya. ¿Cuál es el combo correcto?',
+  opts:['Noise Chopper suave','Vaporize en dosis pequeña','Cyber Jet al 50%','Reflect Echo sostenido'],
+  a:1, fb:'<b>Vaporize</b> es reverb + desvanecimiento en un giro: atmósfera instantánea de una mano. La dosis pequeña importa — el breakdown quiere agrandarse, no disolverse por completo.'},
+ {q:'Cae el drop. En el build usaste Noise Chopper. ¿Estado correcto del sistema en el beat 1?',
+  opts:['Knob al 20% para mantener energía','Knob al centro, y SMART CFX apagado en cuanto puedas','Cambiar a Twister','Knob al centro pero Smart encendido toda la noche'],
+  a:1, fb:'La ley del drop rige en las tres capas: <b>todo muere en el beat 1</b>. Y el paso extra del Vol. III: apagar SMART CFX ahí mismo, para que el knob vuelva a ser tu Filter antes de la siguiente transición.'}
+];
+const box=document.getElementById('quizBox');
+let qi=0,score=0;
+function renderQ(){
+  const q=QUIZ[qi];
+  box.innerHTML=`
+    <div class="quiz-progress">Escena ${qi+1} de ${QUIZ.length} · Aciertos: ${score}</div>
+    <div class="quiz-q">${q.q}</div>
+    <div class="quiz-opts">${q.opts.map((o,i)=>`<button class="quiz-opt" data-i="${i}">${o}</button>`).join('')}</div>
+    <div class="quiz-fb" id="qfb"></div>
+    <button class="play-btn quiz-next" id="qnext">${qi<QUIZ.length-1?'Siguiente escena →':'Ver resultado →'}</button>`;
+  box.querySelectorAll('.quiz-opt').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const i=+btn.dataset.i;
+      box.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);
+      if(i===q.a){btn.classList.add('correct');score++;}
+      else{btn.classList.add('wrong');box.querySelector(`[data-i="${q.a}"]`).classList.add('correct');}
+      const fb=document.getElementById('qfb');fb.innerHTML=q.fb;fb.classList.add('show');
+      document.getElementById('qnext').classList.add('show');
+      box.querySelector('.quiz-progress').textContent=`Escena ${qi+1} de ${QUIZ.length} · Aciertos: ${score}`;
+    });
+  });
+  document.getElementById('qnext').addEventListener('click',()=>{
+    qi++; qi<QUIZ.length? renderQ():renderScore();
+  });
+}
+function renderScore(){
+  let verdict;
+  if(score===8) verdict='Impecable. El criterio de sistema ya está: control cuando importa, conveniencia cuando conviene, silencio cuando el groove manda. Lo que queda es puro hardware — el ritual Smart ON → gesto → centro → Smart OFF, veinte veces con tracks reales.';
+  else if(score>=6) verdict='Muy sólido. El sistema ya piensa contigo; los fallos seguramente fueron sobre el "cuándo apagar", que es el hábito más difícil. Repite el combinador de la sección 03 y vuelve al quiz en unos días.';
+  else if(score>=4) verdict='Vas a la mitad. Concéntrate en dos ideas: Smart CFX te quita el Filter mientras está encendido, y una sola capa protagonista a la vez. Con eso, el resto del sistema se ordena solo.';
+  else verdict='Punto de partida perfecto. Juega con la cabina alternando SMART CFX on/off para sentir el cambio de knob, recorre el combinador momento por momento, y reintenta. La segunda vuelta se siente muy distinta.';
+  box.innerHTML=`
+    <div class="quiz-progress">Resultado final</div>
+    <div class="quiz-score">${score} <span style="color:var(--gold-dim);font-size:.5em">/ ${QUIZ.length}</span></div>
+    <p class="quiz-verdict">${verdict}</p>
+    <button class="play-btn quiz-next show" id="qretry" style="margin-top:26px">Reintentar quiz</button>`;
+  document.getElementById('qretry').addEventListener('click',()=>{qi=0;score=0;renderQ();});
+}
+renderQ();
+</script>
+</body>
+</html>

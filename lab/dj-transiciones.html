@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Transiciones — Crate Starter</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #06070a;
+    --s1: #0c0e14;
+    --s2: #111420;
+    --border: #1a1e2a;
+    --afro: #d4893a;
+    --bridge: #9b6bbf;
+    --techno: #3a8fd4;
+    --ok: #3aad6e;
+    --warn: #c9a227;
+    --text: #b8b2a8;
+    --white: #edeae4;
+    --muted: #444a5a;
+    --mono: 'Space Mono', monospace;
+    --display: 'Bebas Neue', sans-serif;
+    --body: 'Syne', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-weight: 400;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 40% at 10% 20%, rgba(212,137,58,0.05) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 35% at 90% 70%, rgba(58,143,212,0.05) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 30% at 50% 50%, rgba(155,107,191,0.04) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 52px 20px 80px;
+  }
+
+  /* ── Header ── */
+  .hdr {
+    margin-bottom: 56px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 36px;
+  }
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    color: var(--afro);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .eyebrow::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(44px, 9vw, 78px);
+    line-height: 0.92;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    margin-bottom: 16px;
+  }
+
+  h1 em { color: var(--afro); font-style: normal; }
+
+  .hdr-sub {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 460px;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .leg-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  /* ── Zone labels ── */
+  .zone-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 36px 0 20px;
+  }
+
+  .zone-pill {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+    border: 1px solid;
+  }
+
+  .zone-pill.afro { border-color: var(--afro); color: var(--afro); }
+  .zone-pill.bridge { border-color: var(--bridge); color: var(--bridge); }
+  .zone-pill.techno { border-color: var(--techno); color: var(--techno); }
+
+  .zone-bpm {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ── Transition card ── */
+  .tx-card {
+    background: var(--s1);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+
+  .tx-card:hover { border-color: #2a2e3a; }
+  .tx-card.open { border-color: #252936; }
+
+  .tx-card.afro-card { border-left: 3px solid var(--afro); }
+  .tx-card.bridge-card { border-left: 3px solid var(--bridge); }
+  .tx-card.techno-card { border-left: 3px solid var(--techno); }
+
+  /* Card header */
+  .tx-head {
+    padding: 18px 22px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .tx-tracks {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .track-a, .track-b {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .track-sub {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .arrow-icon {
+    color: var(--muted);
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  .tx-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .bpm-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .diff-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    padding: 3px 9px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .diff-easy { background: rgba(58,173,110,0.12); color: var(--ok); }
+  .diff-med  { background: rgba(201,162,39,0.12); color: var(--warn); }
+
+  .expand-btn {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .tx-card.open .expand-btn {
+    color: var(--white);
+    border-color: #2a2e3a;
+  }
+
+  /* Card body */
+  .tx-body {
+    display: none;
+    padding: 0 22px 22px;
+    border-top: 1px solid var(--border);
+    margin-top: 0;
+  }
+
+  .tx-card.open .tx-body { display: block; }
+
+  .steps-title {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin: 18px 0 14px;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+
+  .step-num {
+    font-family: var(--display);
+    font-size: 22px;
+    line-height: 1;
+    color: var(--border);
+    padding-top: 2px;
+  }
+
+  .step-content { }
+
+  .step-action {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 3px;
+  }
+
+  .step-desc {
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* EQ visual */
+  .eq-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .eq-block {
+    background: var(--s2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 10px 14px;
+    min-width: 110px;
+  }
+
+  .eq-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .eq-band {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+  }
+
+  .eq-name {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    width: 22px;
+    text-transform: uppercase;
+  }
+
+  .eq-bar-track {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: visible;
+    position: relative;
+  }
+
+  .eq-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .eq-val {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+    width: 28px;
+    text-align: right;
+  }
+
+  .tip-box {
+    background: rgba(212,137,58,0.06);
+    border: 1px solid rgba(212,137,58,0.15);
+    border-radius: 3px;
+    padding: 12px 16px;
+    margin-top: 16px;
+    font-size: 12.5px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .tip-box strong {
+    color: var(--afro);
+    font-weight: 700;
+  }
+
+  .tip-box.purple { background: rgba(155,107,191,0.06); border-color: rgba(155,107,191,0.15); }
+  .tip-box.purple strong { color: var(--bridge); }
+  .tip-box.blue { background: rgba(58,143,212,0.06); border-color: rgba(58,143,212,0.15); }
+  .tip-box.blue strong { color: var(--techno); }
+
+  /* ── Timeline visual ── */
+  .timeline {
+    background: var(--s1);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 24px;
+    margin-bottom: 40px;
+    overflow-x: auto;
+  }
+
+  .tl-title {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .tl-track {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 8px;
+    min-width: 600px;
+  }
+
+  .tl-name {
+    font-size: 11px;
+    color: var(--text);
+    width: 180px;
+    flex-shrink: 0;
+    padding-right: 12px;
+    line-height: 1.3;
+  }
+
+  .tl-bar {
+    height: 28px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.6);
+    position: relative;
+  }
+
+  .tl-bar.afro-bar { background: rgba(212,137,58,0.25); border: 1px solid rgba(212,137,58,0.3); }
+  .tl-bar.bridge-bar { background: rgba(155,107,191,0.25); border: 1px solid rgba(155,107,191,0.3); }
+  .tl-bar.techno-bar { background: rgba(58,143,212,0.25); border: 1px solid rgba(58,143,212,0.3); }
+
+  .tl-overlap {
+    width: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    font-family: var(--mono);
+    color: var(--ok);
+  }
+
+  /* ── Footer note ── */
+  .footer-note {
+    margin-top: 52px;
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .footer-note strong { color: var(--text); }
+
+  @media (max-width: 580px) {
+    .tx-head { grid-template-columns: 1fr; }
+    .tx-meta { align-items: flex-start; flex-direction: row; }
+  }
+</style>
+</head>
+<body>
+<!-- ARWEN Lab · botón de regreso -->
+<style>
+#arwen-back{position:fixed;top:14px;left:14px;z-index:1000;display:inline-flex;align-items:center;gap:8px;
+  padding:9px 14px;background:rgba(10,10,11,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border:1px solid rgba(201,151,91,.35);color:#EDE7DC;text-decoration:none;
+  font:400 11px/1 'Jost',Futura,'Century Gothic',system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;
+  transition:border-color .25s,color .25s}
+#arwen-back:hover{border-color:#C9975B;color:#C9975B}
+#arwen-back:focus-visible{outline:1.5px solid #C9975B;outline-offset:3px}
+@media print{#arwen-back{display:none}}
+</style>
+<a id="arwen-back" href="index.html" aria-label="Volver al ARWEN Lab">← ARWEN Lab</a>
+
+<div class="wrap">
+
+  <!-- Header -->
+  <div class="hdr">
+    <div class="eyebrow">Crate Starter · Guía de Transiciones</div>
+    <h1>CÓMO<br>MEZCLAR<br><em>ESTOS TRACKS</em></h1>
+    <p class="hdr-sub">Pasos exactos para cada transición — qué EQ mover, cuándo y cómo. Toca cada carta para expandir.</p>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="leg-item"><span class="dot" style="background:var(--ok)"></span> Fácil — ideal para semana 1</div>
+    <div class="leg-item"><span class="dot" style="background:var(--warn)"></span> Medio — semana 3+</div>
+    <div class="leg-item"><span class="dot" style="background:var(--afro)"></span> Zona Afro House</div>
+    <div class="leg-item"><span class="dot" style="background:var(--bridge)"></span> Zona Puente</div>
+    <div class="leg-item"><span class="dot" style="background:var(--techno)"></span> Zona Melodic Techno</div>
+  </div>
+
+  <!-- Timeline visual -->
+  <div class="timeline">
+    <div class="tl-title">Flujo del set — vista general</div>
+    <div class="tl-track">
+      <div class="tl-name">Move — Keinemusik<br><span style="color:var(--muted);font-size:10px;">120 BPM</span></div>
+      <div class="tl-bar afro-bar" style="width:160px;">INTRO</div>
+    </div>
+    <div class="tl-track">
+      <div class="tl-name">Say What — &ME<br><span style="color:var(--muted);font-size:10px;">120 BPM</span></div>
+      <div style="width:80px;"></div>
+      <div class="tl-bar afro-bar" style="width:140px;">AFRO PURO</div>
+    </div>
+    <div class="tl-track">
+      <div class="tl-name">My Love 2024<br><span style="color:var(--muted);font-size:10px;">122 BPM</span></div>
+      <div style="width:160px;"></div>
+      <div class="tl-bar afro-bar" style="width:130px;">↑ ENERGÍA</div>
+    </div>
+    <div class="tl-track">
+      <div class="tl-name">Another World — Hugel<br><span style="color:var(--muted);font-size:10px;">123 BPM</span></div>
+      <div style="width:240px;"></div>
+      <div class="tl-bar afro-bar" style="width:120px;">PICO AFRO</div>
+    </div>
+    <div class="tl-track">
+      <div class="tl-name">Thandaza — Keinemusik<br><span style="color:var(--muted);font-size:10px;">126 BPM</span></div>
+      <div style="width:310px;"></div>
+      <div class="tl-bar bridge-bar" style="width:130px;">PUENTE</div>
+    </div>
+    <div class="tl-track">
+      <div class="tl-name">Last Night — Anyma<br><span style="color:var(--muted);font-size:10px;">132 BPM</span></div>
+      <div style="width:380px;"></div>
+      <div class="tl-bar techno-bar" style="width:150px;">TECHNO PICO</div>
+    </div>
+    <div class="tl-track">
+      <div class="tl-name">Yotto — Polar<br><span style="color:var(--muted);font-size:10px;">121 BPM</span></div>
+      <div style="width:480px;"></div>
+      <div class="tl-bar techno-bar" style="width:110px;">CIERRE</div>
+    </div>
+  </div>
+
+  <!-- ZONA 1 -->
+  <div class="zone-label">
+    <span class="zone-pill afro">Zona 1 — Afro House</span>
+    <span class="zone-bpm">120–124 BPM</span>
+  </div>
+
+  <!-- TX 1 -->
+  <div class="tx-card afro-card" onclick="toggle(this)">
+    <div class="tx-head">
+      <div class="tx-tracks">
+        <div>
+          <div class="track-a">Move (feat. Malachiii)</div>
+          <div class="track-sub">Keinemusik · 120 BPM · Ab Minor</div>
+        </div>
+        <span class="arrow-icon">→</span>
+        <div>
+          <div class="track-b">Say What (feat. Chuala)</div>
+          <div class="track-sub">&ME, Keinemusik · 120 BPM · C Major</div>
+        </div>
+      </div>
+      <div class="tx-meta">
+        <span class="bpm-tag">120 → 120</span>
+        <span class="diff-badge diff-easy">● Fácil</span>
+        <span class="expand-btn">VER →</span>
+      </div>
+    </div>
+    <div class="tx-body">
+      <div class="steps-title">Pasos de la transición</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-action">Activa Sync en el deck B</div>
+            <div class="step-desc">Mismo BPM exacto (120). Carga "Say What" en deck B, activa Sync — los BPM se alinean automáticamente. No necesitas tocar los jog wheels.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-action">Espera el outro de "Move" (min 4:30+)</div>
+            <div class="step-desc">El track tiene 5:52 min. Después del minuto 4, la energía baja naturalmente — ese es tu momento de entrada.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-action">Sube el fader del deck B al 50%, Low del B en cero</div>
+            <div class="step-desc">Dejas entrar los mids y highs de "Say What" sin su kick. El resultado: dos grooves mezclados sin conflicto de bajos.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-action">EQ swap en 8 beats</div>
+            <div class="step-desc">Sube el Low del B de 0 a 100% en 8 beats, simultáneamente baja el Low del A de 100% a 0%. El kick cambia de track sin que nadie lo note.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <div class="step-action">Baja fader del A y sube B al 100%</div>
+            <div class="step-desc">Transición completa. "Say What" domina. Baja el fader A lentamente en los siguientes 8 beats.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="eq-row">
+        <div class="eq-block">
+          <div class="eq-label">Deck A — durante mezcla</div>
+          <div class="eq-band">
+            <span class="eq-name">HI</span>
+            <div class="eq-bar-track"><div class="eq-bar-fill" style="width:90%;background:#3aad6e;"></div></div>
+            <span class="eq-val">90%</span>
+          </div>
+          <div class="eq-band">
+            <span class="eq-name">MID</span>
+            <div class="eq-bar-track"><div class="eq-bar-fill" style="width:80%;background:#3aad6e;"></div></div>
+            <span class="eq-val">80%</span>
+          </div>
+          <div class="eq-band">
+            <span class="eq-name">LOW</span>
+            <div class="eq-bar-track"><div class="eq-bar-fill" style="width:0%;background:var(--afro);"></div></div>
+            <span class="eq-val">0%↓</span>
+          </div>
+        </div>
+        <div class="eq-block">
+          <div class="eq-label">Deck B — durante mezcla</div>
+          <div class="eq-band">
+            <span class="eq-name">HI</span>
+            <div class="eq-bar-track"><div class="eq-bar-fill" style="width:70%;background:#3aad6e;"></div></div>
+            <span class="eq-val">70%</span>
+          </div>
+          <div class="eq-band">
+            <span class="eq-name">MID</span>
+            <div class="eq-bar-track"><div class="eq-bar-fill" style="width:80%;background:#3aad6e;"></div></div>
+            <span class="eq-val">80%</span>
+          </div>
+          <div class="eq-band">
+            <span class="eq-name">LOW</span>
+            <div class="eq-bar-track"><div class="eq-bar-fill" style="width:100%;background:var(--afro);"></div></div>
+            <span class="eq-val">100%↑</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <strong>💡 Tip:</strong> Estos dos tracks son del mismo sello (Keinemusik) y tienen sonido muy parecido. Es la transición más fácil de tu crate — perfecta para practicar el EQ swap por primera vez. Hazla 10 veces hasta que se sienta automática.
+      </div>
+    </div>
+  </div>
+
+  <!-- TX 2 -->
+  <div class="tx-card afro-card" onclick="toggle(this)">
+    <div class="tx-head">
+      <div class="tx-tracks">
+        <div>
+          <div class="track-a">Say What (feat. Chuala)</div>
+          <div class="track-sub">&ME · 120 BPM</div>
+        </div>
+        <span class="arrow-icon">→</span>
+        <div>
+          <div class="track-b">My Love (2024)</div>
+          <div class="track-sub">Route 94, Jess Glynne · 122 BPM</div>
+        </div>
+      </div>
+      <div class="tx-meta">
+        <span class="bpm-tag">120 → 122</span>
+        <span class="diff-badge diff-easy">● Fácil</span>
+        <span class="expand-btn">VER →</span>
+      </div>
+    </div>
+    <div class="tx-body">
+      <div class="steps-title">Pasos de la transición</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-action">Sube el pitch de "My Love" a 122 BPM con el pitch fader</div>
+            <div class="step-desc">Solo 2 BPM de diferencia. En Rekordbox/Serato, el pitch fader del FLX4 tiene rango de ±6% — fácilmente alcanzas 122 desde 120.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-action">Usa Sync para alinear los beats</div>
+            <div class="step-desc">Con 122 BPM en el pitch fader del B, activa Sync. El software alineará el grid automáticamente.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-action">Entra en el intro largo de "My Love" — sube fader B a 40%</div>
+            <div class="step-desc">"My Love" tiene un intro de 32 beats limpio. Aprovéchalo para que los dos tracks convivan antes del drop.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-action">EQ swap al llegar el drop de "My Love"</div>
+            <div class="step-desc">Cuando llegue el kick de "My Love", haz el swap: Low A a cero, Low B a 100%. Sube el fader B a 100% y baja el A.</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-box">
+        <strong>💡 Tip:</strong> "My Love" tiene una melodía vocal muy reconocible. Úsala como herramienta — el público va a reaccionar al escucharla, así que no la entierres en el mix. Deja que sus mids entren con presencia desde el principio.
+      </div>
+    </div>
+  </div>
+
+  <!-- TX 3 -->
+  <div class="tx-card afro-card" onclick="toggle(this)">
+    <div class="tx-head">
+      <div class="tx-tracks">
+        <div>
+          <div class="track-a">My Love (2024)</div>
+          <div class="track-sub">122 BPM</div>
+        </div>
+        <span class="arrow-icon">→</span>
+        <div>
+          <div class="track-b">Another World (HUGEL Extended)</div>
+          <div class="track-sub">Hugel, HAYLA · 123 BPM</div>
+        </div>
+      </div>
+      <div class="tx-meta">
+        <span class="bpm-tag">122 → 123</span>
+        <span class="diff-badge diff-easy">● Fácil</span>
+        <span class="expand-btn">VER →</span>
+      </div>
+    </div>
+    <div class="tx-body">
+      <div class="steps-title">Pasos de la transición</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-action">Activa loop de 8 beats en "My Love" en el outro</div>
+            <div class="step-desc">Cuando "My Love" entra al outro (últimos 60 segundos), activa un loop de 8 beats. Esto te da tiempo ilimitado para preparar "Another World" sin presión.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-action">Carga "Another World", ajusta a 123 BPM</div>
+            <div class="step-desc">Solo 1 BPM de diferencia. Sync lo resuelve en un clic.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-action">Entra con Low B en cero, sube fader B a 60%</div>
+            <div class="step-desc">La melodía de "Another World" es muy reconocible — deja que sus highs y mids entren antes del kick para anunciar el cambio.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-action">Desactiva el loop y haz el EQ swap</div>
+            <div class="step-desc">Desactiva el loop del A, sube Low B simultáneamente. El nuevo kick entra con fuerza. Baja el A completamente en 4 beats.</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-box">
+        <strong>💡 Técnica del loop:</strong> Este truco (loop en el outro + preparar el siguiente track sin prisa) es lo que separa a un DJ que se ve nervioso de uno que se ve tranquilo. Practica activar y desactivar loops sin perder el beat.
+      </div>
+    </div>
+  </div>
+
+  <!-- ZONA PUENTE -->
+  <div class="zone-label">
+    <span class="zone-pill bridge">Zona 2 — Puente Afro Tech</span>
+    <span class="zone-bpm">125–128 BPM</span>
+  </div>
+
+  <!-- TX 4 -->
+  <div class="tx-card bridge-card" onclick="toggle(this)">
+    <div class="tx-head">
+      <div class="tx-tracks">
+        <div>
+          <div class="track-a">Another World</div>
+          <div class="track-sub">123 BPM</div>
+        </div>
+        <span class="arrow-icon">→</span>
+        <div>
+          <div class="track-b">Thandaza</div>
+          <div class="track-sub">Keinemusik · 126 BPM</div>
+        </div>
+      </div>
+      <div class="tx-meta">
+        <span class="bpm-tag">123 → 126</span>
+        <span class="diff-badge diff-med">● Medio</span>
+        <span class="expand-btn">VER →</span>
+      </div>
+    </div>
+    <div class="tx-body">
+      <div class="steps-title">Pasos de la transición — el cambio de zona</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-action">Sube gradualmente el pitch de "Another World" de 123 a 125 BPM</div>
+            <div class="step-desc">Antes de mezclar, mueve el pitch fader del deck A para acercar los BPM. 2–3 BPM de ajuste son inaudibles si lo haces lento (en 16–32 beats).</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-action">Carga "Thandaza" a 126 BPM — solo 1 BPM de diferencia</div>
+            <div class="step-desc">Ahora la diferencia entre decks es mínima. Usa Sync o ajusta manualmente con el jog wheel borde (muy suave).</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-action">Entra "Thandaza" en su intro — sube fader B a 50%, Low en cero</div>
+            <div class="step-desc">Thandaza tiene un intro tribal de 32 beats. Ese groove percusivo encima del groove de "Another World" crea tensión positiva — el público lo siente.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-action">Baja el Hi del A para quitar el brillo anterior</div>
+            <div class="step-desc">Thandaza es más oscuro. Bajar el Hi del A en un 30% ayuda a que el sonido general se vuelva más oscuro y profundo — preparando al oído para el Techno.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <div class="step-action">EQ swap en el drop de Thandaza</div>
+            <div class="step-desc">Cuando el kick de Thandaza entra, haz el swap. El bajo oscuro de este track es inconfundible — deja que tome el control total.</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-box purple">
+        <strong>💡 Esta es la transición más importante de tu set.</strong> Es el momento en que el mood cambia de Afro House luminoso a algo más oscuro y profundo. El público debe sentirlo como una evolución natural, no como un corte. Practica este cruce 20 veces — es el corazón del set.
+      </div>
+    </div>
+  </div>
+
+  <!-- ZONA TECHNO -->
+  <div class="zone-label">
+    <span class="zone-pill techno">Zona 3 — Melodic Techno</span>
+    <span class="zone-bpm">128–136 BPM</span>
+  </div>
+
+  <!-- TX 5 -->
+  <div class="tx-card techno-card" onclick="toggle(this)">
+    <div class="tx-head">
+      <div class="tx-tracks">
+        <div>
+          <div class="track-a">Thandaza</div>
+          <div class="track-sub">Keinemusik · 126 BPM</div>
+        </div>
+        <span class="arrow-icon">→</span>
+        <div>
+          <div class="track-b">Last Night</div>
+          <div class="track-sub">Anyma x Layton Giordani · ~132 BPM</div>
+        </div>
+      </div>
+      <div class="tx-meta">
+        <span class="bpm-tag">126 → 132</span>
+        <span class="diff-badge diff-med">● Medio</span>
+        <span class="expand-btn">VER →</span>
+      </div>
+    </div>
+    <div class="tx-body">
+      <div class="steps-title">Pasos de la transición — el pico del set</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-action">Sube Thandaza a 128 BPM gradualmente en 2–3 min</div>
+            <div class="step-desc">6 BPM de diferencia es mucho para hacer de golpe. Mueve el pitch fader del A muy lentamente (+1 BPM cada 30–40 beats). Nadie lo nota conscientemente pero el cuerpo lo siente.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-action">Carga "Last Night" — ajusta pitch a 128–129 BPM para hacer match</div>
+            <div class="step-desc">Baja el tempo de Last Night (que originalmente va a ~132) o sube el de Thandaza más. Busca un punto de encuentro entre 128–130.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-action">Usa reverb/echo del FLX4 en la salida de Thandaza</div>
+            <div class="step-desc">En el botón de efectos del FLX4, activa Echo en el deck A con el outro de Thandaza. Esto crea una cola atmosférica que suaviza la entrada del Techno.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <div class="step-action">Entra "Last Night" con fader B al 40%, Low B en cero</div>
+            <div class="step-desc">La síntesis de Last Night es muy atmosférica en el intro. Deja que esa textura se mezcle con el echo del track anterior — crea un momento cinematográfico.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <div class="step-action">Drop: Low B al 100%, corta el A completamente</div>
+            <div class="step-desc">Cuando entre el kick de Last Night, que entre con todo. Este es el pico del set — el crossfader de golpe al B, Low B al 100%. El contraste es la emoción.</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-box blue">
+        <strong>💡 Tip avanzado:</strong> Después del drop de Last Night, sube el pitch fader del B lentamente hasta su BPM natural (~132). El set ya está en zona Techno y puedes mantenerlo ahí. El público ya hizo el viaje contigo.
+      </div>
+    </div>
+  </div>
+
+  <!-- TX 6 — Cierre -->
+  <div class="tx-card techno-card" onclick="toggle(this)">
+    <div class="tx-head">
+      <div class="tx-tracks">
+        <div>
+          <div class="track-a">Along Came Polly / Sweet Disposition</div>
+          <div class="track-sub">Rebuke / John Summit · ~126–130 BPM</div>
+        </div>
+        <span class="arrow-icon">→</span>
+        <div>
+          <div class="track-b">Yotto — Polar (cierre)</div>
+          <div class="track-sub">121 BPM</div>
+        </div>
+      </div>
+      <div class="tx-meta">
+        <span class="bpm-tag">128 → 121</span>
+        <span class="diff-badge diff-med">● Medio</span>
+        <span class="expand-btn">VER →</span>
+      </div>
+    </div>
+    <div class="tx-body">
+      <div class="steps-title">Pasos del cierre — baja la energía</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <div class="step-action">Baja el BPM gradualmente antes de mezclar con Polar</div>
+            <div class="step-desc">En los últimos 2–3 tracks del set Techno, ve bajando el pitch fader 1 BPM cada varios minutos. Llegas al track anterior a Polar ya en ~123–124 BPM.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <div class="step-action">Entra Polar con un largo fade — fader B sube muy lento en 32 beats</div>
+            <div class="step-desc">Polar es el momento de respiro. No hay prisa. Deja que entre suavemente mientras el track anterior se desvanece con un fade largo del fader A.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <div class="step-action">Sube el reverb/hall en Polar durante la mezcla</div>
+            <div class="step-desc">Los efectos de sala (reverb largo) en un track de cierre crean sensación de espacio y conclusión. El FLX4 tiene esto en sus performance effects.</div>
+          </div>
+        </div>
+      </div>
+      <div class="tip-box blue">
+        <strong>💡 El arte del cierre:</strong> Terminar bien un set es tan importante como el pico. Polar de Yotto baja la temperatura emocionalmente sin decepcionar — es hermoso y conclusivo. El público sale con esa última sensación grabada.
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer note -->
+  <div class="footer-note">
+    <strong>Rutina de práctica sugerida:</strong> Elige UNA sola transición por sesión de práctica (30–45 min). Hazla en loop hasta que sea automática. No intentes practicar todo el set de un tirón hasta la semana 6. La repetición de una sola transición construye músculo más rápido que hacer el set completo mal.
+  </div>
+
+</div>
+
+<script>
+  function toggle(card) {
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.tx-card.open').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+</script>
+</body>
+</html>

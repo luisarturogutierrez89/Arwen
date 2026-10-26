@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BEAT FX · Guía Afro House · ARWEN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0B;
+  --panel:#131315;
+  --panel2:#18181B;
+  --line:rgba(201,151,91,.22);
+  --line-soft:rgba(201,151,91,.10);
+  --gold:#C9975B;
+  --gold-hi:#E3BE8B;
+  --gold-dim:#8C6A42;
+  --bone:#EDE7DC;
+  --muted:#9A948A;
+  --bad:#B05C4A;
+  --good:#7E9C6E;
+  --disp:'Cormorant Garamond',Didot,'Bodoni MT',Georgia,serif;
+  --sans:'Jost',Futura,'Century Gothic',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--ink)}
+
+.wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+.eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:400}
+h2{font-family:var(--disp);font-weight:600;font-size:clamp(28px,4.4vw,42px);line-height:1.12;margin:10px 0 14px}
+h2 em{font-style:italic;font-weight:400;color:var(--gold-hi)}
+.lead{color:var(--muted);max-width:660px;font-size:15.5px}
+section{padding:76px 0;border-top:1px solid var(--line-soft)}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:1.5px solid var(--gold);outline-offset:3px}
+
+/* ---------- HERO ---------- */
+.hero{min-height:88vh;display:flex;align-items:center;border:none;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 70% 50% at 70% 20%, rgba(201,151,91,.08), transparent 60%),
+  radial-gradient(ellipse 50% 40% at 15% 90%, rgba(201,151,91,.05), transparent 60%);pointer-events:none}
+.hero-inner{position:relative}
+.hero h1{font-family:var(--disp);font-weight:400;font-size:clamp(52px,10vw,118px);line-height:.98;letter-spacing:.01em;margin:18px 0 8px}
+.hero h1 .fx{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:15px;color:var(--muted);max-width:580px;margin-top:18px}
+.hero-rule{display:flex;align-items:center;gap:14px;margin-top:36px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dim)}
+.hero-rule::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+.hero-nav{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:22px}
+.hero-nav a{color:var(--bone);text-decoration:none;font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;border-bottom:1px solid transparent;padding-bottom:3px;transition:border-color .25s,color .25s}
+.hero-nav a:hover,.hero-nav a:focus-visible{color:var(--gold);border-color:var(--gold)}
+
+/* ---------- CONTEXTO ---------- */
+.ctx-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:start;margin-top:34px}
+.ctx-grid p{margin-bottom:16px;font-size:15px;color:#CFC9BE}
+.ctx-grid strong{font-weight:500;color:var(--bone)}
+.callout{border-left:2px solid var(--gold);background:var(--panel);padding:16px 20px;margin-top:8px;font-size:14px;color:#CFC9BE}
+.callout b{color:var(--gold);font-weight:500}
+.flow{background:var(--panel);border:1px solid var(--line);padding:28px 26px}
+.flow h5{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dim);text-align:center;margin-bottom:20px;font-weight:400}
+.flow-step{display:flex;gap:16px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line-soft)}
+.flow-step:last-child{border-bottom:none}
+.flow-num{font-family:var(--disp);font-style:italic;font-size:20px;color:var(--gold);flex:0 0 28px}
+.flow-step div b{display:block;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:500;color:var(--bone)}
+.flow-step div span{font-size:12.5px;color:var(--muted)}
+
+/* ---------- TIERS / FAMILIAS ---------- */
+.tier-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.tier{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;padding:6px 13px;border:1px solid var(--line-soft)}
+.tier.t-ess{color:var(--gold);border-color:var(--gold)}
+.tier.t-util{color:var(--gold-hi);border-color:var(--line)}
+.tier.t-tex{color:var(--muted)}
+.tier.t-ign{color:#6A655D;text-decoration:line-through;text-decoration-color:rgba(154,148,138,.5)}
+.tier.t-lock{color:#6A655D}
+.fx-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:30px}
+.fx-card{background:var(--panel);border:1px solid var(--line-soft);padding:28px;position:relative;transition:border-color .3s}
+.fx-card:hover{border-color:var(--line)}
+.fx-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.fx-glyph{width:44px;height:44px;flex:0 0 44px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.fx-glyph svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.5;stroke-linecap:round}
+.fx-name{font-family:var(--disp);font-size:25px;font-weight:600;letter-spacing:.02em}
+.fx-tag{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-dim);display:block;margin-top:1px}
+.fx-desc{font-size:14px;color:#CFC9BE;margin-bottom:16px}
+.fx-desc b{color:var(--bone);font-weight:500}
+.member{display:flex;gap:12px;align-items:baseline;padding:9px 0;border-top:1px solid var(--line-soft);font-size:13px}
+.member .mn{flex:0 0 122px;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:400}
+.member .mn.ess{color:var(--gold)}
+.member .mn.util{color:var(--gold-hi)}
+.member .mn.tex{color:var(--muted)}
+.member .mn.ign{color:#6A655D;text-decoration:line-through;text-decoration-color:rgba(154,148,138,.4)}
+.member .mn.lock{color:#6A655D}
+.member .mn .lk{font-size:10px;text-decoration:none;display:inline-block}
+.member span{color:var(--muted);flex:1}
+.member span b{color:#CFC9BE;font-weight:400}
+.fx-meter{position:absolute;top:0;right:0;font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:8px 12px;color:var(--gold-dim);border-left:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft)}
+
+/* ---------- MAPA ---------- */
+.timeline{display:flex;margin-top:40px;border:1px solid var(--line);background:var(--panel)}
+.tl-seg{flex:1;padding:20px 8px 16px;text-align:center;cursor:pointer;border-right:1px solid var(--line-soft);position:relative;transition:background .3s;background:transparent;color:var(--bone);font-family:var(--sans);border-top:none;border-bottom:none;border-left:none}
+.tl-seg:last-child{border-right:none}
+.tl-seg .tl-energy{display:block;margin:0 auto 12px;width:60%;background:var(--gold-dim);opacity:.5;transition:opacity .3s,background .3s}
+.tl-seg .tl-name{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;display:block}
+.tl-seg .tl-bars{font-size:10px;color:var(--muted);display:block;margin-top:3px;letter-spacing:.06em}
+.tl-seg[aria-selected="true"]{background:rgba(201,151,91,.08)}
+.tl-seg[aria-selected="true"] .tl-energy{background:var(--gold);opacity:1}
+.tl-seg[aria-selected="true"] .tl-name{color:var(--gold)}
+.tl-detail{border:1px solid var(--line);border-top:none;background:var(--panel2);padding:30px;min-height:190px}
+.tl-detail h3{font-family:var(--disp);font-size:24px;font-weight:600;margin-bottom:4px}
+.tl-detail .tl-sub{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block}
+.tl-detail p{font-size:14px;color:#CFC9BE;max-width:680px}
+.tl-fx-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.tl-chip{border:1px solid var(--line);padding:6px 14px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.tl-chip.off{color:var(--muted);border-color:var(--line-soft);text-decoration:line-through}
+
+/* ---------- CABINA ---------- */
+.booth{background:var(--panel);border:1px solid var(--line);margin-top:40px;padding:36px 32px}
+.booth-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:8px}
+.booth-title{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-dim)}
+.play-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:var(--sans);font-size:12px;letter-spacing:.24em;text-transform:uppercase;padding:13px 34px;cursor:pointer;transition:background .3s,color .3s}
+.play-btn:hover{background:var(--gold);color:var(--ink)}
+.play-btn.playing{background:var(--gold);color:var(--ink)}
+.booth-hint{font-size:12.5px;color:var(--muted);margin-bottom:26px}
+.fxpanel{display:grid;grid-template-columns:1fr 260px;gap:26px;align-items:stretch}
+.fxpanel-left{border:1px solid var(--line-soft);background:var(--ink);padding:24px}
+.fxpanel-right{border:1px solid var(--line-soft);background:var(--ink);padding:24px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:18px}
+.panel-lab{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px}
+.sel-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.sel-btn{background:transparent;border:1px solid var(--line-soft);color:var(--bone);font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:9px 14px;cursor:pointer;transition:border-color .25s,color .25s,background .25s}
+.sel-btn:hover{border-color:var(--gold)}
+.sel-btn[aria-pressed="true"]{border-color:var(--gold);color:var(--gold);background:rgba(201,151,91,.08)}
+.beat-row{display:flex;gap:8px;margin-bottom:6px}
+.beat-btn{flex:1;background:transparent;border:1px solid var(--line-soft);color:var(--bone);font-family:var(--sans);font-size:12px;padding:10px 0;cursor:pointer;transition:border-color .25s,color .25s,background .25s;letter-spacing:.06em}
+.beat-btn:hover{border-color:var(--gold)}
+.beat-btn[aria-pressed="true"]{border-color:var(--gold);color:var(--gold);background:rgba(201,151,91,.08)}
+.fx-hintline{font-size:12px;color:var(--muted);margin-top:16px;min-height:38px}
+.fx-hintline b{color:var(--gold);font-weight:500}
+.knob{width:96px;height:96px;border-radius:50%;position:relative;cursor:ns-resize;touch-action:none;
+  background:radial-gradient(circle at 38% 32%, #232326, #0E0E10 70%);
+  border:1px solid #2A2A2E;box-shadow:0 6px 18px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05)}
+.knob::after{content:"";position:absolute;inset:-7px;border-radius:50%;border:1px solid var(--line-soft);pointer-events:none}
+.knob .pointer{position:absolute;left:50%;top:7px;width:2.5px;height:28px;background:var(--gold);transform-origin:50% 41px;transform:translateX(-50%) rotate(-135deg);border-radius:2px}
+.knob-label{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--bone);margin-top:12px;text-align:center}
+.knob-val{font-size:10.5px;color:var(--gold-dim);margin-top:4px;letter-spacing:.1em;min-height:16px;text-align:center}
+.onoff{width:100%;background:transparent;border:1px solid var(--line);color:var(--muted);font-family:var(--sans);font-size:12px;letter-spacing:.28em;text-transform:uppercase;padding:16px 0;cursor:pointer;transition:all .25s}
+.onoff.on{border-color:var(--gold);color:var(--ink);background:var(--gold)}
+.cutbtn{width:100%;background:transparent;border:1px solid var(--line-soft);color:var(--muted);font-family:var(--sans);font-size:11px;letter-spacing:.22em;text-transform:uppercase;padding:11px 0;cursor:pointer;transition:all .25s}
+.cutbtn.cut{border-color:var(--bad);color:var(--bad)}
+.booth-scenes{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;padding-top:22px;border-top:1px solid var(--line-soft)}
+.scene-btn{background:transparent;border:1px solid var(--line);color:var(--bone);font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;padding:10px 16px;cursor:pointer;transition:border-color .25s,color .25s}
+.scene-btn:hover{border-color:var(--gold);color:var(--gold)}
+.booth-note{font-size:12px;color:var(--muted);margin-top:16px}
+.booth-note b{color:var(--gold);font-weight:500}
+
+/* ---------- QUIZ ---------- */
+.quiz-box{background:var(--panel);border:1px solid var(--line);margin-top:38px;padding:38px 34px;min-height:340px;display:flex;flex-direction:column}
+.quiz-progress{font-size:11px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:18px}
+.quiz-q{font-family:var(--disp);font-size:clamp(21px,3vw,27px);font-weight:600;line-height:1.25;margin-bottom:26px;max-width:720px}
+.quiz-opts{display:grid;gap:10px;max-width:720px}
+.quiz-opt{background:transparent;border:1px solid var(--line-soft);color:var(--bone);text-align:left;font-family:var(--sans);font-weight:300;font-size:14px;padding:15px 18px;cursor:pointer;transition:border-color .25s,background .25s;line-height:1.5}
+.quiz-opt:hover:not(:disabled){border-color:var(--gold)}
+.quiz-opt:disabled{cursor:default}
+.quiz-opt.correct{border-color:var(--good);background:rgba(126,156,110,.08)}
+.quiz-opt.wrong{border-color:var(--bad);background:rgba(176,92,74,.07);opacity:.85}
+.quiz-fb{margin-top:20px;font-size:14px;color:#CFC9BE;border-left:2px solid var(--gold);padding:12px 18px;background:var(--ink);max-width:720px;display:none}
+.quiz-fb.show{display:block}
+.quiz-fb b{color:var(--gold);font-weight:500}
+.quiz-next{margin-top:22px;align-self:flex-start;display:none}
+.quiz-next.show{display:inline-block}
+.quiz-score{font-family:var(--disp);font-size:clamp(34px,6vw,58px);font-weight:600;line-height:1.1}
+.quiz-verdict{color:var(--muted);margin-top:12px;max-width:600px;font-size:15px}
+
+/* ---------- REGLAS ---------- */
+.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid var(--line);margin-top:38px}
+.rule{padding:30px 28px;border-bottom:1px solid var(--line-soft)}
+.rule:nth-child(odd){border-right:1px solid var(--line-soft)}
+.rule:nth-last-child(-n+2){border-bottom:none}
+.rule h4{font-family:var(--disp);font-size:21px;font-weight:600;margin-bottom:8px}
+.rule h4 span{color:var(--gold);font-style:italic;font-weight:400}
+.rule p{font-size:13.5px;color:var(--muted)}
+.rule p b{color:var(--bone);font-weight:400}
+
+footer{padding:60px 0 70px;text-align:center;color:var(--gold-dim);font-size:11px;letter-spacing:.34em;text-transform:uppercase}
+footer .mark{font-family:var(--disp);font-size:20px;letter-spacing:.42em;color:var(--gold);margin-bottom:10px;font-weight:400}
+
+@media(max-width:840px){
+  .ctx-grid{grid-template-columns:1fr}
+  .fx-grid{grid-template-columns:1fr}
+  .rules{grid-template-columns:1fr}
+  .rule:nth-child(odd){border-right:none}
+  .rule:nth-last-child(-n+2){border-bottom:1px solid var(--line-soft)}
+  .rule:last-child{border-bottom:none}
+  .fxpanel{grid-template-columns:1fr}
+  .timeline{flex-wrap:wrap}
+  .tl-seg{flex:1 1 33%;border-bottom:1px solid var(--line-soft)}
+  .member .mn{flex:0 0 104px}
+  section{padding:58px 0}
+}
+</style>
+</head>
+<body>
+<!-- ARWEN Lab · botón de regreso -->
+<style>
+#arwen-back{position:fixed;top:14px;left:14px;z-index:1000;display:inline-flex;align-items:center;gap:8px;
+  padding:9px 14px;background:rgba(10,10,11,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border:1px solid rgba(201,151,91,.35);color:#EDE7DC;text-decoration:none;
+  font:400 11px/1 'Jost',Futura,'Century Gothic',system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;
+  transition:border-color .25s,color .25s}
+#arwen-back:hover{border-color:#C9975B;color:#C9975B}
+#arwen-back:focus-visible{outline:1.5px solid #C9975B;outline-offset:3px}
+@media print{#arwen-back{display:none}}
+</style>
+<a id="arwen-back" href="index.html" aria-label="Volver al ARWEN Lab">← ARWEN Lab</a>
+
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Guía técnica · Vol. II · Rekordbox / DDJ-FLX4</span>
+    <h1>Beat <span class="fx">FX</span><br>en Afro House</h1>
+    <p class="hero-sub">El panel de efectos de tu captura tiene más de treinta opciones. La buena noticia: para Afro House vas a vivir en cinco o seis. Esta guía te dice cuáles, por qué, y te deja practicarlos sincronizados al beat — que es justo lo que los hace distintos al Color FX.</p>
+    <div class="hero-rule">Sincronizado al grid · Medido en beats</div>
+    <nav class="hero-nav" aria-label="Secciones">
+      <a href="#contexto">El panel</a>
+      <a href="#familias">Las familias</a>
+      <a href="#mapa">Mapa del track</a>
+      <a href="#cabina">La cabina</a>
+      <a href="#quiz">Ponte a prueba</a>
+      <a href="#reglas">Reglas de oro</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ CONTEXTO ============ -->
+<section id="contexto">
+  <div class="wrap">
+    <span class="eyebrow">01 · Antes de encender nada</span>
+    <h2>Beat FX no es Color FX: <em>aquí manda el beat</em></h2>
+    <div class="ctx-grid">
+      <div>
+        <p>El Color FX es un knob por canal, análogo y continuo. El <strong>Beat FX</strong> es otra cosa: un procesador que se <strong>sincroniza al beatgrid</strong> del track y se mide en fracciones de beat — 1/2, 3/4, 1, 2. Un echo de "1/2 beat" repite exactamente cada media negra, matemáticamente en tiempo con la música. Por eso suena profesional sin esfuerzo… siempre que tu grid esté bien puesto.</p>
+        <p>El flujo de trabajo es siempre el mismo, y conviene hacerlo mecánico en este orden (panel de la derecha). El error clásico del principiante es encender el efecto primero y luego buscar los parámetros — para cuando los encuentras, ya sonó feo durante cuatro compases.</p>
+        <p>Los efectos con <strong>candado</strong> en tu menú (Ping Pong, Helix, Vinyl Brake, Stretch) son parte de los paquetes de pago de Rekordbox — no están en tu licencia actual. No te hacen falta: nada de lo esencial para Afro House está detrás de un candado.</p>
+        <div class="callout"><b>La regla de convivencia:</b> Beat FX y Color FX comparten escenario, pero solo uno puede ser protagonista a la vez. Un echo de salida no necesita un filtro encima; un build de HPF + Noise no necesita un roll simultáneo. Uno dirige, el otro descansa.</div>
+      </div>
+      <div class="flow">
+        <h5>El ritual, siempre en este orden</h5>
+        <div class="flow-step"><span class="flow-num">i.</span><div><b>Selecciona el efecto</b><span>En el menú desplegable (tu captura). Antes de tocar nada más.</span></div></div>
+        <div class="flow-step"><span class="flow-num">ii.</span><div><b>Asigna el canal</b><span>Deck 1, deck 2 o master. El FX solo toca lo que le asignes.</span></div></div>
+        <div class="flow-step"><span class="flow-num">iii.</span><div><b>Elige el beat</b><span>Botones &lt; &gt; — la longitud en beats. La mitad del carácter del efecto vive aquí.</span></div></div>
+        <div class="flow-step"><span class="flow-num">iv.</span><div><b>Ajusta LEVEL/DEPTH</b><span>La intensidad. Arranca en 30–40%, nunca al máximo.</span></div></div>
+        <div class="flow-step"><span class="flow-num">v.</span><div><b>ON — gesto — OFF</b><span>El efecto entra, cumple su frase, y se apaga. Siempre se apaga.</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAMILIAS ============ -->
+<section id="familias">
+  <div class="wrap">
+    <span class="eyebrow">02 · Los 30+ efectos, ordenados</span>
+    <h2>Seis familias, <em>y tu lugar en cada una</em></h2>
+    <p class="lead">Todo lo que aparece en tu menú, agrupado por lo que hace — con una jerarquía honesta para Afro House. Los tachados no es que sean malos: es que hoy te distraen.</p>
+    <div class="tier-legend">
+      <span class="tier t-ess">Esencial</span>
+      <span class="tier t-util">Útil</span>
+      <span class="tier t-tex">Textura ocasional</span>
+      <span class="tier t-ign">Ignóralo por ahora</span>
+      <span class="tier t-lock">🔒 Bloqueado (de pago)</span>
+    </div>
+
+    <div class="fx-grid">
+
+      <!-- ECOS Y DELAYS -->
+      <article class="fx-card">
+        <span class="fx-meter">80% de tu uso</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><path d="M4 6 v12 M10 8 v8 M15 10 v4 M19 11 v2"/></svg></div>
+          <div><span class="fx-name">Ecos y delays</span><span class="fx-tag">La familia que paga la renta</span></div>
+        </div>
+        <p class="fx-desc">Repeticiones sincronizadas al beat. Aquí viven el <b>echo-out</b> y las colas de vocal — los dos gestos más usados del Afro House. La variante estrella para ti es <b>LOW CUT ECHO</b>: repite todo menos los graves, así puedes echar el eco con el kick sonando sin hacer lodo.</p>
+        <div class="member"><span class="mn ess">Echo</span><span>El clásico: repeticiones con cola que se desvanece. <b>Tu salida de tracks.</b> Beat 1/2 o 3/4.</span></div>
+        <div class="member"><span class="mn ess">Low Cut Echo</span><span>Echo sin graves. <b>El echo-out limpio</b> cuando hay kick presente. Tu mejor amigo nuevo.</span></div>
+        <div class="member"><span class="mn util">Delay</span><span>Repeticiones discretas, menos feedback. Para dar aire a una vocal sin protagonismo.</span></div>
+        <div class="member"><span class="mn tex">HPF / LPF / BPF Echo</span><span>Ecos filtrados (solo agudos / solo graves / solo medios). Colores del mismo gesto.</span></div>
+        <div class="member"><span class="mn tex">Up / Down Echo</span><span>El eco sube o baja de tono al repetir. Salidas ascendentes o aterrizajes.</span></div>
+        <div class="member"><span class="mn tex">Rev Delay · MT Delay</span><span>Repetición invertida / multi-tap rítmico. Rarezas de estudio, no de cabina.</span></div>
+        <div class="member"><span class="mn tex">Crush Echo</span><span>Eco degradado, agresivo. Solo en tu lado más Afro Tech, un instante.</span></div>
+        <div class="member"><span class="mn lock">Ping Pong <span class="lk">🔒</span></span><span>Eco alternando izquierda/derecha. Bloqueado; no te pierdes nada crítico.</span></div>
+      </article>
+
+      <!-- REVERBS -->
+      <article class="fx-card">
+        <span class="fx-meter">Breakdowns</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7" opacity=".55"/><circle cx="12" cy="12" r="10" opacity=".3"/></svg></div>
+          <div><span class="fx-name">Reverbs</span><span class="fx-tag">Espacio y emoción</span></div>
+        </div>
+        <p class="fx-desc">Igual que el Space del CFX, pero con control fino de nivel y asignación de canal. Su casa es el <b>breakdown</b>: sin kick, la reverb agranda pads y vocal sin ensuciar nada.</p>
+        <div class="member"><span class="mn ess">Reverb</span><span>La sala. Depth 30–40% sobre el breakdown y el momento se vuelve cine.</span></div>
+        <div class="member"><span class="mn util">Reverb Up</span><span>La reverb crece sola con el tiempo: <b>un build de atmósfera automático</b> hacia el drop.</span></div>
+        <div class="member"><span class="mn tex">Reverb Down</span><span>La reverb se seca gradualmente. Para aterrizar de un breakdown al groove.</span></div>
+      </article>
+
+      <!-- RISERS Y ESPIRALES -->
+      <article class="fx-card">
+        <span class="fx-meter">Builds</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><path d="M4 19 C4 12 9 12 9 16 C9 19 6 19 6 16 C6 10 14 8 16 13 M16 5 l3 3 l-3 3 M19 8 h-7"/></svg></div>
+          <div><span class="fx-name">Risers y espirales</span><span class="fx-tag">Tensión que sube sola</span></div>
+        </div>
+        <p class="fx-desc">Efectos cuyo tono o feedback <b>asciende</b>: tensión automática hacia el drop. Especialmente valiosos en tu lado Melodic Techno, donde los builds son más largos y dramáticos.</p>
+        <div class="member"><span class="mn util">Mobius Saw / Tri</span><span>El tono Shepard: una subida <b>infinita</b> que nunca llega. Depth gradual en builds largos de melodic techno. Saw es más agresivo, Tri más suave.</span></div>
+        <div class="member"><span class="mn util">Spiral Up</span><span>Eco en espiral ascendente. Riser corto y controlado para los últimos 4 compases.</span></div>
+        <div class="member"><span class="mn tex">Spiral</span><span>El espiral neutro: feedback que gira sobre sí mismo. Textura hipnótica breve.</span></div>
+        <div class="member"><span class="mn tex">Spiral Down · Enigma Jet</span><span>Descensos y jet continuo. Enigma Jet puede sostener tensión de fondo, con moderación.</span></div>
+        <div class="member"><span class="mn lock">Helix <span class="lk">🔒</span></span><span>Capas que se congelan y acumulan. Bloqueado.</span></div>
+      </article>
+
+      <!-- ROLLS -->
+      <article class="fx-card">
+        <span class="fx-meter">Builds rítmicos</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><path d="M4 12 a4 4 0 1 1 8 0 a4 4 0 1 1 -8 0 M14 12 h6 M17 9 l3 3 l-3 3"/></svg></div>
+          <div><span class="fx-name">Rolls</span><span class="fx-tag">El loop como arma</span></div>
+        </div>
+        <p class="fx-desc">Capturan un fragmento del audio y lo <b>repiten en loop</b> mientras el efecto esté encendido. El gesto pro: un roll de 1/2 beat que reduces a 1/4 en los últimos compases del build — la música "tartamudea" acelerando hacia el drop.</p>
+        <div class="member"><span class="mn util">Roll</span><span>El roll directo. Enciende en beat 1, reduce la longitud, apaga justo en el drop.</span></div>
+        <div class="member"><span class="mn tex">Slip Roll</span><span>Igual, pero al soltar el track sigue donde iba (no pierde posición). Versión avanzada.</span></div>
+        <div class="member"><span class="mn tex">Rev Roll</span><span>El fragmento se repite al revés. Textura extraña; un compás máximo.</span></div>
+      </article>
+
+      <!-- RITMO Y MOVIMIENTO -->
+      <article class="fx-card">
+        <span class="fx-meter">Sal y pimienta</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><path d="M3 12 C6 6 9 6 12 12 C15 18 18 18 21 12"/></svg></div>
+          <div><span class="fx-name">Ritmo y movimiento</span><span class="fx-tag">Modulación con cuidado</span></div>
+        </div>
+        <p class="fx-desc">Efectos que mueven o recortan el sonido de forma cíclica. En Afro House se usan en <b>micro-dosis</b>: 2–4 compases y fuera. Más que eso y el groove orgánico empieza a sonar a máquina.</p>
+        <div class="member"><span class="mn util">Trans</span><span>Corta el audio rítmicamente (gate). A 1/2 beat con depth bajo crea un bombeo sutil e hipnótico. El más útil de esta familia.</span></div>
+        <div class="member"><span class="mn tex">Flanger</span><span>Barrido metálico tipo avión. Un pase de 4 compases sobre percusión, máximo.</span></div>
+        <div class="member"><span class="mn tex">Phaser</span><span>El primo suave del flanger. Menos drama, mismo consejo.</span></div>
+        <div class="member"><span class="mn ign">Pan</span><span>Rebota el sonido izquierda/derecha. En un club con sistema mono, literalmente inaudible.</span></div>
+      </article>
+
+      <!-- DUPLICADOS Y RAREZAS -->
+      <article class="fx-card">
+        <span class="fx-meter">Puedes vivir sin ellos</span>
+        <div class="fx-head">
+          <div class="fx-glyph"><svg viewBox="0 0 24 24"><path d="M5 5 l14 14 M19 5 l-14 14"/></svg></div>
+          <div><span class="fx-name">Duplicados y rarezas</span><span class="fx-tag">Sin culpa: ignóralos</span></div>
+        </div>
+        <p class="fx-desc">Efectos que ya tienes mejor resueltos en tu knob CFX, o que simplemente no pertenecen al lenguaje del Afro House. Saber qué <b>no</b> usar también es criterio.</p>
+        <div class="member"><span class="mn ign">Filter</span><span>Ya lo tienes en el CFX, con mejor control manual. No lo dupliques aquí.</span></div>
+        <div class="member"><span class="mn ign">Noise</span><span>Ídem: tu riser de ruido vive en el knob CFX, donde el gesto gradual es natural.</span></div>
+        <div class="member"><span class="mn ign">Pitch</span><span>Ya lo conoces del CFX. Como Beat FX no gana nada para tu género.</span></div>
+        <div class="member"><span class="mn ign">Robot</span><span>Voz metálica de robot. Divertido en casa, criminal en un set de Afro House.</span></div>
+        <div class="member"><span class="mn lock">Vinyl Brake <span class="lk">🔒</span></span><span>Frenado de tornamesa. Sería útil para cierres dramáticos, pero está bloqueado.</span></div>
+        <div class="member"><span class="mn lock">Stretch <span class="lk">🔒</span></span><span>Estira el tiempo del audio. Bloqueado; tampoco lo extrañarás.</span></div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAPA ============ -->
+<section id="mapa">
+  <div class="wrap">
+    <span class="eyebrow">03 · Dónde vive cada efecto</span>
+    <h2>El mapa: Beat FX <em>sección por sección</em></h2>
+    <p class="lead">La misma estructura de track que ya conoces del mapa de Color FX — ahora con la capa de Beat FX encima. Toca cada sección. Nota un patrón: las zonas donde el Beat FX brilla son exactamente las transiciones entre secciones.</p>
+
+    <div class="timeline" role="tablist" aria-label="Secciones del track" id="timeline"></div>
+    <div class="tl-detail" id="tlDetail" role="tabpanel"></div>
+  </div>
+</section>
+
+<!-- ============ CABINA ============ -->
+<section id="cabina">
+  <div class="wrap">
+    <span class="eyebrow">04 · Escúchalo sincronizado</span>
+    <h2>La cabina: <em>el panel FX</em> sobre un groove real</h2>
+    <p class="lead">El mismo loop de Afro House a 122 BPM — ahora con un panel que imita el flujo real: elige efecto, elige beats, ajusta depth, enciende. El botón CORTAR CANAL simula bajar el fader: úsalo con el Echo encendido y escucharás un echo-out de verdad.</p>
+
+    <div class="booth">
+      <div class="booth-top">
+        <span class="booth-title">ARWEN · FX Booth · 122 BPM</span>
+        <button class="play-btn" id="playBtn">▶ &nbsp;Reproducir loop</button>
+      </div>
+      <p class="booth-hint">Ritual completo: efecto → beats → depth → ON. Compara ECHO vs LOW CUT ECHO con el loop sonando — esa diferencia en los graves es toda la lección.</p>
+
+      <div class="fxpanel">
+        <div class="fxpanel-left">
+          <div class="panel-lab">Efecto</div>
+          <div class="sel-row" id="fxSelect">
+            <button class="sel-btn" data-fx="echo" aria-pressed="true">Echo</button>
+            <button class="sel-btn" data-fx="lowcut" aria-pressed="false">Low Cut Echo</button>
+            <button class="sel-btn" data-fx="delay" aria-pressed="false">Delay</button>
+            <button class="sel-btn" data-fx="reverb" aria-pressed="false">Reverb</button>
+            <button class="sel-btn" data-fx="trans" aria-pressed="false">Trans</button>
+            <button class="sel-btn" data-fx="roll" aria-pressed="false">Roll</button>
+            <button class="sel-btn" data-fx="flanger" aria-pressed="false">Flanger</button>
+          </div>
+          <div class="panel-lab">Beat</div>
+          <div class="beat-row" id="beatRow">
+            <button class="beat-btn" data-b="0.25" aria-pressed="false">1/4</button>
+            <button class="beat-btn" data-b="0.5" aria-pressed="true">1/2</button>
+            <button class="beat-btn" data-b="0.75" aria-pressed="false">3/4</button>
+            <button class="beat-btn" data-b="1" aria-pressed="false">1</button>
+            <button class="beat-btn" data-b="2" aria-pressed="false">2</button>
+          </div>
+          <div class="fx-hintline" id="fxHint"></div>
+        </div>
+        <div class="fxpanel-right">
+          <div>
+            <div class="knob" id="kDepth" tabindex="0" role="slider" aria-label="Level / Depth" aria-valuemin="0" aria-valuemax="100" aria-valuenow="35"><div class="pointer"></div></div>
+            <div class="knob-label">Level / Depth</div>
+            <div class="knob-val" id="vDepth">35%</div>
+          </div>
+          <button class="onoff" id="onoffBtn" aria-pressed="false">FX OFF</button>
+          <button class="cutbtn" id="cutBtn" aria-pressed="false">Cortar canal (fader)</button>
+        </div>
+      </div>
+
+      <div class="booth-scenes">
+        <button class="scene-btn" data-scene="echoout">Simular: echo-out completo</button>
+        <button class="scene-btn" data-scene="rollbuild">Simular: roll build al drop</button>
+        <button class="scene-btn" data-scene="reset">Reset</button>
+      </div>
+      <p class="booth-note"><b>Ejercicio con tu FLX4:</b> repite el echo-out real 10 veces: Echo (o Low Cut Echo) a 1/2 beat, depth ~60%, ON en el último compás de la frase, fader abajo en el beat 1 siguiente, FX OFF cuando muera la cola. Cuando te salga sin mirar el panel, ya es tuyo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section id="quiz">
+  <div class="wrap">
+    <span class="eyebrow">05 · Ponte a prueba</span>
+    <h2>Ocho situaciones <em>de panel FX</em></h2>
+    <p class="lead">Mismo formato que el quiz de Color FX. Ahora las respuestas dependen de beats, depth y timing — y como siempre, a veces la respuesta correcta es apagar.</p>
+    <div class="quiz-box" id="quizBox"></div>
+  </div>
+</section>
+
+<!-- ============ REGLAS ============ -->
+<section id="reglas">
+  <div class="wrap">
+    <span class="eyebrow">06 · Lo que separa al amateur del selector</span>
+    <h2>Reglas de oro del <em>Beat FX</em></h2>
+    <div class="rules">
+      <div class="rule"><h4><span>I.</span> El beat es la mitad del efecto</h4><p>El mismo Echo a 1/4 suena nervioso, a 1/2 suena groovy, a 2 suena épico. <b>Elige el beat antes de encender</b> — 1/2 y 3/4 resuelven el 90% de tus gestos en Afro House.</p></div>
+      <div class="rule"><h4><span>II.</span> Depth arranca en 30–40%</h4><p>El knob LEVEL/DEPTH al máximo es la firma sonora del principiante. <b>Empieza bajo y sube si el momento lo pide.</b> Un efecto que apenas se nota casi siempre está en el nivel correcto.</p></div>
+      <div class="rule"><h4><span>III.</span> ON — gesto — OFF</h4><p>El Beat FX no es un estado, es un verbo. Entra para cumplir <b>una frase concreta</b> y se apaga. Un flanger olvidado durante tres minutos es tortura certificada.</p></div>
+      <div class="rule"><h4><span>IV.</span> Low Cut Echo cuando hay kick</h4><p>El eco normal repite también los graves: dos compases de feedback y tienes lodo. <b>Si el kick está sonando, tu echo es Low Cut.</b> El eco completo, resérvalo para vocales y breakdowns.</p></div>
+      <div class="rule"><h4><span>V.</span> El FX confía en tu grid</h4><p>Todo el Beat FX se sincroniza al beatgrid del track. Si un echo suena fuera de tiempo, el problema casi nunca es el efecto: <b>es tu grid mal analizado</b>. Revísalo en Rekordbox antes de culpar al panel.</p></div>
+      <div class="rule"><h4><span>VI.</span> Un protagonista a la vez</h4><p>Beat FX y Color FX no se apilan por ambición. El build es del CFX (HPF + Noise) <b>o</b> del Beat FX (Roll, Mobius) — no de los dos. Dos efectos protagonistas equivalen a cero.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="mark">ARWEN</div>
+  Focus · Elegance · Movement · Connection · Emotion · Timelessness
+</footer>
+
+<script>
+/* ================= MAPA DEL TRACK ================= */
+const SECTIONS = [
+  {id:'intro', name:'Intro', bars:'16–32 compases', energy:.3,
+   title:'Intro', sub:'Mezclando hacia adentro',
+   desc:'El Beat FX casi no pertenece aquí: la entrada de un track se resuelve con EQ y, si acaso, el LPF del CFX. Un Delay muy discreto (depth 20–30%) sobre algún elemento del track saliente puede suavizar su despedida — pero la palabra clave es discreto.',
+   fx:[{n:'Nada (la mayoría de las veces)',on:true},{n:'Delay sutil en el saliente',on:true},{n:'Echo con feedback alto',on:false},{n:'Flanger',on:false}]},
+  {id:'groove', name:'Groove', bars:'32–64 compases', energy:.6,
+   title:'Groove principal', sub:'Disciplina, otra vez',
+   desc:'Igual que con el CFX: la respuesta por defecto es nada. La excepción elegante es Trans a 1/2 beat con depth bajo durante 2–4 compases — un bombeo rítmico casi subliminal que refresca el groove sin romper el trance. Enciende en beat 1, apaga en beat 1.',
+   fx:[{n:'Nada (regla general)',on:true},{n:'Trans 1/2 beat, depth bajo, 2–4 compases',on:true},{n:'Roll en medio del groove',on:false},{n:'Robot',on:false}]},
+  {id:'breakdown', name:'Breakdown', bars:'16–32 compases', energy:.35,
+   title:'Breakdown', sub:'La casa de la Reverb',
+   desc:'Sin kick, la Reverb (depth 30–40%) agranda pads y vocal sin ensuciar. Un Delay a 3/4 sobre la última frase vocal la deja flotando con más precisión que el Dub Echo del CFX, porque aquí controlas los beats exactos. Al salir del breakdown, apaga: el build quiere empezar seco.',
+   fx:[{n:'Reverb (depth 30–40%)',on:true},{n:'Delay 3/4 en la vocal',on:true},{n:'Echo completo con kick',on:false},{n:'Trans',on:false}]},
+  {id:'build', name:'Build', bars:'8–16 compases', energy:.85,
+   title:'Build', sub:'Aquí el Beat FX compite con tu CFX',
+   desc:'Dos caminos, elige UNO por build: (a) el que ya dominas — HPF + Noise del CFX — o (b) el del Beat FX: Roll a 1/2 beat que reduces a 1/4 en los últimos 2 compases, o Mobius/Spiral Up con depth subiendo gradual (tu arma para melodic techno). Sea cual sea, todo muere exactamente en el beat 1 del drop.',
+   fx:[{n:'Roll 1/2 → 1/4 (acelerando)',on:true},{n:'Mobius / Spiral Up (depth gradual)',on:true},{n:'Reverb Up (atmósfera creciente)',on:true},{n:'CFX y Beat FX a la vez',on:false}]},
+  {id:'drop', name:'Drop', bars:'Beat 1', energy:1,
+   title:'Drop', sub:'La misma ley de siempre',
+   desc:'FX OFF. Todo. El roll se apaga, el mobius muere, el echo se corta. El drop cae seco y completo — esta ley no cambia entre Color FX y Beat FX, y no va a cambiar nunca. Si un solo efecto sigue sonando en el beat 1, el build entero fue en vano.',
+   fx:[{n:'FX OFF — el drop cae seco',on:true},{n:'Roll que sigue girando',on:false},{n:'Cualquier efecto activo',on:false}]},
+  {id:'outro', name:'Outro', bars:'16–32 compases', energy:.4,
+   title:'Outro / Salida', sub:'El gesto estrella: echo-out',
+   desc:'El momento por el que existe esta guía: Echo (o Low Cut Echo si el kick del track nuevo ya suena) a 1/2 o 3/4, depth ~60%, ON en el último compás de la frase, fader del canal abajo en el beat 1 — las repeticiones sostienen mientras el nuevo track manda. Cuando la cola muere, FX OFF.',
+   fx:[{n:'Echo 1/2 – 3/4 (echo-out)',on:true},{n:'Low Cut Echo (si hay kick nuevo)',on:true},{n:'Down Echo (variante descendente)',on:true},{n:'Dejar el FX encendido después',on:false}]}
+];
+
+const tl = document.getElementById('timeline');
+const tlDetail = document.getElementById('tlDetail');
+SECTIONS.forEach((s,i)=>{
+  const b = document.createElement('button');
+  b.className='tl-seg'; b.setAttribute('role','tab'); b.setAttribute('aria-selected', i===0?'true':'false');
+  b.innerHTML = `<span class="tl-energy" style="height:${8+s.energy*46}px"></span><span class="tl-name">${s.name}</span><span class="tl-bars">${s.bars}</span>`;
+  b.addEventListener('click',()=>selectSection(i));
+  tl.appendChild(b);
+});
+function selectSection(i){
+  [...tl.children].forEach((c,j)=>c.setAttribute('aria-selected', j===i?'true':'false'));
+  const s = SECTIONS[i];
+  tlDetail.innerHTML = `<span class="tl-sub">${s.sub}</span><h3>${s.title}</h3><p>${s.desc}</p>
+    <div class="tl-fx-list">${s.fx.map(f=>`<span class="tl-chip${f.on?'':' off'}">${f.n}</span>`).join('')}</div>`;
+}
+selectSection(0);
+
+/* ================= AUDIO ENGINE ================= */
+let ctx=null, playing=false, schedTimer=null, nextNoteTime=0, step=0;
+const BPM=122, SPB=60/BPM, STEP=SPB/4;
+let nodes={};
+const fxState = {fx:'echo', beat:0.5, depth:.35, on:false, cut:false};
+const roll = {active:false, start:0, len:2};
+
+function buildGraph(){
+  const c = ctx;
+  const bus = c.createGain(); bus.gain.value=.9;      // instrumentos entran aquí
+  const chGain = c.createGain(); chGain.gain.value=1; // "fader" del canal
+  bus.connect(chGain);
+
+  // TRANS gate
+  const gate = c.createGain(); gate.gain.value=1;
+  chGain.connect(gate);
+  const lfo = c.createOscillator(); lfo.type='square'; lfo.frequency.value=1/(fxState.beat*SPB);
+  const lfoScale = c.createGain(); lfoScale.gain.value=0;
+  lfo.connect(lfoScale); lfoScale.connect(gate.gain); lfo.start();
+
+  const src = gate; // punto de derivación post-fader
+  const master = c.createGain(); master.gain.value=.85;
+
+  // dry
+  const dry = c.createGain(); dry.gain.value=1;
+  src.connect(dry); dry.connect(master);
+
+  // ECHO / DELAY compartido
+  const echoSend = c.createGain(); echoSend.gain.value=0;
+  const delay = c.createDelay(2.5); delay.delayTime.value = fxState.beat*SPB;
+  const fb = c.createGain(); fb.gain.value=0;
+  const loopHP = c.createBiquadFilter(); loopHP.type='highpass'; loopHP.frequency.value=20;
+  const loopLP = c.createBiquadFilter(); loopLP.type='lowpass'; loopLP.frequency.value=6000;
+  src.connect(echoSend); echoSend.connect(delay);
+  delay.connect(loopHP); loopHP.connect(loopLP); loopLP.connect(fb); fb.connect(delay);
+  loopLP.connect(master);
+
+  // REVERB
+  const revSend = c.createGain(); revSend.gain.value=0;
+  const conv = c.createConvolver(); conv.buffer = makeImpulse(c, 2.8, 2.4);
+  src.connect(revSend); revSend.connect(conv); conv.connect(master);
+
+  // FLANGER
+  const flSend = c.createGain(); flSend.gain.value=0;
+  const flDelay = c.createDelay(.05); flDelay.delayTime.value=.004;
+  const flFB = c.createGain(); flFB.gain.value=.45;
+  const flLFO = c.createOscillator(); flLFO.type='sine'; flLFO.frequency.value=.35;
+  const flDepth = c.createGain(); flDepth.gain.value=.0022;
+  flLFO.connect(flDepth); flDepth.connect(flDelay.delayTime); flLFO.start();
+  src.connect(flSend); flSend.connect(flDelay);
+  flDelay.connect(flFB); flFB.connect(flDelay);
+  flDelay.connect(master);
+
+  master.connect(c.destination);
+  nodes = {bus,chGain,gate,lfo,lfoScale,dry,echoSend,delay,fb,loopHP,loopLP,revSend,flSend,master};
+}
+
+function makeNoiseBuffer(c,sec){
+  const b = c.createBuffer(1, c.sampleRate*sec, c.sampleRate);
+  const d = b.getChannelData(0);
+  for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
+  return b;
+}
+function makeImpulse(c,sec,decay){
+  const len = c.sampleRate*sec;
+  const b = c.createBuffer(2,len,c.sampleRate);
+  for(let ch=0;ch<2;ch++){const d=b.getChannelData(ch);
+    for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,decay);}
+  return b;
+}
+
+/* --- instrumentos (mismo groove que la guía de Color FX) --- */
+function kick(t){
+  const o=ctx.createOscillator(), g=ctx.createGain();
+  o.type='sine';
+  o.frequency.setValueAtTime(140,t);
+  o.frequency.exponentialRampToValueAtTime(46,t+.11);
+  g.gain.setValueAtTime(1,t);
+  g.gain.exponentialRampToValueAtTime(.001,t+.34);
+  o.connect(g); g.connect(nodes.bus); o.start(t); o.stop(t+.4);
+}
+function shaker(t,acc){
+  const s=ctx.createBufferSource(); s.buffer=nodes.noiseB||(nodes.noiseB=makeNoiseBuffer(ctx,.5));
+  const f=ctx.createBiquadFilter(); f.type='highpass'; f.frequency.value=6500;
+  const g=ctx.createGain();
+  g.gain.setValueAtTime(acc? .34:.16,t);
+  g.gain.exponentialRampToValueAtTime(.001,t+(acc?.09:.05));
+  s.connect(f); f.connect(g); g.connect(nodes.bus); s.start(t); s.stop(t+.12);
+}
+function conga(t,fq){
+  const o=ctx.createOscillator(), g=ctx.createGain();
+  o.type='triangle';
+  o.frequency.setValueAtTime(fq,t);
+  o.frequency.exponentialRampToValueAtTime(fq*.72,t+.09);
+  g.gain.setValueAtTime(.5,t);
+  g.gain.exponentialRampToValueAtTime(.001,t+.16);
+  o.connect(g); g.connect(nodes.bus); o.start(t); o.stop(t+.2);
+}
+function rim(t){
+  const o=ctx.createOscillator(), g=ctx.createGain();
+  const f=ctx.createBiquadFilter(); f.type='bandpass'; f.frequency.value=1700; f.Q.value=8;
+  o.type='square'; o.frequency.value=900;
+  g.gain.setValueAtTime(.35,t); g.gain.exponentialRampToValueAtTime(.001,t+.05);
+  o.connect(f); f.connect(g); g.connect(nodes.bus); o.start(t); o.stop(t+.06);
+}
+function bass(t,fq,len){
+  const o=ctx.createOscillator(), g=ctx.createGain();
+  const f=ctx.createBiquadFilter(); f.type='lowpass'; f.frequency.value=340; f.Q.value=1.2;
+  o.type='sawtooth'; o.frequency.value=fq;
+  g.gain.setValueAtTime(0,t);
+  g.gain.linearRampToValueAtTime(.34,t+.012);
+  g.gain.setValueAtTime(.34,t+len-.05);
+  g.gain.exponentialRampToValueAtTime(.001,t+len);
+  o.connect(f); f.connect(g); g.connect(nodes.bus); o.start(t); o.stop(t+len+.05);
+}
+function pad(t,barLen){
+  const freqs=[220,261.6,329.6];
+  freqs.forEach(fq=>{
+    const o=ctx.createOscillator(), g=ctx.createGain();
+    o.type='sine'; o.frequency.value=fq;
+    g.gain.setValueAtTime(0,t);
+    g.gain.linearRampToValueAtTime(.045,t+barLen*.4);
+    g.gain.linearRampToValueAtTime(0,t+barLen);
+    o.connect(g); g.connect(nodes.bus); o.start(t); o.stop(t+barLen+.05);
+  });
+}
+
+/* --- patrón con soporte de ROLL --- */
+function patternStep(p,t){
+  if(p%4===0) kick(t);
+  shaker(t, p%4===2);
+  if(p===3||p===11||p===19||p===27) conga(t,300);
+  if(p===6||p===22) conga(t,220);
+  if(p===14||p===30) rim(t);
+  if(p===2||p===10||p===18||p===26) bass(t,55,STEP*1.6);
+  if(p===7) bass(t,65.4,STEP*1.2);
+  if(p===23) bass(t,73.4,STEP*1.2);
+}
+function scheduleStep(s,t){
+  let eff = s;
+  if(roll.active) eff = roll.start + ((s - roll.start) % roll.len);
+  patternStep(eff % 32, t);
+  if(s % 64 === 0 && !roll.active) pad(t, SPB*8);
+}
+function scheduler(){
+  while(nextNoteTime < ctx.currentTime + .12){
+    scheduleStep(step, nextNoteTime);
+    nextNoteTime += STEP; step++;
+  }
+}
+
+const playBtn = document.getElementById('playBtn');
+playBtn.addEventListener('click', async ()=>{
+  if(!ctx){ ctx = new (window.AudioContext||window.webkitAudioContext)(); buildGraph(); applyFX(); }
+  if(ctx.state==='suspended') await ctx.resume();
+  playing = !playing;
+  if(playing){
+    step=0; nextNoteTime = ctx.currentTime + .06;
+    schedTimer = setInterval(scheduler, 30);
+    playBtn.textContent='■  Detener'; playBtn.classList.add('playing');
+  }else{
+    clearInterval(schedTimer);
+    playBtn.innerHTML='▶ &nbsp;Reproducir loop'; playBtn.classList.remove('playing');
+  }
+});
+
+/* ================= LÓGICA DEL PANEL FX ================= */
+const HINTS = {
+  echo:   'Repeticiones con cola. <b>Prueba:</b> depth 60%, beat 1/2, ON al final de una frase y luego CORTAR CANAL — ese es el echo-out. Nota cómo el kick repetido ensucia los graves.',
+  lowcut: 'El mismo echo, <b>sin graves en las repeticiones</b>. Repite el mismo gesto que con Echo y compara: la cola queda limpia aunque el kick esté en ella. Tu echo-out de cabecera.',
+  delay:  'Repeticiones discretas con poco feedback. Bueno para dar aire sin protagonismo. <b>Prueba:</b> beat 3/4, depth 40% — el groove respira distinto.',
+  reverb: 'Espacio. Con el kick sonando ensucia rápido — imagina esto en un breakdown, donde brillaría. <b>Prueba:</b> depth 35% y sube lentamente para oír dónde empieza el lodo.',
+  trans:  'Gate rítmico: corta el audio al ritmo del beat elegido. <b>Prueba:</b> beat 1/2, depth 40% — bombeo sutil. Depth 100% a 1/4 — ya es otro género.',
+  roll:   'Congela y repite un fragmento del tamaño del beat elegido. <b>Prueba:</b> ON con beat 1/2, luego cambia a 1/4 sin apagar — el build clásico. El depth no aplica aquí.',
+  flanger:'Barrido metálico en movimiento. <b>Prueba:</b> depth 50% durante unos compases sobre el groove — y nota qué rápido cansa. Por eso: dosis de 4 compases.'
+};
+function applyFX(){
+  if(!ctx) return;
+  const t = ctx.currentTime, ramp=.05;
+  const {echoSend,fb,delay,loopHP,loopLP,revSend,flSend,lfoScale,gate,lfo,chGain} = nodes;
+  const d = fxState.depth, on = fxState.on;
+  // reset objetivo de todos
+  let eSend=0, eFB=0, hp=20, lp=6000, rev=0, fl=0, gDepth=0;
+  if(on){
+    switch(fxState.fx){
+      case 'echo':   eSend=d; eFB=Math.min(.85,d*.95); hp=20;  lp=6000; break;
+      case 'lowcut': eSend=d; eFB=Math.min(.85,d*.95); hp=380; lp=6000; break;
+      case 'delay':  eSend=d; eFB=.3; hp=20; lp=5000; break;
+      case 'reverb': rev=d*1.15; break;
+      case 'flanger':fl=d; break;
+      case 'trans':  gDepth=d; break;
+      case 'roll':   break; // se maneja en el patrón
+    }
+  }
+  delay.delayTime.setTargetAtTime(fxState.beat*SPB, t, ramp);
+  echoSend.gain.setTargetAtTime(eSend, t, ramp);
+  // feedback: al apagar, dejar morir la cola con gracia
+  fb.gain.setTargetAtTime(eFB, t, on? ramp : .9);
+  loopHP.frequency.setTargetAtTime(hp, t, ramp);
+  loopLP.frequency.setTargetAtTime(lp, t, ramp);
+  revSend.gain.setTargetAtTime(rev, t, ramp);
+  flSend.gain.setTargetAtTime(fl, t, ramp);
+  // trans
+  lfo.frequency.setTargetAtTime(1/(fxState.beat*SPB), t, ramp);
+  lfoScale.gain.setTargetAtTime(gDepth*.5, t, ramp);
+  gate.gain.setTargetAtTime(1-gDepth*.5, t, ramp);
+  // roll
+  if(on && fxState.fx==='roll'){
+    if(!roll.active){ roll.active=true; roll.start=step; }
+    roll.len = Math.max(1, Math.round(fxState.beat*4));
+  } else roll.active=false;
+  // fader
+  chGain.gain.setTargetAtTime(fxState.cut? 0 : 1, t, .03);
+}
+
+/* selección de efecto */
+const fxHint = document.getElementById('fxHint');
+document.querySelectorAll('#fxSelect .sel-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#fxSelect .sel-btn').forEach(x=>x.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+    fxState.fx = b.dataset.fx;
+    fxHint.innerHTML = HINTS[fxState.fx];
+    applyFX();
+  });
+});
+fxHint.innerHTML = HINTS.echo;
+
+/* beats */
+document.querySelectorAll('#beatRow .beat-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#beatRow .beat-btn').forEach(x=>x.setAttribute('aria-pressed','false'));
+    b.setAttribute('aria-pressed','true');
+    fxState.beat = parseFloat(b.dataset.b);
+    applyFX();
+  });
+});
+
+/* knob depth */
+const kDepth = document.getElementById('kDepth');
+const kPtr = kDepth.querySelector('.pointer');
+const vDepth = document.getElementById('vDepth');
+function renderDepth(){
+  const deg = -135 + fxState.depth*270;
+  kPtr.style.transform = `translateX(-50%) rotate(${deg}deg)`;
+  vDepth.textContent = Math.round(fxState.depth*100)+'%';
+  kDepth.setAttribute('aria-valuenow', Math.round(fxState.depth*100));
+  applyFX();
+}
+renderDepth();
+let dragging=false, startY=0, startV=0;
+kDepth.addEventListener('pointerdown',e=>{dragging=true; startY=e.clientY; startV=fxState.depth; kDepth.setPointerCapture(e.pointerId); e.preventDefault();});
+kDepth.addEventListener('pointermove',e=>{
+  if(!dragging) return;
+  fxState.depth = Math.max(0,Math.min(1, startV + (startY-e.clientY)/160));
+  renderDepth();
+});
+kDepth.addEventListener('pointerup',()=>dragging=false);
+kDepth.addEventListener('pointercancel',()=>dragging=false);
+kDepth.addEventListener('dblclick',()=>{fxState.depth=.35; renderDepth();});
+kDepth.addEventListener('keydown',e=>{
+  const s = e.shiftKey? .2 : .05;
+  if(e.key==='ArrowUp'||e.key==='ArrowRight'){fxState.depth=Math.min(1,fxState.depth+s); renderDepth(); e.preventDefault();}
+  if(e.key==='ArrowDown'||e.key==='ArrowLeft'){fxState.depth=Math.max(0,fxState.depth-s); renderDepth(); e.preventDefault();}
+});
+
+/* on/off y cut */
+const onoffBtn = document.getElementById('onoffBtn');
+const cutBtn = document.getElementById('cutBtn');
+function renderOnOff(){
+  onoffBtn.classList.toggle('on', fxState.on);
+  onoffBtn.textContent = fxState.on? 'FX ON' : 'FX OFF';
+  onoffBtn.setAttribute('aria-pressed', fxState.on);
+}
+function renderCut(){
+  cutBtn.classList.toggle('cut', fxState.cut);
+  cutBtn.textContent = fxState.cut? 'Canal cortado — subir fader' : 'Cortar canal (fader)';
+  cutBtn.setAttribute('aria-pressed', fxState.cut);
+}
+onoffBtn.addEventListener('click',()=>{fxState.on=!fxState.on; renderOnOff(); applyFX();});
+cutBtn.addEventListener('click',()=>{fxState.cut=!fxState.cut; renderCut(); applyFX();});
+renderOnOff(); renderCut();
+
+/* helpers de escenas */
+function pressFx(fx){document.querySelector(`#fxSelect [data-fx="${fx}"]`).click();}
+function pressBeat(b){document.querySelector(`#beatRow [data-b="${b}"]`).click();}
+function setDepth(v){fxState.depth=v; renderDepth();}
+function setOn(v){fxState.on=v; renderOnOff(); applyFX();}
+function setCut(v){fxState.cut=v; renderCut(); applyFX();}
+let sceneT=[];
+function clearScenes(){sceneT.forEach(clearTimeout); sceneT=[];}
+document.querySelectorAll('.scene-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    clearScenes();
+    const s=b.dataset.scene;
+    if(s==='reset'){setOn(false); setCut(false); setDepth(.35); pressBeat('0.5'); return;}
+    if(s==='echoout'){
+      pressFx('lowcut'); pressBeat('0.5'); setDepth(.6);
+      sceneT.push(setTimeout(()=>setOn(true), 400));
+      sceneT.push(setTimeout(()=>setCut(true), 2400));   // fader abajo: la cola sostiene
+      sceneT.push(setTimeout(()=>setOn(false), 6500));   // FX OFF cuando muere
+      sceneT.push(setTimeout(()=>setCut(false), 8000));  // canal de vuelta
+    }
+    if(s==='rollbuild'){
+      pressFx('roll'); pressBeat('0.5');
+      sceneT.push(setTimeout(()=>setOn(true), 300));
+      sceneT.push(setTimeout(()=>pressBeat('0.25'), 3300)); // acelera
+      sceneT.push(setTimeout(()=>setOn(false), 6300));       // drop: seco
+    }
+  });
+});
+
+/* ================= QUIZ ================= */
+const QUIZ = [
+  {q:'Vas a hacer un echo-out clásico para salir de un track. ¿Qué longitud de beat eliges?',
+   opts:['1/16 — cuanto más rápido, mejor','1/2 o 3/4 de beat','4 beats para que dure mucho','El beat no importa, solo el depth'],
+   a:1, fb:'<b>1/2 y 3/4</b> son las longitudes del echo-out: repeticiones que groovean con la música sin volverse metralleta (1/4 o menos) ni arrastrarse (2+). El beat es la mitad del carácter del efecto.'},
+  {q:'Quieres echar un echo pero el kick del track está sonando fuerte. ¿Qué efecto de tu menú es la elección profesional?',
+   opts:['ECHO normal, con más depth','REVERB','LOW CUT ECHO','MT DELAY'],
+   a:2, fb:'<b>Low Cut Echo</b> repite todo excepto los graves: la cola queda limpia aunque el kick caiga dentro de ella. El echo normal con kick genera lodo de graves en dos compases. Esta sola respuesta ya vale la guía.'},
+  {q:'Hiciste tu gesto de flanger sobre 4 compases de percusión y quedó genial. ¿Qué sigue?',
+   opts:['Dejarlo sonando: si funcionó, que siga','Subir el depth para el siguiente pase','FX OFF inmediatamente al cerrar la frase','Cambiar a Phaser sin apagar'],
+   a:2, fb:'<b>ON — gesto — OFF.</b> El Beat FX es un verbo, no un estado. El flanger que funcionó 4 compases se vuelve tortura al compás 12. Apagar a tiempo es el 50% de usar efectos bien.'},
+  {q:'Build de 8 compases y quieres que la música "tartamudee" acelerando hacia el drop. ¿Cuál es el gesto?',
+   opts:['ROLL a 1/2 beat, reduciendo a 1/4 en los últimos compases, OFF en el drop','TRANS al 100% todo el build','PAN rápido de lado a lado','ROBOT con depth alto'],
+   a:0, fb:'El <b>roll acelerante</b>: capturas medio beat en loop y a mitad del build lo reduces a 1/4 — la repetición se aprieta y la tensión sube sola. La parte sagrada: OFF exactamente en el beat 1 del drop.'},
+  {q:'Breakdown melódico con vocal. Quieres que la última frase vocal quede flotando con precisión.',
+   opts:['ECHO a 1/8 con depth 100%','DELAY o ECHO a 3/4, depth moderado, justo en la última frase','FLANGER sobre la vocal','SPIRAL DOWN'],
+   a:1, fb:'Un <b>Delay o Echo a 3/4 con depth moderado</b> sobre la última frase — el equivalente Beat FX del gesto de Dub Echo que ya conoces del CFX, pero con los beats exactos bajo tu control. Apaga cuando la cola muera.'},
+  {q:'Tu Echo suena claramente fuera de tiempo con el track. ¿Cuál es la causa más probable?',
+   opts:['El efecto está defectuoso','El depth está muy alto','El beatgrid del track está mal analizado en Rekordbox','El cable USB'],
+   a:2, fb:'El Beat FX se sincroniza al <b>beatgrid</b>. Si el grid quedó mal puesto al analizar el track (pasa seguido con intros ambientales del Afro House), todo efecto sincronizado sonará fuera. Revisa y corrige el grid en Rekordbox antes de culpar al panel.'},
+  {q:'Ya tienes tu build de HPF + Noise con el CFX funcionando. ¿Le sumas un Roll del Beat FX encima?',
+   opts:['Sí: más efectos, más energía','Sí, pero solo con el depth al máximo','No: un protagonista por build — o el CFX o el Beat FX','Solo si además agregas Reverb Up'],
+   a:2, fb:'<b>Un protagonista a la vez.</b> Dos builds compitiendo se tapan mutuamente y saturan el canal. Elige el arma de cada build y domínala; la variedad viene de alternar entre builds, no de apilarlos.'},
+  {q:'¿En qué momento del track el Beat FX debe estar completamente apagado, sin excepción?',
+   opts:['En el breakdown','En el beat 1 del drop','En la intro','Durante las vocales'],
+   a:1, fb:'La misma ley de la guía de Color FX: <b>el drop cae seco</b>. Roll, mobius, echo — todo muere exactamente en el beat 1. El impacto del drop es el contraste con el build, y cualquier efecto residual se lo roba.'}
+];
+const box = document.getElementById('quizBox');
+let qi=0, score=0;
+function renderQ(){
+  const q = QUIZ[qi];
+  box.innerHTML = `
+    <div class="quiz-progress">Escena ${qi+1} de ${QUIZ.length} · Aciertos: ${score}</div>
+    <div class="quiz-q">${q.q}</div>
+    <div class="quiz-opts">${q.opts.map((o,i)=>`<button class="quiz-opt" data-i="${i}">${o}</button>`).join('')}</div>
+    <div class="quiz-fb" id="qfb"></div>
+    <button class="play-btn quiz-next" id="qnext">${qi<QUIZ.length-1?'Siguiente escena →':'Ver resultado →'}</button>`;
+  box.querySelectorAll('.quiz-opt').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const i=+btn.dataset.i;
+      box.querySelectorAll('.quiz-opt').forEach(b=>b.disabled=true);
+      if(i===q.a){btn.classList.add('correct'); score++;}
+      else{btn.classList.add('wrong'); box.querySelector(`[data-i="${q.a}"]`).classList.add('correct');}
+      const fb=document.getElementById('qfb'); fb.innerHTML=q.fb; fb.classList.add('show');
+      document.getElementById('qnext').classList.add('show');
+      box.querySelector('.quiz-progress').textContent=`Escena ${qi+1} de ${QUIZ.length} · Aciertos: ${score}`;
+    });
+  });
+  document.getElementById('qnext').addEventListener('click',()=>{
+    qi++; qi<QUIZ.length? renderQ() : renderScore();
+  });
+}
+function renderScore(){
+  let verdict;
+  if(score===8) verdict='Impecable. Ya piensas el Beat FX como se debe: beats primero, depth bajo, y OFF como parte del gesto. Ahora al hardware — el ritual de 5 pasos con tu FLX4 hasta que sea reflejo.';
+  else if(score>=6) verdict='Muy sólido. Los conceptos de sincronización ya están; repasa las preguntas falladas — casi seguro fueron de beat length o de cuándo apagar. Repite el quiz en unos días.';
+  else if(score>=4) verdict='Vas a la mitad. Concéntrate en dos ideas: Low Cut Echo cuando hay kick, y ON–gesto–OFF. Con eso dominado, el resto de la familia cae solo.';
+  else verdict='Perfecto punto de partida. Juega 10 minutos en la cabina comparando Echo vs Low Cut Echo con el loop sonando, relee el mapa del track, y vuelve. La segunda vuelta se siente muy distinta.';
+  box.innerHTML = `
+    <div class="quiz-progress">Resultado final</div>
+    <div class="quiz-score">${score} <span style="color:var(--gold-dim);font-size:.5em">/ ${QUIZ.length}</span></div>
+    <p class="quiz-verdict">${verdict}</p>
+    <button class="play-btn quiz-next show" id="qretry" style="margin-top:26px">Reintentar quiz</button>`;
+  document.getElementById('qretry').addEventListener('click',()=>{qi=0;score=0;renderQ();});
+}
+renderQ();
+</script>
+</body>
+</html>

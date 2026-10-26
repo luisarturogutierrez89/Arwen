@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARWEN Lab</title>
+<meta name="description" content="Guías interactivas de ARWEN para mezclar Afro House y Melodic Techno en Rekordbox y DDJ-FLX4.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0A0B;
+  --panel:#131315;
+  --line:rgba(201,151,91,.22);
+  --line-soft:rgba(201,151,91,.10);
+  --gold:#C9975B;
+  --gold-hi:#E3BE8B;
+  --gold-dim:#8C6A42;
+  --bone:#EDE7DC;
+  --muted:#9A948A;
+  --disp:'Cormorant Garamond',Didot,'Bodoni MT',Georgia,serif;
+  --sans:'Jost',Futura,'Century Gothic',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+@media (prefers-reduced-motion: reduce){*{transition:none!important}}
+body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-weight:300;line-height:1.65;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:1.5px solid var(--gold);outline-offset:3px}
+
+.wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+.eyebrow{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);font-weight:400}
+h2{font-family:var(--disp);font-weight:600;font-size:clamp(28px,4.4vw,42px);line-height:1.12;margin:10px 0 14px}
+h2 em{font-style:italic;font-weight:400;color:var(--gold-hi)}
+.lead{color:var(--muted);max-width:660px;font-size:15.5px}
+section{padding:76px 0;border-top:1px solid var(--line-soft)}
+
+/* ---------- TOP ---------- */
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0}
+.top .mark{font-family:var(--disp);font-size:18px;letter-spacing:.42em;color:var(--gold)}
+.back{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid transparent;padding-bottom:3px;transition:color .25s,border-color .25s}
+.back:hover{color:var(--gold);border-color:var(--gold)}
+
+/* ---------- HERO ---------- */
+.hero{min-height:70vh;display:flex;align-items:center;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:
+  radial-gradient(ellipse 70% 50% at 70% 20%, rgba(201,151,91,.08), transparent 60%),
+  radial-gradient(ellipse 50% 40% at 15% 90%, rgba(201,151,91,.05), transparent 60%);pointer-events:none}
+.hero .wrap{position:relative;width:100%}
+.hero h1{font-family:var(--disp);font-weight:400;font-size:clamp(56px,11vw,128px);line-height:.98;margin:18px 0 8px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:15px;color:var(--muted);max-width:580px;margin-top:18px}
+.hero-rule{display:flex;align-items:center;gap:14px;margin-top:36px;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dim)}
+.hero-rule::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--line),transparent)}
+
+/* ---------- GUÍAS ---------- */
+.guides{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:38px}
+.guide{background:var(--panel);border:1px solid var(--line-soft);padding:28px;display:flex;flex-direction:column;gap:12px;transition:border-color .3s}
+.guide:hover{border-color:var(--gold)}
+.guide .vol{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:var(--gold-dim)}
+.guide h3{font-family:var(--disp);font-size:28px;font-weight:600;line-height:1.1}
+.guide h3 em{font-style:italic;font-weight:400;color:var(--gold)}
+.guide p{font-size:14px;color:#CFC9BE;flex:1}
+.guide .go{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.guide:hover .go{color:var(--gold-hi)}
+.guide.wide{grid-column:1/-1}
+
+.sublabel{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-dim);margin-top:56px}
+
+footer{padding:60px 0 70px;text-align:center;color:var(--gold-dim);font-size:11px;letter-spacing:.34em;text-transform:uppercase;border-top:1px solid var(--line-soft)}
+footer .mark{font-family:var(--disp);font-size:20px;letter-spacing:.42em;color:var(--gold);margin-bottom:10px}
+footer a{display:inline-block;margin-top:18px;color:var(--muted)}
+footer a:hover{color:var(--gold)}
+
+@media(max-width:840px){
+  .guides{grid-template-columns:1fr}
+  section{padding:58px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap top">
+  <span class="mark">ARWEN</span>
+  <a class="back" href="../arwen-home.html">← Press kit</a>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Herramientas · Rekordbox / DDJ-FLX4</span>
+    <h1>ARWEN <em>Lab</em></h1>
+    <p class="hero-sub">Las guías con las que preparo mis sets: cómo meter un track, cómo usar cada efecto y cómo armar un set de Afro House a Melodic Techno. Todas son interactivas y suenan en el navegador.</p>
+    <div class="hero-rule">120–132 BPM · Groove primero</div>
+  </div>
+</header>
+
+<section id="efectos">
+  <div class="wrap">
+    <span class="eyebrow">01 · Serie de efectos</span>
+    <h2>Efectos en Afro House, <em>en tres volúmenes</em></h2>
+    <p class="lead">Del knob CFX al sistema completo. Cada guía tiene un mapa del track, una cabina con un loop a 122 BPM y un quiz de ocho situaciones.</p>
+    <div class="guides">
+      <a class="guide" href="color-fx-afro-house.html">
+        <span class="vol">Vol. I</span>
+        <h3>Color <em>FX</em></h3>
+        <p>Los seis efectos del knob CFX (Filter, Dub Echo, Noise, Space, Pitch y Crush): cuál usar, cuándo y, sobre todo, cuándo no.</p>
+        <span class="go">Abrir guía →</span>
+      </a>
+      <a class="guide" href="beat-fx-afro-house.html">
+        <span class="vol">Vol. II</span>
+        <h3>Beat <em>FX</em></h3>
+        <p>Más de treinta efectos sincronizados al beat, agrupados en seis familias. Echo-out, Low Cut Echo, rolls y reverbs medidos en beats.</p>
+        <span class="go">Abrir guía →</span>
+      </a>
+      <a class="guide wide" href="smart-cfx-sistema.html">
+        <span class="vol">Vol. III</span>
+        <h3>Smart <em>CFX</em> y el sistema completo</h3>
+        <p>Los ocho presets Smart CFX y el criterio que une las tres capas: cuánto control necesita cada momento del set.</p>
+        <span class="go">Abrir guía →</span>
+      </a>
+    </div>
+
+    <p class="sublabel">Mezcla</p>
+    <div class="guides" style="margin-top:18px">
+      <a class="guide" href="dj-formula-mezcla.html">
+        <span class="vol">Fundamentos</span>
+        <h3>La fórmula <em>del mix</em></h3>
+        <p>Cuándo y cómo meter un track: frases de 8 compases, EQ swap, técnicas de transición y mezcla armónica con Camelot.</p>
+        <span class="go">Abrir guía →</span>
+      </a>
+      <a class="guide" href="dj-transiciones.html">
+        <span class="vol">Crate Starter</span>
+        <h3>Guía de <em>transiciones</em></h3>
+        <p>Paso a paso de cada transición de un set: de Keinemusik a Anyma y el cierre con Yotto, pasando por la zona puente de Afro Tech.</p>
+        <span class="go">Abrir guía →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="mark">ARWEN</div>
+  Focus · Elegance · Movement · Connection · Emotion · Timelessness<br>
+  <a href="../arwen-home.html">← Volver al press kit</a>
+</footer>
+
+</body>
+</html>

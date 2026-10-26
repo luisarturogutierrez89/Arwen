@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Fórmula del Mix</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:ital,wght@0,300;0,400;0,500;1,300&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07080c;
+  --s1: #0d0f16;
+  --s2: #12141e;
+  --border: #1c1f2e;
+  --b2: #242840;
+  --green: #00e5a0;
+  --orange: #ff6b35;
+  --blue: #4d9fff;
+  --yellow: #f5c842;
+  --red: #ff4466;
+  --text: #a8a4b8;
+  --white: #e8e4f0;
+  --muted: #3a3d52;
+  --mono: 'Share Tech Mono', monospace;
+  --display: 'Archivo Black', sans-serif;
+  --body: 'Archivo', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body);
+  font-weight: 300;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(255,255,255,0.012) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(255,255,255,0.012) 40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page { position: relative; z-index: 1; max-width: 880px; margin: 0 auto; padding: 56px 20px 100px; }
+
+/* ── HERO ── */
+.hero {
+  margin-bottom: 72px;
+  position: relative;
+}
+
+.hero-bg-text {
+  font-family: var(--display);
+  font-size: clamp(80px, 20vw, 200px);
+  color: rgba(255,255,255,0.02);
+  line-height: 0.85;
+  position: absolute;
+  top: -20px;
+  left: -10px;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.02em;
+}
+
+.kicker {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--green);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+h1 {
+  font-family: var(--display);
+  font-size: clamp(36px, 7vw, 68px);
+  color: var(--white);
+  line-height: 1.0;
+  margin-bottom: 18px;
+  position: relative;
+}
+
+h1 .hl { color: var(--green); }
+
+.hero-desc {
+  font-size: 15px;
+  color: var(--text);
+  max-width: 500px;
+  position: relative;
+}
+
+/* ── SECTION HEADINGS ── */
+.sec {
+  margin-bottom: 60px;
+}
+
+.sec-hd {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 14px;
+}
+
+.sec-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.2em;
+}
+
+h2 {
+  font-family: var(--display);
+  font-size: 20px;
+  color: var(--white);
+  letter-spacing: 0.01em;
+}
+
+.sec-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  padding: 3px 10px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  margin-left: auto;
+}
+
+.tag-green { background: rgba(0,229,160,0.1); color: var(--green); border: 1px solid rgba(0,229,160,0.2); }
+.tag-orange { background: rgba(255,107,53,0.1); color: var(--orange); border: 1px solid rgba(255,107,53,0.2); }
+.tag-blue { background: rgba(77,159,255,0.1); color: var(--blue); border: 1px solid rgba(77,159,255,0.2); }
+.tag-yellow { background: rgba(245,200,66,0.1); color: var(--yellow); border: 1px solid rgba(245,200,66,0.2); }
+
+/* ── PHRASE STRUCTURE VISUAL ── */
+.phrase-visual {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 28px 24px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.phrase-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 560px;
+  margin-bottom: 8px;
+}
+
+.phrase-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  width: 60px;
+  flex-shrink: 0;
+  letter-spacing: 0.1em;
+}
+
+.beat {
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 8px;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+.beat.kick { background: var(--orange); color: #000; font-weight: 700; }
+.beat.snare { background: var(--blue); color: #000; }
+.beat.hihat { background: var(--s2); color: var(--muted); border: 1px solid var(--border); }
+.beat.silent { background: var(--bg); border: 1px dashed var(--border); }
+.beat.marker { background: var(--green); color: #000; font-weight: 700; }
+.beat.warning { background: var(--yellow); color: #000; font-weight: 700; }
+
+.phrase-gap { width: 8px; flex-shrink: 0; }
+
+.phrase-annotation {
+  display: flex;
+  gap: 4px;
+  min-width: 560px;
+  align-items: flex-start;
+  margin-top: 8px;
+  padding-left: 64px;
+}
+
+.ann {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.ann.green { color: var(--green); }
+.ann.orange { color: var(--orange); }
+.ann.yellow { color: var(--yellow); }
+
+/* ── INFO BOX ── */
+.infobox {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  border-radius: 4px;
+  padding: 18px 22px;
+  margin-bottom: 14px;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+.infobox.orange { border-left-color: var(--orange); }
+.infobox.blue { border-left-color: var(--blue); }
+.infobox.yellow { border-left-color: var(--yellow); }
+.infobox.red { border-left-color: var(--red); }
+
+.infobox strong { color: var(--white); font-weight: 500; }
+.infobox .label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green);
+  display: block;
+  margin-bottom: 6px;
+}
+.infobox.orange .label { color: var(--orange); }
+.infobox.blue .label { color: var(--blue); }
+.infobox.yellow .label { color: var(--yellow); }
+.infobox.red .label { color: var(--red); }
+
+/* ── FORMULA CARD ── */
+.formula {
+  background: var(--s2);
+  border: 1px solid var(--b2);
+  border-radius: 6px;
+  padding: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.formula-eq {
+  font-family: var(--display);
+  font-size: clamp(18px, 4vw, 32px);
+  color: var(--white);
+  letter-spacing: 0.02em;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.formula-eq .op { color: var(--green); margin: 0 10px; }
+.formula-eq .val { color: var(--orange); }
+.formula-eq .res { color: var(--green); }
+
+.formula-desc {
+  font-size: 13px;
+  color: var(--muted);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ── TECHNIQUE CARDS ── */
+.techniques {
+  display: grid;
+  gap: 14px;
+}
+
+.tech-card {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.tech-head {
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: background 0.15s;
+}
+
+.tech-card:hover .tech-head { background: rgba(255,255,255,0.02); }
+
+.tech-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.icon-green { background: rgba(0,229,160,0.1); }
+.icon-orange { background: rgba(255,107,53,0.1); }
+.icon-blue { background: rgba(77,159,255,0.1); }
+.icon-yellow { background: rgba(245,200,66,0.1); }
+.icon-red { background: rgba(255,68,102,0.1); }
+
+.tech-title-group { flex: 1; }
+
+.tech-name {
+  font-family: var(--display);
+  font-size: 16px;
+  color: var(--white);
+  letter-spacing: 0.02em;
+  margin-bottom: 2px;
+}
+
+.tech-sub {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.tech-diff {
+  font-family: var(--mono);
+  font-size: 9px;
+  padding: 4px 10px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.diff-1 { background: rgba(0,229,160,0.1); color: var(--green); }
+.diff-2 { background: rgba(245,200,66,0.1); color: var(--yellow); }
+.diff-3 { background: rgba(255,68,102,0.1); color: var(--red); }
+
+.chevron {
+  color: var(--muted);
+  font-size: 12px;
+  transition: transform 0.2s;
+  margin-left: 8px;
+}
+
+.tech-card.open .chevron { transform: rotate(90deg); }
+
+.tech-body {
+  display: none;
+  padding: 0 22px 22px;
+  border-top: 1px solid var(--border);
+}
+
+.tech-card.open .tech-body { display: block; }
+
+.tech-steps {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tstep {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.tstep-n {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--muted);
+  padding-top: 2px;
+  letter-spacing: 0.1em;
+}
+
+.tstep-txt {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.tstep-txt strong { color: var(--white); font-weight: 500; }
+
+/* ── EQ SWAP VISUAL ── */
+.eq-swap-visual {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0;
+  margin-top: 20px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.deck-vis {
+  padding: 16px 18px;
+}
+
+.deck-vis.a { background: rgba(255,107,53,0.05); }
+.deck-vis.b { background: rgba(77,159,255,0.05); }
+
+.deck-title {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.deck-vis.a .deck-title { color: var(--orange); }
+.deck-vis.b .deck-title { color: var(--blue); }
+
+.band-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.band-name {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  width: 24px;
+  text-transform: uppercase;
+}
+
+.band-track {
+  flex: 1;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.band-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+}
+
+.band-pct {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  width: 32px;
+  text-align: right;
+}
+
+.swap-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--s2);
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+}
+
+.swap-arrow {
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--green);
+}
+
+/* ── WAVEFORM TIMING ── */
+.waveform-demo {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 24px;
+  overflow-x: auto;
+}
+
+.wf-title {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.wf-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  min-width: 520px;
+}
+
+.wf-label {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  width: 50px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.wf-bar {
+  height: 32px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  position: relative;
+}
+
+.wf-full { background: rgba(255,107,53,0.2); border: 1px solid rgba(255,107,53,0.3); color: var(--orange); }
+.wf-fade { background: linear-gradient(to right, rgba(255,107,53,0.2), rgba(255,107,53,0.02)); border: 1px solid rgba(255,107,53,0.2); color: var(--orange); }
+.wf-enter { background: linear-gradient(to right, rgba(77,159,255,0.02), rgba(77,159,255,0.2)); border: 1px solid rgba(77,159,255,0.2); color: var(--blue); }
+.wf-active { background: rgba(77,159,255,0.2); border: 1px solid rgba(77,159,255,0.3); color: var(--blue); }
+.wf-overlap { background: rgba(0,229,160,0.12); border: 1px dashed rgba(0,229,160,0.4); color: var(--green); }
+
+.wf-spacer { flex: 0 0 var(--sp, 0px); }
+
+/* ── NUMBERS CALLOUTS ── */
+.numbers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.num-card {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 14px;
+  text-align: center;
+}
+
+.num-big {
+  font-family: var(--display);
+  font-size: 42px;
+  line-height: 1;
+  color: var(--white);
+  margin-bottom: 6px;
+}
+
+.num-unit {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.num-desc {
+  font-size: 11px;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+/* ── KEY HARMONY ── */
+.key-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.key-card {
+  background: var(--s2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 14px;
+  text-align: center;
+}
+
+.key-from {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--white);
+  margin-bottom: 4px;
+  font-weight: 700;
+}
+
+.key-to {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--green);
+  margin-bottom: 6px;
+}
+
+.key-label {
+  font-size: 10px;
+  color: var(--muted);
+}
+
+/* ── INTERACTIVE COUNTER ── */
+.counter-demo {
+  background: var(--s2);
+  border: 1px solid var(--b2);
+  border-radius: 6px;
+  padding: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.counter-title {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.beat-grid {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.beat-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  background: var(--border);
+  border: 1px solid var(--b2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--muted);
+  transition: all 0.1s;
+  cursor: default;
+}
+
+.beat-dot.kick-beat { background: var(--orange); color: #000; border-color: var(--orange); }
+.beat-dot.phrase-end { background: var(--green); color: #000; border-color: var(--green); }
+.beat-dot.active { transform: scale(1.2); box-shadow: 0 0 12px currentColor; }
+.beat-dot.played { opacity: 0.4; }
+
+.counter-btn {
+  background: var(--green);
+  color: #000;
+  border: none;
+  font-family: var(--display);
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  padding: 12px 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin: 0 6px;
+}
+
+.counter-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 20px rgba(0,229,160,0.3); }
+.counter-btn.stop { background: var(--red); }
+.counter-btn.stop:hover { box-shadow: 0 4px 20px rgba(255,68,102,0.3); }
+
+.counter-display {
+  font-family: var(--display);
+  font-size: 56px;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 6px;
+  min-height: 60px;
+}
+
+.counter-phrase {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.counter-hint {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 12px;
+  font-style: italic;
+}
+
+/* ── RULE CARDS ── */
+.rules-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.rule {
+  background: var(--s1);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 16px 20px;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.rule-icon {
+  font-size: 20px;
+  padding-top: 2px;
+  text-align: center;
+}
+
+.rule-text { font-size: 13.5px; color: var(--text); line-height: 1.6; }
+.rule-text strong { color: var(--white); font-weight: 500; }
+
+@media (max-width: 560px) {
+  .numbers-grid { grid-template-columns: repeat(2,1fr); }
+  .key-grid { grid-template-columns: repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+<!-- ARWEN Lab · botón de regreso -->
+<style>
+#arwen-back{position:fixed;top:14px;left:14px;z-index:1000;display:inline-flex;align-items:center;gap:8px;
+  padding:9px 14px;background:rgba(10,10,11,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  border:1px solid rgba(201,151,91,.35);color:#EDE7DC;text-decoration:none;
+  font:400 11px/1 'Jost',Futura,'Century Gothic',system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;
+  transition:border-color .25s,color .25s}
+#arwen-back:hover{border-color:#C9975B;color:#C9975B}
+#arwen-back:focus-visible{outline:1.5px solid #C9975B;outline-offset:3px}
+@media print{#arwen-back{display:none}}
+</style>
+<a id="arwen-back" href="index.html" aria-label="Volver al ARWEN Lab">← ARWEN Lab</a>
+
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg-text">MIX</div>
+    <div class="kicker">La Fórmula Completa</div>
+    <h1>CUÁNDO Y CÓMO<br><span class="hl">METER UN TRACK</span></h1>
+    <p class="hero-desc">Beatmatching, estructura de frases, timing de transiciones y todos los trucos. Todo lo que los DJs buenos hacen de forma instintiva — explicado.</p>
+  </div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 01 — LOS NÚMEROS CLAVE -->
+  <!-- ═══════════════════════════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">01</span>
+      <h2>Los números que gobiernan todo</h2>
+      <span class="sec-tag tag-green">Fundamentos</span>
+    </div>
+
+    <div class="numbers-grid">
+      <div class="num-card">
+        <div class="num-big" style="color:var(--orange)">4</div>
+        <div class="num-unit">beats = 1 compás</div>
+        <div class="num-desc">La unidad base. El kick siempre cae en el beat 1.</div>
+      </div>
+      <div class="num-card">
+        <div class="num-big" style="color:var(--blue)">8</div>
+        <div class="num-unit">compases = 1 frase</div>
+        <div class="num-desc">La unidad musical real. Cada cambio ocurre en múltiplos de 8.</div>
+      </div>
+      <div class="num-card">
+        <div class="num-big" style="color:var(--yellow)">16</div>
+        <div class="num-unit">compases = 1 sección</div>
+        <div class="num-desc">Intro, verse, drop, outro — cada uno dura ~16 compases.</div>
+      </div>
+      <div class="num-card">
+        <div class="num-big" style="color:var(--green)">32</div>
+        <div class="num-unit">compases = zona mezcla</div>
+        <div class="num-desc">El tiempo real que tienes para hacer la transición completa.</div>
+      </div>
+    </div>
+
+    <div class="infobox">
+      <span class="label">Regla de oro</span>
+      <strong>TODO en la música electrónica ocurre en múltiplos de 8 compases.</strong> Intros, drops, builds, outros — todos caen en el compás 8, 16, 32 o 64. Si internalizas esto, nunca mezclarás en el momento equivocado.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 02 — ESTRUCTURA DEL TRACK -->
+  <!-- ═══════════════════════════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">02</span>
+      <h2>Anatomía de un track</h2>
+      <span class="sec-tag tag-orange">Estructura</span>
+    </div>
+
+    <div class="phrase-visual">
+      <div class="wf-title">Estructura típica de un track de Afro House / Melodic Techno (6 min)</div>
+
+      <div style="display:flex;gap:8px;align-items:center;margin-bottom:16px;flex-wrap:wrap;min-width:500px;">
+        <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:2px;background:rgba(0,229,160,0.3);border:1px solid var(--green)"></div><span style="font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:0.1em;">ENTRA AQUÍ →</span></div>
+        <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:2px;background:rgba(255,107,53,0.3);border:1px solid var(--orange)"></div><span style="font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:0.1em;">SECCIÓN ACTIVA</span></div>
+        <div style="display:flex;align-items:center;gap:6px;"><div style="width:14px;height:14px;border-radius:2px;background:rgba(255,68,102,0.3);border:1px solid var(--red)"></div><span style="font-family:var(--mono);font-size:9px;color:var(--muted);letter-spacing:0.1em;">SALE AQUÍ →</span></div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-label">Track A</div>
+        <div class="wf-bar wf-full" style="width:90px;flex-shrink:0;">INTRO</div>
+        <div class="wf-bar wf-full" style="width:130px;flex-shrink:0;background:rgba(255,107,53,0.35);">BUILD</div>
+        <div class="wf-bar wf-full" style="width:120px;flex-shrink:0;background:rgba(255,107,53,0.45);">DROP</div>
+        <div class="wf-bar wf-full" style="width:90px;flex-shrink:0;background:rgba(255,107,53,0.35);">MID</div>
+        <div class="wf-bar wf-fade" style="width:100px;flex-shrink:0;background:linear-gradient(to right,rgba(255,68,102,0.3),rgba(255,68,102,0.05));">OUTRO ↗</div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-label" style="color:var(--green);">MEZCLA</div>
+        <div style="flex:0 0 430px;flex-shrink:0;display:flex;align-items:center;justify-content:flex-end;">
+          <div style="background:rgba(0,229,160,0.12);border:1px dashed rgba(0,229,160,0.4);border-radius:3px;height:28px;width:180px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:9px;color:var(--green);letter-spacing:0.1em;">← VENTANA DE MEZCLA →</div>
+        </div>
+      </div>
+
+      <div class="wf-row">
+        <div class="wf-label" style="color:var(--blue);">Track B</div>
+        <div style="flex:0 0 360px;flex-shrink:0;"></div>
+        <div class="wf-bar wf-enter" style="width:100px;flex-shrink:0;background:linear-gradient(to right,rgba(77,159,255,0.05),rgba(77,159,255,0.25));">INTRO ↗</div>
+        <div class="wf-bar wf-active" style="width:120px;flex-shrink:0;">BUILD…</div>
+      </div>
+    </div>
+
+    <div class="infobox orange">
+      <span class="label">La ventana de mezcla</span>
+      <strong>El outro del track A es tu zona de trabajo.</strong> Empieza a mezclar cuando el track A entra a su outro (los últimos 32–64 compases). Nunca intentes mezclar en medio de un drop activo — espera siempre a que la energía baje.
+    </div>
+
+    <div class="infobox blue">
+      <span class="label">Los 4 puntos de entrada del Track B</span>
+      <strong>Beat 1 de una frase nueva.</strong> Siempre entra el track B en el primer beat de una frase de 8 compases. Si el track A está en el compás 48, el B entra en el 49 (inicio de frase), no en el 52.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 03 — EL CONTADOR INTERACTIVO -->
+  <!-- ═══════════════════════════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">03</span>
+      <h2>Aprende a contar frases</h2>
+      <span class="sec-tag tag-blue">Práctica</span>
+    </div>
+
+    <div class="counter-demo">
+      <div class="counter-title">Simulador de conteo — practica contar compases</div>
+      <div class="counter-display" id="cntDisplay">—</div>
+      <div class="counter-phrase" id="cntPhrase">Pulsa START para comenzar</div>
+      <div class="beat-grid" id="beatGrid">
+        <!-- generado por JS -->
+      </div>
+      <div>
+        <button class="counter-btn" id="btnStart" onclick="startCounter()">▶ START</button>
+        <button class="counter-btn stop" id="btnStop" onclick="stopCounter()" style="display:none;">■ STOP</button>
+      </div>
+      <div class="counter-hint" id="cntHint">Pon un track y presiona START — el simulador cuenta los beats y te indica cuándo entrar</div>
+    </div>
+
+    <div class="infobox">
+      <span class="label">Cómo usar el contador</span>
+      <strong>Pon cualquier track de tu crate y presiona START al mismo tiempo que escuchas el kick.</strong> El contador te muestra en qué beat estás, en qué compás y cuándo es el siguiente inicio de frase (cada 8 compases). Los beats verdes son tus ventanas de entrada.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 04 — LA FÓRMULA -->
+  <!-- ═══════════════════════════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">04</span>
+      <h2>La Fórmula de la Transición</h2>
+      <span class="sec-tag tag-yellow">Core</span>
+    </div>
+
+    <div class="formula">
+      <div class="formula-eq">
+        BPM Match <span class="op">+</span> Phrase Timing <span class="op">+</span> EQ Swap <span class="op">=</span> <span class="res">Transición limpia</span>
+      </div>
+      <div class="formula-desc">Los tres elementos son obligatorios. Puedes tener BPM perfectos pero entrar en el compás equivocado — sigue sonando mal. Los tres deben estar presentes.</div>
+    </div>
+
+    <div class="infobox yellow">
+      <span class="label">Paso 1 — BPM Match</span>
+      <strong>Los BPM del Track A y Track B deben estar iguales o muy cercanos (±0.5 BPM).</strong> En Rekordbox/Serato: usa Sync para que el software los iguale automáticamente. A mano: ajusta el pitch fader hasta que los kicks caigan juntos en los jog wheels.
+    </div>
+
+    <div class="infobox orange">
+      <span class="label">Paso 2 — Phrase Timing</span>
+      <strong>Entra el Track B solo en el Beat 1 de una frase de 8 compases.</strong> Escucha el track actual — cuenta 1-2-3-4, 2-2-3-4... hasta llegar al inicio de una frase nueva (cada 8 compases). Ahí y solo ahí arrancas el B.
+    </div>
+
+    <div class="infobox">
+      <span class="label">Paso 3 — EQ Swap</span>
+      <strong>Nunca dos kicks al mismo tiempo. Baja el Low del B a cero antes de subirlo, intercambia con el Low del A.</strong> El resultado: el cambio de kick es imperceptible. La pista no siente un "doble golpe".
+    </div>
+
+    <!-- EQ Swap Visual -->
+    <div class="eq-swap-visual">
+      <div class="deck-vis a">
+        <div class="deck-title">Deck A — Saliendo</div>
+        <div class="band-row">
+          <span class="band-name">HI</span>
+          <div class="band-track"><div class="band-fill" style="width:75%;background:var(--orange);"></div></div>
+          <span class="band-pct">75%</span>
+        </div>
+        <div class="band-row">
+          <span class="band-name">MID</span>
+          <div class="band-track"><div class="band-fill" style="width:60%;background:var(--orange);"></div></div>
+          <span class="band-pct">60%</span>
+        </div>
+        <div class="band-row">
+          <span class="band-name">LOW</span>
+          <div class="band-track"><div class="band-fill" style="width:5%;background:var(--red);"></div></div>
+          <span class="band-pct" style="color:var(--red);">0% ↓</span>
+        </div>
+      </div>
+      <div class="swap-center">
+        <div>
+          <div class="swap-arrow">⇄</div>
+          <div style="font-family:var(--mono);font-size:8px;color:var(--green);letter-spacing:0.1em;text-align:center;margin-top:4px;">8 beats</div>
+        </div>
+      </div>
+      <div class="deck-vis b">
+        <div class="deck-title">Deck B — Entrando</div>
+        <div class="band-row">
+          <span class="band-name">HI</span>
+          <div class="band-track"><div class="band-fill" style="width:70%;background:var(--blue);"></div></div>
+          <span class="band-pct">70%</span>
+        </div>
+        <div class="band-row">
+          <span class="band-name">MID</span>
+          <div class="band-track"><div class="band-fill" style="width:80%;background:var(--blue);"></div></div>
+          <span class="band-pct">80%</span>
+        </div>
+        <div class="band-row">
+          <span class="band-name">LOW</span>
+          <div class="band-track"><div class="band-fill" style="width:95%;background:var(--green);"></div></div>
+          <span class="band-pct" style="color:var(--green);">100% ↑</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 05 — TÉCNICAS DE TRANSICIÓN -->
+  <!-- ═══════════════════════════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">05</span>
+      <h2>Técnicas de transición</h2>
+      <span class="sec-tag tag-green">Trucos</span>
+    </div>
+
+    <div class="techniques">
+
+      <!-- EQ SWAP -->
+      <div class="tech-card" onclick="toggleTech(this)">
+        <div class="tech-head">
+          <div class="tech-icon icon-green">⚖️</div>
+          <div class="tech-title-group">
+            <div class="tech-name">EQ SWAP</div>
+            <div class="tech-sub">La base de todo</div>
+          </div>
+          <span class="tech-diff diff-1">Nivel 1</span>
+          <span class="chevron">▶</span>
+        </div>
+        <div class="tech-body">
+          <div class="tech-steps">
+            <div class="tstep"><span class="tstep-n">01</span><div class="tstep-txt">Track B cargado y en sync. <strong>Fader B al 50%, Low B en cero.</strong> Los mids y highs del B entran pero sin kick.</div></div>
+            <div class="tstep"><span class="tstep-n">02</span><div class="tstep-txt">Escucha que los dos grooves se sientan bien juntos. Si no cuadra, ajusta con el jog wheel del B muy ligeramente.</div></div>
+            <div class="tstep"><span class="tstep-n">03</span><div class="tstep-txt"><strong>En 8 beats:</strong> sube Low B de 0 a 100%, simultáneamente baja Low A de 100% a 0%. El kick cambia de track.</div></div>
+            <div class="tstep"><span class="tstep-n">04</span><div class="tstep-txt">Sube fader B a 100%, baja fader A a 0% en los siguientes 8 beats. Transición completa.</div></div>
+          </div>
+          <div class="infobox" style="margin-top:14px;">
+            <span class="label">Cuándo usarla</span>
+            Siempre. El EQ swap es la técnica base que existe debajo de TODAS las demás. Domínala primero.
+          </div>
+        </div>
+      </div>
+
+      <!-- LOOP TRICK -->
+      <div class="tech-card" onclick="toggleTech(this)">
+        <div class="tech-head">
+          <div class="tech-icon icon-blue">🔁</div>
+          <div class="tech-title-group">
+            <div class="tech-name">LOOP DE EMERGENCIA</div>
+            <div class="tech-sub">Tu paracaídas</div>
+          </div>
+          <span class="tech-diff diff-1">Nivel 1</span>
+          <span class="chevron">▶</span>
+        </div>
+        <div class="tech-body">
+          <div class="tech-steps">
+            <div class="tstep"><span class="tstep-n">01</span><div class="tstep-txt">En cualquier momento que sientas que el track A está a punto de terminar y no tienes el B listo: <strong>activa Loop de 8 beats.</strong></div></div>
+            <div class="tstep"><span class="tstep-n">02</span><div class="tstep-txt">Ahora tienes tiempo ilimitado. Carga el B, ajusta BPM, prepara el hot cue de entrada — con calma.</div></div>
+            <div class="tstep"><span class="tstep-n">03</span><div class="tstep-txt">Cuando el B está listo, <strong>desactiva el loop en el beat 1 de la siguiente frase</strong> y simultáneamente presiona play en el B.</div></div>
+          </div>
+          <div class="infobox blue" style="margin-top:14px;">
+            <span class="label">Pro tip</span>
+            Los primeros 3 meses deberías usar esto en casi cada mezcla. No es trampa — es control. Los DJs profesionales lo usan constantemente.
+          </div>
+        </div>
+      </div>
+
+      <!-- FILTRO -->
+      <div class="tech-card" onclick="toggleTech(this)">
+        <div class="tech-head">
+          <div class="tech-icon icon-orange">🎚️</div>
+          <div class="tech-title-group">
+            <div class="tech-name">TRANSICIÓN CON FILTRO</div>
+            <div class="tech-sub">Suave y cinematográfica</div>
+          </div>
+          <span class="tech-diff diff-2">Nivel 2</span>
+          <span class="chevron">▶</span>
+        </div>
+        <div class="tech-body">
+          <div class="tech-steps">
+            <div class="tstep"><span class="tstep-n">01</span><div class="tstep-txt">En el outro del track A: <strong>baja el High-Pass Filter</strong> (knob de filter del FLX4) hasta que el sonido se vuelva oscuro y "submarino".</div></div>
+            <div class="tstep"><span class="tstep-n">02</span><div class="tstep-txt">Mientras el A se vuelve más oscuro, sube el fader del B con el filtro también cerrado. Dos sonidos "borrosos" mezclados.</div></div>
+            <div class="tstep"><span class="tstep-n">03</span><div class="tstep-txt">Abre el filtro del B lentamente en 8–16 beats: el nuevo track "aparece" de la neblina. <strong>Efecto cinematográfico.</strong></div></div>
+            <div class="tstep"><span class="tstep-n">04</span><div class="tstep-txt">Cuando el B está abierto al 100%, cierra el fader del A.</div></div>
+          </div>
+          <div class="infobox orange" style="margin-top:14px;">
+            <span class="label">Cuándo usarla</span>
+            Para transiciones emocionales — de Afro House a Melodic Techno, o cuando quieres que el cambio se sienta como una transformación. Evítala entre tracks del mismo estilo (se nota artificial).
+          </div>
+        </div>
+      </div>
+
+      <!-- ECHO OUT -->
+      <div class="tech-card" onclick="toggleTech(this)">
+        <div class="tech-head">
+          <div class="tech-icon icon-yellow">🌊</div>
+          <div class="tech-title-group">
+            <div class="tech-name">ECHO OUT</div>
+            <div class="tech-sub">Salida con efecto</div>
+          </div>
+          <span class="tech-diff diff-2">Nivel 2</span>
+          <span class="chevron">▶</span>
+        </div>
+        <div class="tech-body">
+          <div class="tech-steps">
+            <div class="tstep"><span class="tstep-n">01</span><div class="tstep-txt">Activa el efecto <strong>Echo/Delay</strong> en el deck A desde el performance panel del FLX4.</div></div>
+            <div class="tstep"><span class="tstep-n">02</span><div class="tstep-txt">En el último compás antes de la transición: <strong>baja el fader A bruscamente.</strong> El echo crea una cola que "disuelve" el track.</div></div>
+            <div class="tstep"><span class="tstep-n">03</span><div class="tstep-txt">Durante esa cola de echo, sube el fader B con el track nuevo ya sincronizado.</div></div>
+            <div class="tstep"><span class="tstep-n">04</span><div class="tstep-txt">Apaga el efecto del A. El track B toma el control limpiamente.</div></div>
+          </div>
+          <div class="infobox yellow" style="margin-top:14px;">
+            <span class="label">Cuándo usarla</span>
+            Al final de secciones de alta energía — antes del pico del set, o al cerrar el set. El echo crea drama y sensación de conclusión. <strong>No abusar — máximo 2–3 veces por set.</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- CUT DURO -->
+      <div class="tech-card" onclick="toggleTech(this)">
+        <div class="tech-head">
+          <div class="tech-icon icon-red">⚡</div>
+          <div class="tech-title-group">
+            <div class="tech-name">CUT DURO (Hard Cut)</div>
+            <div class="tech-sub">Cambio de golpe</div>
+          </div>
+          <span class="tech-diff diff-3">Nivel 3</span>
+          <span class="chevron">▶</span>
+        </div>
+        <div class="tech-body">
+          <div class="tech-steps">
+            <div class="tstep"><span class="tstep-n">01</span><div class="tstep-txt">Solo funciona si los dos tracks tienen <strong>BPM idénticos y KEY compatible.</strong> Sin esto el hard cut suena fatal.</div></div>
+            <div class="tstep"><span class="tstep-n">02</span><div class="tstep-txt">Prepara el B en hot cue del beat 1 de su drop. Sincroniza perfectamente — el B listo para dispararse.</div></div>
+            <div class="tstep"><span class="tstep-n">03</span><div class="tstep-txt">En el beat 1 exacto de una frase nueva del A: <strong>crossfader de golpe al B</strong> (o fader A a cero, B a 100% al mismo tiempo).</div></div>
+            <div class="tstep"><span class="tstep-n">04</span><div class="tstep-txt">El cambio es abrupto — intencional. Funciona mejor en el pico del set para crear sorpresa máxima.</div></div>
+          </div>
+          <div class="infobox red" style="margin-top:14px;">
+            <span class="label">⚠️ Aviso</span>
+            Esta técnica la deja para el mes 3 mínimo. Requiere que el phrase timing sea perfecto — un beat de error y suena como un error técnico, no artístico.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 06 — KEY HARMONY -->
+  <!-- ═══════════════════════════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">06</span>
+      <h2>Harmonía de tonalidades</h2>
+      <span class="sec-tag tag-orange">Bonus</span>
+    </div>
+
+    <div class="infobox orange">
+      <span class="label">Camelot Wheel — el secreto del sonido profesional</span>
+      <strong>Dos tracks con tonalidades incompatibles suenan disonantes aunque los BPM sean perfectos.</strong> El sistema Camelot asigna números y letras a cada tonalidad. Tracks adyacentes o del mismo número mezclan perfectamente.
+    </div>
+
+    <div class="key-grid">
+      <div class="key-card">
+        <div class="key-from">8A → 8A</div>
+        <div class="key-to">✓ Perfecta</div>
+        <div class="key-label">Misma tonalidad</div>
+      </div>
+      <div class="key-card">
+        <div class="key-from">8A → 9A</div>
+        <div class="key-to">✓ Muy bien</div>
+        <div class="key-label">+1 número, misma letra</div>
+      </div>
+      <div class="key-card">
+        <div class="key-from">8A → 7A</div>
+        <div class="key-to">✓ Muy bien</div>
+        <div class="key-label">-1 número, misma letra</div>
+      </div>
+      <div class="key-card">
+        <div class="key-from">8A → 8B</div>
+        <div class="key-to">✓ Bien</div>
+        <div class="key-label">Mismo número, letra distinta</div>
+      </div>
+      <div class="key-card">
+        <div class="key-from">8A → 3B</div>
+        <div class="key-to" style="color:var(--yellow);">⚠ Con cuidado</div>
+        <div class="key-label">Números muy distintos</div>
+      </div>
+      <div class="key-card">
+        <div class="key-from">8A → 2A</div>
+        <div class="key-to" style="color:var(--red);">✗ Evitar</div>
+        <div class="key-label">Incompatibles — suena disonante</div>
+      </div>
+    </div>
+
+    <div class="infobox" style="margin-top:14px;">
+      <span class="label">Cómo usarlo</span>
+      <strong>Rekordbox analiza la tonalidad de cada track automáticamente y la muestra en notación Camelot.</strong> Antes de mezclar, verifica que los dos tracks sean adyacentes en el sistema. Con el tiempo lo harás de oído — pero al principio usa la pantalla.
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ -->
+  <!-- 07 — REGLAS DE CAMPO -->
+  <!-- ═══════════════════════════════ -->
+  <div class="sec">
+    <div class="sec-hd">
+      <span class="sec-num">07</span>
+      <h2>Reglas de campo</h2>
+      <span class="sec-tag tag-blue">Las que nadie explica</span>
+    </div>
+
+    <div class="rules-grid">
+      <div class="rule">
+        <div class="rule-icon">🔊</div>
+        <div class="rule-text"><strong>Nunca dos kicks al mismo tiempo.</strong> Es la regla #1. Siempre uno activo y uno en cero. El EQ swap lo resuelve.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon">⏱️</div>
+        <div class="rule-text"><strong>Entra temprano, sal temprano.</strong> Mejor preparar la transición 32 compases antes que estar corriendo en los últimos 8. El estrés se escucha.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon">👂</div>
+        <div class="rule-text"><strong>Monitorea con un auricular antes de mezclar.</strong> El cue del FLX4 te deja escuchar el deck B en tu auricular mientras el A suena en los speakers. Úsalo siempre.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon">📊</div>
+        <div class="rule-text"><strong>Iguala los volúmenes antes del EQ swap.</strong> Si el B es más fuerte que el A, la transición va a sonar como un golpe de volumen. Usa el gain knob del canal para equipararlos.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon">🎯</div>
+        <div class="rule-text"><strong>Hot cue en el beat 1 de cada track.</strong> Antes de mezclar, pon un hot cue exactamente en el primer beat del kick. Eso te da un punto de retorno instantáneo si te pierdes.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon">🎵</div>
+        <div class="rule-text"><strong>Menos es más en los efectos.</strong> El FLX4 tiene muchos efectos — resiste la tentación. Una transición limpia con EQ swap supera siempre a una con 5 efectos mal colocados.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon">🔁</div>
+        <div class="rule-text"><strong>Graba cada sesión.</strong> En Rekordbox puedes grabar el output. Escúchate al día siguiente con oído crítico — identificarás exactamente dónde fallaron las transiciones.</div>
+      </div>
+      <div class="rule">
+        <div class="rule-icon">😤</div>
+        <div class="rule-text"><strong>Una mezcla rota no es el fin.</strong> Si la transición salió mal: sube el fader del track que suena mejor, baja el otro, loop de 8 beats y recupera. El público rara vez nota lo que tú escuchas.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Toggle técnicas
+function toggleTech(card) {
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.tech-card.open').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+// Beat counter
+let counterInterval = null;
+let beat = 0;
+let bar = 0;
+let phrase = 0;
+
+function buildBeatGrid() {
+  const grid = document.getElementById('beatGrid');
+  grid.innerHTML = '';
+  for (let i = 0; i < 32; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'beat-dot';
+    dot.id = `bd-${i}`;
+    const bn = (i % 4) + 1;
+    const isKick = bn === 1;
+    const isPhraseEnd = (i + 1) % 8 === 0;
+    dot.textContent = bn;
+    if (isPhraseEnd) dot.style.borderColor = 'rgba(0,229,160,0.4)';
+    grid.appendChild(dot);
+  }
+}
+
+buildBeatGrid();
+
+function startCounter() {
+  beat = 0; bar = 0; phrase = 0;
+  document.getElementById('btnStart').style.display = 'none';
+  document.getElementById('btnStop').style.display = 'inline-block';
+  document.getElementById('cntHint').textContent = '';
+
+  // reset dots
+  for (let i = 0; i < 32; i++) {
+    const dot = document.getElementById(`bd-${i}`);
+    dot.className = 'beat-dot';
+    dot.style.borderColor = (i + 1) % 8 === 0 ? 'rgba(0,229,160,0.4)' : '';
+  }
+
+  let pos = 0;
+  counterInterval = setInterval(() => {
+    // clear previous
+    if (pos > 0) {
+      const prev = document.getElementById(`bd-${(pos - 1) % 32}`);
+      prev.classList.remove('active');
+      prev.classList.add('played');
+    }
+
+    const dot = document.getElementById(`bd-${pos % 32}`);
+    const beatNum = (pos % 4) + 1;
+    const barNum = Math.floor(pos / 4) % 8 + 1;
+    const phraseNum = Math.floor(pos / 32) + 1;
+    const isPhraseStart = pos % 32 === 0 && pos > 0;
+
+    dot.classList.add('active');
+    if (beatNum === 1) {
+      dot.classList.add('kick-beat');
+    }
+    if (isPhraseStart || (pos + 1) % 32 === 0) {
+      dot.classList.add('phrase-end');
+    }
+
+    document.getElementById('cntDisplay').textContent = `${beatNum}`;
+    document.getElementById('cntPhrase').textContent = `Compás ${barNum} / 8 · Frase ${phraseNum}`;
+
+    const nextPhraseIn = 32 - (pos % 32);
+    const hint = nextPhraseIn <= 4
+      ? `⚡ ENTRA TRACK B EN ${nextPhraseIn} BEAT${nextPhraseIn > 1 ? 'S' : ''}!`
+      : pos % 32 === 0 && pos > 0
+        ? `✓ INICIO DE FRASE — punto de entrada`
+        : `Próxima entrada: en ${nextPhraseIn} beats`;
+    document.getElementById('cntHint').textContent = hint;
+    document.getElementById('cntHint').style.color = nextPhraseIn <= 4 ? 'var(--green)' : 'var(--muted)';
+
+    // reset dots every 32
+    if (pos % 32 === 31) {
+      setTimeout(() => {
+        for (let i = 0; i < 32; i++) {
+          const d = document.getElementById(`bd-${i}`);
+          d.className = 'beat-dot';
+          d.style.borderColor = (i + 1) % 8 === 0 ? 'rgba(0,229,160,0.4)' : '';
+        }
+      }, 50);
+    }
+
+    pos++;
+  }, 500); // 120 BPM ~= 500ms/beat
+}
+
+function stopCounter() {
+  clearInterval(counterInterval);
+  counterInterval = null;
+  document.getElementById('btnStart').style.display = 'inline-block';
+  document.getElementById('btnStop').style.display = 'none';
+  document.getElementById('cntDisplay').textContent = '—';
+  document.getElementById('cntPhrase').textContent = 'Pulsa START para comenzar';
+  document.getElementById('cntHint').textContent = 'Pon un track y presiona START — el simulador cuenta los beats y te indica cuándo entrar';
+  document.getElementById('cntHint').style.color = 'var(--muted)';
+  buildBeatGrid();
+}
+</script>
+</body>
+</html>

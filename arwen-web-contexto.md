@@ -27,11 +27,16 @@ El sitio oficial de ARWEN (DJ y productor de Afro House y Melodic Techno, CDMX /
 5. **Galería:** 3 fotos en cabina, en blanco y negro, que recuperan su color al pasar el cursor.
 6. **Booking:** arwenmusicmx@gmail.com (con botón de copiar), @arwen.dj, @frecuenciazerocolectivo, frecuenciazerocolectivo.com y linktr.ee/arwenmusicmx.
 
+## ARWEN Lab
+- Página aparte en `lab/index.html`, enlazada desde la nav del home ("Lab") y con regreso al press kit.
+- Guías: Vol. I Color FX (`color-fx-afro-house.html`), Vol. II Beat FX (`beat-fx-afro-house.html`), Vol. III Smart CFX (`smart-cfx-sistema.html`), La Fórmula del Mix (`dj-formula-mezcla.html`) y Crate Starter (`dj-transiciones.html`).
+- `lab/agregar-regreso.py` inserta el botón fijo "← ARWEN Lab" en cada guía de la carpeta (se puede correr varias veces).
+- Fuera por ahora: DJ Prep Tool, Mix Replicator, arwen_reels.py, generador de media kit y EPK builder.
+
 ## Archivo
 `arwen-home.html` funciona solo, sin carpetas aparte, porque las fotos van incrustadas. Se puede abrir en el navegador o subir tal cual a un hosting (Netlify, Vercel, GitHub Pages).
 
 ## Pendientes
-- Reactivar el **ARWEN Lab** como página aparte (/lab), con botón de regreso en cada guía.
 - Agregar links o embeds de sets en SoundCloud y YouTube.
 - Hacer una versión en inglés para promotores fuera de México.
 - Agregar las próximas fechas de ARWEN Sessions al hero, como las fechas del festival en el póster.
