@@ -18,14 +18,16 @@ El sitio oficial de ARWEN (DJ y productor de Afro House y Melodic Techno, CDMX /
 
 ## Secciones
 1. **Hero / póster**
-2. **Bio:** texto largo y botón "Copiar bio corta". Incluye la barra del arco del set: Afro House 120–125, Afro Tech 125–128, Melodic Techno 128–132 BPM.
-3. **ARWEN Sessions:** Coffee (mañana, cafeterías), Sunset (rooftops), Garden (jardines), Night (club).
+2. **Bio:** texto largo basado en el Press Kit 2026 (propuesta, Frecuencia Zero, fechas 2026 y activaciones) y botón "Copiar bio corta". Incluye la barra del arco del set: Afro House 120–125, Afro Tech 125–128, Melodic Techno 128–132 BPM.
+3. **ARWEN Sessions:** Coffee (10:00–14:00, cafeterías y brunch), Sunset (16:00–21:00, terrazas y rooftops), Garden (jardines y hoteles), Night (clubs y venues nocturnos) y Sport (torneos y activaciones). Debajo, la Sesión 001 (ARWEN B2B BAZT_TZ) con link a SoundCloud.
 4. **Rider & sonido**
-   - Cabina: 2× CDJ-3000 en Pro DJ Link y DJM-900NXS2.
-   - Ha tocado en: Rumores (Funktion-One), Revo Rooftop, ARWEN Sessions y Frecuencia Zero (colectivo actual, link a https://frecuenciazerocolectivo.com).
+   - Cabina: 2× CDJ-3000 en Pro DJ Link y DJM-900NXS2. Alternativas: Pioneer XDJ-AZ o equipo propio (DDJ-FLX4 + laptop).
+   - En vivo 2026: Revo Rooftop (02.10, Frecuencia Zero × Revo Rooftop), Annua (04.09, ARWEN B2B BAZT_TZ) y Rumores (30.07, Frecuencia Zero × Rumores, Funktion-One).
+   - Activaciones: Torneo Tecnifibre (22.08, tenis), Padelab (pádel) y MOEV Training Lab (evento de marca).
    - Referencias: Rampa, Adam Port, Adriatique, Keinemusik, Anyma y Yotto.
-5. **Galería:** 3 fotos en cabina, en blanco y negro, que recuperan su color al pasar el cursor.
-6. **Booking:** arwenmusicmx@gmail.com (con botón de copiar), @arwen.dj, @frecuenciazerocolectivo, frecuenciazerocolectivo.com y linktr.ee/arwenmusicmx.
+   - Lineups compartidos: Alexx Fall, Sanlika, BAZT_TZ, Andrreas, Shedlee, Francø, HOMM, Vargrbo, Nattsoo, Tlakoh, Angelo Diablo, Deja Böö, Bassenerg, Davor y Chávez.
+5. **Galería:** 3 fotos en cabina, en blanco y negro, que recuperan su color al pasar el cursor. Debajo, botón "Descargar press kit".
+6. **Booking:** arwenmusicmx@gmail.com (con botón de copiar), @arwen.dj, soundcloud.com/arwenmusic, youtube.com/@arwen.musicdj, @frecuenciazerocolectivo, frecuenciazerocolectivo.com, descarga del press kit y linktr.ee/arwenmusicmx.
 
 ## ARWEN Lab
 - Página aparte en `lab/index.html`, enlazada desde la nav del home ("Lab") y con regreso al press kit.
@@ -33,11 +35,16 @@ El sitio oficial de ARWEN (DJ y productor de Afro House y Melodic Techno, CDMX /
 - `lab/agregar-regreso.py` inserta el botón fijo "← ARWEN Lab" en cada guía de la carpeta (se puede correr varias veces).
 - Fuera por ahora: DJ Prep Tool, Mix Replicator, arwen_reels.py, generador de media kit y EPK builder.
 
+## Descargas (`descargas/`)
+- `ARWEN-Press-Kit-2026.pdf`: press kit de 9 páginas en vertical. Se enlaza desde Rider y Booking.
+- El press kit incluye el WhatsApp, así que queda público al descargarlo.
+- El media kit de ARWEN Sessions (16:9 y 4:5) no se publica porque trae la tarifa: se manda por correo. Los PDFs están en `descargas/`, pero el `.gitignore` los deja fuera del repo.
+
 ## Archivo
 `arwen-home.html` funciona solo, sin carpetas aparte, porque las fotos van incrustadas. Se puede abrir en el navegador o subir tal cual a un hosting (Netlify, Vercel, GitHub Pages).
 
 ## Pendientes
-- Agregar links o embeds de sets en SoundCloud y YouTube.
+- Agregar embeds de sets (ya hay links a los perfiles de SoundCloud y YouTube y a la Sesión 001).
 - Hacer una versión en inglés para promotores fuera de México.
 - Agregar las próximas fechas de ARWEN Sessions al hero, como las fechas del festival en el póster.
 - Revisar la bio cuando haya releases o logros nuevos.
