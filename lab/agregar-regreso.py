@@ -1,4 +1,4 @@
-"""Inserta el botón "← ARWEN Lab" en cada guía de esta carpeta.
+"""Inserta el botón "← ARWEN Lab" y el ícono de pestaña en cada guía de esta carpeta.
 
 Uso: python3 lab/agregar-regreso.py
 Es seguro correrlo varias veces: si una guía ya tiene el botón, la salta.
@@ -6,6 +6,10 @@ Es seguro correrlo varias veces: si una guía ya tiene el botón, la salta.
 from pathlib import Path
 
 MARK = 'id="arwen-back"'
+ICONS = '''<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+'''
 SNIPPET = '''<!-- ARWEN Lab · botón de regreso -->
 <style>
 #arwen-back{position:fixed;top:14px;left:14px;z-index:1000;display:inline-flex;align-items:center;gap:8px;
@@ -25,6 +29,11 @@ for page in sorted(here.glob('*.html')):
     if page.name == 'index.html':
         continue
     html = page.read_text(encoding='utf-8')
+    if 'favicon.svg' not in html and '</head>' in html:
+        k = html.index('</head>')
+        html = html[:k] + ICONS + html[k:]
+        page.write_text(html, encoding='utf-8')
+        print(f'ícono agregado: {page.name}')
     if MARK in html:
         print(f'ya tiene botón: {page.name}')
         continue

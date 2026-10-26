@@ -19,7 +19,7 @@ El sitio oficial de ARWEN (DJ y productor de Afro House y Melodic Techno, CDMX /
 ## Secciones
 1. **Hero / póster**
 2. **Bio:** texto largo basado en el Press Kit 2026 (propuesta, Frecuencia Zero, fechas 2026 y activaciones) y botón "Copiar bio corta". Incluye la barra del arco del set: Afro House 120–125, Afro Tech 125–128, Melodic Techno 128–132 BPM.
-3. **ARWEN Sessions:** Coffee (10:00–14:00, cafeterías y brunch), Sunset (16:00–21:00, terrazas y rooftops), Garden (jardines y hoteles), Night (clubs y venues nocturnos) y Sport (torneos y activaciones). Debajo, la Sesión 001 (ARWEN B2B BAZT_TZ) con link a SoundCloud.
+3. **ARWEN Sessions:** Coffee (10:00–14:00, cafeterías y brunch), Sunset (16:00–21:00, terrazas y rooftops), Garden (jardines y hoteles), Night (clubs y venues nocturnos) y Sport (torneos y activaciones). Debajo, la Sesión 001 (ARWEN B2B BAZT_TZ) con link al perfil de SoundCloud.
 4. **Rider & sonido**
    - Cabina: 2× CDJ-3000 en Pro DJ Link y DJM-900NXS2. Alternativas: Pioneer XDJ-AZ o equipo propio (DDJ-FLX4 + laptop).
    - En vivo 2026: Revo Rooftop (02.10, Frecuencia Zero × Revo Rooftop), Annua (04.09, ARWEN B2B BAZT_TZ) y Rumores (30.07, Frecuencia Zero × Rumores, Funktion-One).
@@ -27,13 +27,19 @@ El sitio oficial de ARWEN (DJ y productor de Afro House y Melodic Techno, CDMX /
    - Referencias: Rampa, Adam Port, Adriatique, Keinemusik, Anyma y Yotto.
    - Lineups compartidos: Alexx Fall, Sanlika, BAZT_TZ, Andrreas, Shedlee, Francø, HOMM, Vargrbo, Nattsoo, Tlakoh, Angelo Diablo, Deja Böö, Bassenerg, Davor y Chávez.
 5. **Galería:** 3 fotos en cabina, en blanco y negro, que recuperan su color al pasar el cursor. Debajo, botón "Descargar press kit".
-6. **Booking:** arwenmusicmx@gmail.com (con botón de copiar), @arwen.dj, soundcloud.com/arwenmusic, youtube.com/@arwen.musicdj, @frecuenciazerocolectivo, frecuenciazerocolectivo.com, descarga del press kit y linktr.ee/arwenmusicmx.
+6. **Booking:** arwenmusicmx@gmail.com (con botón de copiar), @arwen.dj, SoundCloud (soundcloud.com/luis-arturo-gutierrez-juarez-989173934), youtube.com/@arwen.musicdj, @frecuenciazerocolectivo, frecuenciazerocolectivo.com, descarga del press kit y linktr.ee/arwenmusicmx.
 
 ## ARWEN Lab
 - Página aparte en `lab/index.html`, enlazada desde la nav del home ("Lab") y con regreso al press kit.
 - Guías: Vol. I Color FX (`color-fx-afro-house.html`), Vol. II Beat FX (`beat-fx-afro-house.html`), Vol. III Smart CFX (`smart-cfx-sistema.html`), La Fórmula del Mix (`dj-formula-mezcla.html`) y Crate Starter (`dj-transiciones.html`).
 - `lab/agregar-regreso.py` inserta el botón fijo "← ARWEN Lab" en cada guía de la carpeta (se puede correr varias veces).
 - Fuera por ahora: DJ Prep Tool, Mix Replicator, arwen_reels.py, generador de media kit y EPK builder.
+
+## Marca e íconos
+- `marca/arwen-logo.png`: logo completo (emblema dorado + ARWEN + géneros) sobre negro, 1254×1254.
+- `favicon.svg`: versión simplificada del emblema para la pestaña, con `favicon-32.png` de respaldo. `apple-touch-icon.png` es el emblema recortado del logo, para el ícono en iPhone.
+- El home, el Lab y las guías enlazan los tres íconos.
+- El PDF del press kit todavía dice soundcloud.com/arwenmusic; hay que corregirlo en la próxima versión.
 
 ## Descargas (`descargas/`)
 - `ARWEN-Press-Kit-2026.pdf`: press kit de 9 páginas en vertical. Se enlaza desde Rider y Booking.
