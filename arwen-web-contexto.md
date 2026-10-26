@@ -41,7 +41,7 @@ El sitio oficial de ARWEN (DJ y productor de Afro House y Melodic Techno, CDMX /
 - El media kit de ARWEN Sessions (16:9 y 4:5) no se publica porque trae la tarifa: se manda por correo. Los PDFs están en `descargas/`, pero el `.gitignore` los deja fuera del repo.
 
 ## Archivo
-`arwen-home.html` funciona solo, sin carpetas aparte, porque las fotos van incrustadas. Se puede abrir en el navegador o subir tal cual a un hosting (Netlify, Vercel, GitHub Pages).
+`index.html` funciona solo, sin carpetas aparte, porque las fotos van incrustadas. Se puede abrir en el navegador o subir tal cual a un hosting (Netlify, Vercel, GitHub Pages).
 
 ## Pendientes
 - Agregar embeds de sets (ya hay links a los perfiles de SoundCloud y YouTube y a la Sesión 001).
